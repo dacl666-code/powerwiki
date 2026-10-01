@@ -1,80 +1,410 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>POWERWIKI · 跨宇宙战力论战量级库</title>
-<style>
-:root{--bg:#0a0e17;--panel:#121826;--line:#1f2a3d;--txt:#e6edf7;--dim:#8b9bb4;--acc:#4da3ff;--acc2:#a56bff;--warn:#ffb020}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
-header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:36px}
-h1{font-size:30px;letter-spacing:2px;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.sub{color:var(--dim);font-size:13px;margin-top:8px;letter-spacing:1px}
-h2{font-size:18px;margin:40px 0 16px;padding-left:10px;border-left:3px solid var(--acc)}
-h3{font-size:15px;margin:22px 0 10px;color:var(--acc)}
-.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:16px}
-table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
-th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
-th{background:#182134;color:var(--dim);font-weight:600;font-size:13px}
-td.num{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--acc)}
-.formula{background:#0d1320;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;color:var(--acc2);margin:10px 0}
-.note{color:var(--dim);font-size:13px}
-.badge{display:inline-block;background:rgba(255,176,32,.12);color:var(--warn);border:1px solid rgba(255,176,32,.3);border-radius:5px;padding:3px 10px;font-size:12px;margin-bottom:12px}
-ul{margin:8px 0 8px 20px}li{margin:5px 0;font-size:14px}
-footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>首页 - 全作品战力评鉴所</title>
+    <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
 </head>
 <body>
-<div class="wrap">
-<header>
-<h1>POWERWIKI</h1>
-<div class="sub">跨宇宙战力论战 · 量级标准与元规则库</div>
-</header>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/powerwiki/index.html" class="logo">全作品战力评鉴所</a>
+            <nav class="main-nav">
+                <a href="/powerwiki/index.html">首页</a>
+                <a href="/powerwiki/search.html">搜索</a>
+            </nav>
+        </div>
+    </header>
 
-<div class="badge">数据状态：等待导入（当前为框架页，尚未载入角色库）</div>
+    <main class="main-content" id="main">
+    <div class="container">
+        <section class="hero">
+            <h1>全作品战力评鉴所</h1>
+            <p>角色战力量级评鉴档案库</p>
+            <form action="/powerwiki/search.html" method="get" class="search-form">
+                <input type="text" name="q" placeholder="搜索角色、作品...">
+                <button type="submit">搜索</button>
+            </form>
+        </section>
+        <section class="panel">
+            <div class="panel-header">
+                <h2>规则与世界观</h2>
+            </div>
+            <div class="page-list">
+                <a href="/powerwiki/page/rules.html" class="page-tag">战力评级规则</a>
+                <a href="/powerwiki/page/cosmology.html" class="page-tag">宇宙学/世界观</a>
+            </div>
+        </section>
+        <section class="panel">
+            <div class="panel-header">
+                <h2>战力等级</h2>
+            </div>
+            <div class="category-grid">
+                <a href="/powerwiki/category/low-dimensional.html" class="category-card">
+                    <span class="cat-name">低维</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/microscopic.html" class="category-card">
+                    <span class="cat-name">微观</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-brick.html" class="category-card">
+                    <span class="cat-name">弱爆砖</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/brick.html" class="category-card">
+                    <span class="cat-name">爆砖</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-brick.html" class="category-card">
+                    <span class="cat-name">强爆砖</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-brick.html" class="category-card">
+                    <span class="cat-name">超爆砖</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-wall.html" class="category-card">
+                    <span class="cat-name">弱爆墙</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/wall.html" class="category-card">
+                    <span class="cat-name">爆墙</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-wall.html" class="category-card">
+                    <span class="cat-name">强爆墙</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-wall.html" class="category-card">
+                    <span class="cat-name">超爆墙</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-room.html" class="category-card">
+                    <span class="cat-name">弱爆屋</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/room.html" class="category-card">
+                    <span class="cat-name">爆屋</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-room.html" class="category-card">
+                    <span class="cat-name">强爆屋</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-room.html" class="category-card">
+                    <span class="cat-name">超爆屋</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-building.html" class="category-card">
+                    <span class="cat-name">弱爆楼</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/building.html" class="category-card">
+                    <span class="cat-name">爆楼</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-building.html" class="category-card">
+                    <span class="cat-name">强爆楼</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-building.html" class="category-card">
+                    <span class="cat-name">超爆楼</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-street.html" class="category-card">
+                    <span class="cat-name">弱爆街</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/street.html" class="category-card">
+                    <span class="cat-name">爆街</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-street.html" class="category-card">
+                    <span class="cat-name">强爆街</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-street.html" class="category-card">
+                    <span class="cat-name">超爆街</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-city.html" class="category-card">
+                    <span class="cat-name">弱爆城</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/city.html" class="category-card">
+                    <span class="cat-name">爆城</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-city.html" class="category-card">
+                    <span class="cat-name">强爆城</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-city.html" class="category-card">
+                    <span class="cat-name">超爆城</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-country.html" class="category-card">
+                    <span class="cat-name">弱爆国</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/country.html" class="category-card">
+                    <span class="cat-name">爆国</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-country.html" class="category-card">
+                    <span class="cat-name">强爆国</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-country.html" class="category-card">
+                    <span class="cat-name">超爆国</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-continent.html" class="category-card">
+                    <span class="cat-name">弱大陆</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/continent.html" class="category-card">
+                    <span class="cat-name">大陆</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-continent.html" class="category-card">
+                    <span class="cat-name">强大陆</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-continent.html" class="category-card">
+                    <span class="cat-name">超大陆</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-surface.html" class="category-card">
+                    <span class="cat-name">弱地表</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/surface.html" class="category-card">
+                    <span class="cat-name">地表</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-surface.html" class="category-card">
+                    <span class="cat-name">强地表</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-surface.html" class="category-card">
+                    <span class="cat-name">超地表</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-planet.html" class="category-card">
+                    <span class="cat-name">弱爆星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/planet.html" class="category-card">
+                    <span class="cat-name">爆星</span>
+                    <span class="cat-count">1</span>
+                </a>
+                <a href="/powerwiki/category/strong-planet.html" class="category-card">
+                    <span class="cat-name">强爆星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-planet.html" class="category-card">
+                    <span class="cat-name">超爆星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-star.html" class="category-card">
+                    <span class="cat-name">弱恒星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/star.html" class="category-card">
+                    <span class="cat-name">恒星</span>
+                    <span class="cat-count">1</span>
+                </a>
+                <a href="/powerwiki/category/strong-star.html" class="category-card">
+                    <span class="cat-name">强恒星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-star.html" class="category-card">
+                    <span class="cat-name">超恒星</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-galaxy.html" class="category-card">
+                    <span class="cat-name">弱星系</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/galaxy.html" class="category-card">
+                    <span class="cat-name">星系</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-galaxy.html" class="category-card">
+                    <span class="cat-name">强星系</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-galaxy.html" class="category-card">
+                    <span class="cat-name">超星系</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-universal-structure.html" class="category-card">
+                    <span class="cat-name">弱宇宙结构</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/universal-structure.html" class="category-card">
+                    <span class="cat-name">宇宙结构</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-universal-structure.html" class="category-card">
+                    <span class="cat-name">强宇宙结构</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-universal-structure.html" class="category-card">
+                    <span class="cat-name">超宇宙结构</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-universe.html" class="category-card">
+                    <span class="cat-name">弱单体</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/universe.html" class="category-card">
+                    <span class="cat-name">单体</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-universe.html" class="category-card">
+                    <span class="cat-name">强单体</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-universe.html" class="category-card">
+                    <span class="cat-name">超单体</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/weak-multiverse.html" class="category-card">
+                    <span class="cat-name">弱多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/multiverse.html" class="category-card">
+                    <span class="cat-name">多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/strong-multiverse.html" class="category-card">
+                    <span class="cat-name">强多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-multiverse.html" class="category-card">
+                    <span class="cat-name">超多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/infinite-multiverse.html" class="category-card">
+                    <span class="cat-name">无限多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/high-multiverse.html" class="category-card">
+                    <span class="cat-name">高阶多元</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/infinite-box.html" class="category-card">
+                    <span class="cat-name">无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/multi-infinite-box.html" class="category-card">
+                    <span class="cat-name">多层无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/infinite-layer-box.html" class="category-card">
+                    <span class="cat-name">无限层无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/high-infinite-layer-box.html" class="category-card">
+                    <span class="cat-name">高阶无限层无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/infinite-power-box.html" class="category-card">
+                    <span class="cat-name">无限次方无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/high-infinite-power-box.html" class="category-card">
+                    <span class="cat-name">高阶无限次方无限盒子</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/infinite-exponential-tower.html" class="category-card">
+                    <span class="cat-name">无限指数塔</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/high-infinite-exponential-tower.html" class="category-card">
+                    <span class="cat-name">高阶无限指数塔</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/hyper-exponential-tower.html" class="category-card">
+                    <span class="cat-name">超指数塔</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/beyond.html" class="category-card">
+                    <span class="cat-name">论外</span>
+                    <span class="cat-count">1</span>
+                </a>
+                <a href="/powerwiki/category/unknown.html" class="category-card">
+                    <span class="cat-name">未知</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/category/draft.html" class="category-card">
+                    <span class="cat-name">暂存</span>
+                    <span class="cat-count">0</span>
+                </a>
+            </div>
+        </section>
+        <section class="panel">
+            <div class="panel-header">
+                <h2>境界体系</h2>
+            </div>
+            <div class="category-grid realm-grid">
+                <a href="/powerwiki/realm/1.html" class="category-card realm-card">
+                    <span class="cat-name">凡人</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/2.html" class="category-card realm-card">
+                    <span class="cat-name">练气</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/3.html" class="category-card realm-card">
+                    <span class="cat-name">筑基</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/4.html" class="category-card realm-card">
+                    <span class="cat-name">金丹</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/5.html" class="category-card realm-card">
+                    <span class="cat-name">元婴</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/6.html" class="category-card realm-card">
+                    <span class="cat-name">化神</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/7.html" class="category-card realm-card">
+                    <span class="cat-name">合道</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/8.html" class="category-card realm-card">
+                    <span class="cat-name">大乘</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/9.html" class="category-card realm-card">
+                    <span class="cat-name">真仙</span>
+                    <span class="cat-count">0</span>
+                </a>
+                <a href="/powerwiki/realm/10.html" class="category-card realm-card">
+                    <span class="cat-name">未知</span>
+                    <span class="cat-count">0</span>
+                </a>
+            </div>
+        </section>
+    </div>
 
-<h2>一、元规则</h2>
-<div class="panel">
-<ul>
-<li><strong>适用范围</strong>：量级表适用于宇宙类型世界观。非宇宙世界观需另行折算。</li>
-<li><strong>换算形式</strong>：宇宙形式按宇宙能量换算；非宇宙形式或更密集对象，使用能量总和换算。</li>
-<li><strong>取值原则</strong>：战力计算取<strong>最高上限</strong>，并按参照物换算。</li>
-<li><strong>无线索处理</strong>：无明确线索时，默认按现实材质强度计。</li>
-<li><strong>版本区分</strong>：弱化版本（时间磨灭／逐步达到）与强化版本（有余力但未达更高量级）需分别标注。</li>
-<li><strong>交叉验算</strong>：恒星系以下参考汪吧量级标准，须用实际表现与科学数据交叉验算。</li>
-</ul>
-</div>
+    </main>
 
-<h2>二、能量换算公式</h2>
-<div class="panel">
-<div class="formula">E = 2π D² × F*</div>
-<p class="note">其中 <strong>D</strong> 为恒星系<strong>直径</strong>（单位 m），<strong>F* = 1.64 × 10²³ J/m²</strong> 为通量常数。<br>全体系统一使用「直径」表述，不使用半径，以避免二倍误差。</p>
-</div>
+    <footer class="site-footer">
+        <div class="container">
+            <p>全作品战力评鉴所 · 静态版 · 更新于 2026-10-02 04:32</p>
+        </div>
+    </footer>
 
-<h2>三、恒星系量级分级</h2>
-<div class="panel">
-<table>
-<thead><tr><th>档次</th><th>直径范围</th><th>能量范围（J）</th></tr></thead>
-<tbody>
-<tr><td>弱恒星系</td><td class="num">40 – 80 AU</td><td class="num">3.69×10⁴⁹ – 1.48×10⁵⁰</td></tr>
-<tr><td>标准恒星系</td><td class="num">1000 – 3000 AU</td><td class="num">2.31×10⁵² – 2.08×10⁵³</td></tr>
-<tr><td>强恒星系</td><td class="num">待录入</td><td class="num">待录入</td></tr>
-<tr><td>超恒星系</td><td class="num">待录入</td><td class="num">待录入</td></tr>
-</tbody>
-</table>
-<p class="note" style="margin-top:12px">换算基准：1 AU = 1.496 × 10¹¹ m。强／超两档按逐级倍数递进原则续定义，阈值待录入。</p>
-</div>
-
-<h2>四、角色库</h2>
-<div class="panel">
-<p class="note">角色数据尚未导入。导入 <code>powerwiki.db</code> 后本区块将自动填充。</p>
-</div>
-
-<footer>
-POWERWIKI · 由数据驱动的静态量级库 · 每次导入 db 后重新生成并覆盖部署
-</footer>
-</div>
+    <script src="/powerwiki/static/js/main.js"></script>
 </body>
 </html>
