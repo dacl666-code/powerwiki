@@ -31,75 +31,172 @@
                 <h1>搜索</h1>
             </div>
             <form class="search-form inline" id="search-form">
-                <input type="text" id="search-input" placeholder="输入角色名、作品、境界...">
+                <input type="text" id="search-input" placeholder="角色名 / 别名 / 作品 / 境界 / 量级 / 简介关键词">
                 <button type="submit">搜索</button>
             </form>
-            <div id="search-results"></div>
-            <p class="search-tip" id="search-tip">输入关键词开始搜索</p>
+
+            <div class="filter-bar">
+                <label>作品<select id="f-series"></select></label>
+                <label>量级<select id="f-category"></select></label>
+                <label>境界体系<select id="f-rseries"></select></label>
+                <label>境界<select id="f-realm"></select></label>
+                <label>排序
+                    <select id="f-sort">
+                        <option value="name">按名称</option>
+                        <option value="cat">按量级高低</option>
+                        <option value="realm">按境界阶序</option>
+                    </select>
+                </label>
+                <button type="button" id="f-reset" class="btn btn-sm">重置</button>
+            </div>
+
+            <div id="active-filters" class="active-filters"></div>
+            <p class="search-tip" id="search-tip"></p>
+            <div id="search-results" class="character-grid"></div>
+            <p class="empty" id="no-result" style="display:none">没有匹配的角色，试试放宽条件</p>
         </section>
     </div>
 
     <script>
-        const indexData = [{"id": 1, "name": "孙悟空（示例）", "alias": "", "series": "西游记", "category": "恒星", "realm": ""}, {"id": 2, "name": "琦玉（示例）", "alias": "", "series": "一拳超人", "category": "爆星", "realm": ""}, {"id": 3, "name": "某论外角色（示例）", "alias": "", "series": "原创", "category": "论外", "realm": ""}];
+        const indexData = [{"id": 1, "name": "孙悟空（示例）", "alias": "", "series": "西游记", "category": "恒星", "catOrder": 44, "realm": "真仙", "realmSeries": "修真通用", "realmOrder": 8, "desc": "一个示例角色，展示如何填写角色介绍。\n你可以删除或修改它。", "power": "七十二变、筋斗云、如意金箍棒。", "image": ""}, {"id": 2, "name": "琦玉（示例）", "alias": "", "series": "一拳超人", "category": "爆星", "catOrder": 40, "realm": "神级灾害", "realmSeries": "一拳超人", "realmOrder": 9, "desc": "示例角色，展示普通一拳到认真一拳的战力跨度。", "power": "绝对的肉体力量，普通拳即可击败龙级怪人。", "image": ""}, {"id": 3, "name": "某论外角色（示例）", "alias": "", "series": "原创", "category": "论外", "catOrder": 74, "realm": "", "realmSeries": "", "realmOrder": 0, "desc": "示例角色，用于展示最高量级分类。", "power": "超越一切叙事层与逻辑。", "image": ""}];
         const BASE = "/powerwiki";
 
-        function link(id) {
-            return BASE + '/character/' + id + '.html';
+        const el = id => document.getElementById(id);
+        const qEl = el('search-input'), fSeries = el('f-series'), fCat = el('f-category'),
+              fRS = el('f-rseries'), fRealm = el('f-realm'), fSort = el('f-sort'),
+              resultsEl = el('search-results'), tipEl = el('search-tip'),
+              noRes = el('no-result'), activeBox = el('active-filters');
+
+        const uniq = arr => Array.from(new Set(arr.filter(Boolean)))
+            .sort((a, b) => String(a).localeCompare(String(b), 'zh'));
+
+        function fillOptions(sel, values, keep) {
+            sel.innerHTML = '<option value="">全部</option>' + values.map(v =>
+                '<option value="' + v + '"' + (v === keep ? ' selected' : '') + '>' + v + '</option>').join('');
         }
 
-        document.getElementById('search-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const q = document.getElementById('search-input').value.trim().toLowerCase();
-            const resultsEl = document.getElementById('search-results');
-            const tipEl = document.getElementById('search-tip');
+        // 选项联动：已选的作品/体系决定量级与境界的可选项
+        function refreshOptions() {
+            const sub = indexData.filter(c =>
+                (!fSeries.value || c.series === fSeries.value) &&
+                (!fRS.value || c.realmSeries === fRS.value));
+            fillOptions(fSeries, uniq(indexData.map(c => c.series)), fSeries.value);
+            fillOptions(fRS, uniq(indexData.map(c => c.realmSeries)), fRS.value);
+            fillOptions(fCat, uniq(sub.map(c => c.category)), fCat.value);
+            fillOptions(fRealm, uniq(sub.map(c => c.realm)), fRealm.value);
+        }
 
-            if (!q) {
-                resultsEl.innerHTML = '';
-                tipEl.textContent = '输入关键词开始搜索';
-                return;
+        function match(c) {
+            const kw = qEl.value.trim().toLowerCase();
+            if (kw) {
+                const hay = [c.name, c.alias, c.series, c.category, c.realm,
+                             c.realmSeries, c.desc, c.power].join(' ').toLowerCase();
+                if (hay.indexOf(kw) === -1) return false;
             }
+            if (fSeries.value && c.series !== fSeries.value) return false;
+            if (fCat.value && c.category !== fCat.value) return false;
+            if (fRS.value && c.realmSeries !== fRS.value) return false;
+            if (fRealm.value && c.realm !== fRealm.value) return false;
+            return true;
+        }
 
-            const results = indexData.filter(c =>
-                c.name.toLowerCase().includes(q) ||
-                (c.alias && c.alias.toLowerCase().includes(q)) ||
-                (c.series && c.series.toLowerCase().includes(q)) ||
-                (c.category && c.category.toLowerCase().includes(q)) ||
-                (c.realm && c.realm.toLowerCase().includes(q))
-            );
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
 
-            if (results.length === 0) {
-                resultsEl.innerHTML = '<p class="empty">没有找到匹配的角色</p>';
-                tipEl.textContent = '';
-                return;
-            }
+        function render() {
+            let list = indexData.filter(match);
+            const s = fSort.value;
+            if (s === 'cat') list.sort((a, b) => b.catOrder - a.catOrder);
+            else if (s === 'realm') list.sort((a, b) => b.realmOrder - a.realmOrder);
+            else list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'zh'));
 
-            let html = '<div class="character-grid">';
-            results.forEach(c => {
-                html += '<a href="' + link(c.id) + '" class="character-card">' +
-                    '<div class="char-info"><h3>' + c.name + '</h3>' +
-                    (c.series ? '<p class="char-series">' + c.series + '</p>' : '') +
-                    (c.category ? '<span class="char-realm">' + c.category + '</span>' : '') +
-                    '</div></a>';
+            resultsEl.innerHTML = list.map(c => {
+                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">'
+                                    : '<div class="no-image">暂无图片</div>';
+                return '<a href="' + BASE + '/character/' + c.id + '.html" class="character-card">' +
+                    '<div class="char-image">' + img + '</div>' +
+                    '<div class="char-info"><h3>' + esc(c.name) + '</h3>' +
+                    (c.series ? '<p class="char-series">' + esc(c.series) + '</p>' : '') +
+                    '<div class="char-tags">' +
+                    (c.category ? '<span class="tag tag-power">' + esc(c.category) + '</span>' : '') +
+                    (c.realm ? '<span class="tag tag-realm">' + esc(c.realm) + '</span>' : '') +
+                    '</div></div></a>';
+            }).join('');
+
+            noRes.style.display = list.length ? 'none' : '';
+            tipEl.textContent = '匹配 ' + list.length + ' / ' + indexData.length + ' 位角色';
+            renderActive();
+            syncURL();
+        }
+
+        function renderActive() {
+            const chips = [];
+            const add = (label, value, key) => {
+                chips.push('<span class="chip">' + label + '：' + esc(value) +
+                    '<button type="button" data-clear="' + key + '">&times;</button></span>');
+            };
+            if (qEl.value.trim()) add('关键词', qEl.value.trim(), 'q');
+            if (fSeries.value) add('作品', fSeries.value, 'series');
+            if (fCat.value) add('量级', fCat.value, 'category');
+            if (fRS.value) add('体系', fRS.value, 'rseries');
+            if (fRealm.value) add('境界', fRealm.value, 'realm');
+            activeBox.innerHTML = chips.join('');
+            activeBox.querySelectorAll('button[data-clear]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const t = btn.dataset.clear;
+                    if (t === 'q') qEl.value = '';
+                    else if (t === 'series') fSeries.value = '';
+                    else if (t === 'category') fCat.value = '';
+                    else if (t === 'rseries') fRS.value = '';
+                    else if (t === 'realm') fRealm.value = '';
+                    refreshOptions();
+                    render();
+                });
             });
-            html += '</div>';
-            resultsEl.innerHTML = html;
-            tipEl.textContent = '找到 ' + results.length + ' 个结果';
+        }
+
+        function syncURL() {
+            const p = new URLSearchParams();
+            if (qEl.value.trim()) p.set('q', qEl.value.trim());
+            if (fSeries.value) p.set('series', fSeries.value);
+            if (fCat.value) p.set('category', fCat.value);
+            if (fRS.value) p.set('rseries', fRS.value);
+            if (fRealm.value) p.set('realm', fRealm.value);
+            const qs = p.toString();
+            history.replaceState(null, '', qs ? ('?' + qs) : location.pathname);
+        }
+
+        function readURL() {
+            const p = new URLSearchParams(location.search);
+            qEl.value = p.get('q') || '';
+            fSeries.value = p.get('series') || '';
+            fRS.value = p.get('rseries') || '';
+            fCat.value = p.get('category') || '';
+            fRealm.value = p.get('realm') || '';
+        }
+
+        el('search-form').addEventListener('submit', e => { e.preventDefault(); render(); });
+        qEl.addEventListener('input', render);
+        [fSeries, fCat, fRS, fRealm, fSort].forEach(sel => {
+            sel.addEventListener('change', () => { refreshOptions(); render(); });
+        });
+        el('f-reset').addEventListener('click', () => {
+            qEl.value = ''; fSeries.value = ''; fCat.value = '';
+            fRS.value = ''; fRealm.value = ''; fSort.value = 'name';
+            refreshOptions(); render();
         });
 
-        // 支持从首页带 q 参数跳转过来
-        const params = new URLSearchParams(location.search);
-        const q = params.get('q');
-        if (q) {
-            document.getElementById('search-input').value = q;
-            document.getElementById('search-form').dispatchEvent(new Event('submit'));
-        }
+        readURL();
+        refreshOptions();
+        render();
     </script>
 
     </main>
 
     <footer class="site-footer">
         <div class="container">
-            <p>全作品战力评鉴所 · 静态版 · 更新于 2026-10-02 04:32</p>
+            <p>全作品战力评鉴所 · 静态版</p>
         </div>
     </footer>
 
