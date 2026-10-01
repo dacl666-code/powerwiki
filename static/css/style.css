@@ -139,27 +139,25 @@ turbo-canvas {
 /* Hero */
 .hero {
     text-align: center;
-    padding: 48px 24px;
-    background: linear-gradient(135deg, var(--primary-light) 0%, #ffffff 100%);
+    padding: 56px 24px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e40af 55%, #3b82f6 100%);
     border-radius: var(--radius);
     margin-bottom: 28px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: var(--shadow-lg);
+    color: #fff;
 }
 
 .hero h1 {
-    margin: 0 0 8px;
-    font-size: 2.25rem;
+    margin: 0 0 10px;
+    font-size: 2.4rem;
     font-weight: 800;
     letter-spacing: -0.03em;
-    background: linear-gradient(135deg, var(--text) 0%, var(--primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #fff;
 }
 
 .hero p {
-    color: var(--text-secondary);
+    color: rgba(255, 255, 255, 0.82);
     margin: 0 0 28px;
     font-size: 1.05rem;
 }
@@ -1075,5 +1073,341 @@ turbo-canvas {
 
     .search-form button {
         width: 100%;
+    }
+}
+
+/* ==========================================================
+   统计条 / 境界体系 / 阶梯 / 交叉筛选 / 标签
+   ========================================================== */
+
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 26px;
+}
+
+.hero-stats .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.26);
+    border-radius: var(--radius-sm);
+    color: #fff;
+    transition: var(--transition);
+}
+
+.hero-stats a.stat:hover {
+    background: rgba(255, 255, 255, 0.26);
+    transform: translateY(-2px);
+    color: #fff;
+}
+
+.hero-stats .stat b {
+    font-size: 22px;
+    line-height: 1.2;
+    font-weight: 700;
+}
+
+.hero-stats .stat span {
+    font-size: 12px;
+    opacity: 0.88;
+    margin-top: 2px;
+}
+
+/* 境界体系卡片 */
+.realm-system-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 14px;
+}
+
+.system-card {
+    display: block;
+    padding: 16px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    color: inherit;
+}
+
+.system-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--primary);
+}
+
+.system-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.system-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.system-count {
+    font-size: 12px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.system-ladder {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    padding: 10px 12px;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    border: 1px dashed var(--border);
+    word-break: break-all;
+}
+
+.system-meta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* 境界阶梯 */
+.realm-ladder {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ladder-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.ladder-step:hover {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.step-order {
+    flex: 0 0 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.step-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.step-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--text);
+}
+
+.step-desc {
+    display: block;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-top: 2px;
+}
+
+.step-count {
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 2px 10px;
+    background: var(--bg);
+    border-radius: 999px;
+}
+
+/* 交叉筛选 */
+.filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    align-items: flex-end;
+    margin: 18px 0 10px;
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.filter-bar label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.filter-bar select {
+    padding: 8px 10px;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    min-width: 130px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-bar select:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.filter-bar .btn {
+    align-self: flex-end;
+}
+
+/* 已选条件 */
+.active-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.active-filters:empty {
+    margin: 0;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px 4px 12px;
+    font-size: 13px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 999px;
+}
+
+.chip button {
+    border: none;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font-size: 15px;
+    line-height: 1;
+    padding: 0 2px;
+}
+
+.chip button:hover {
+    color: var(--danger);
+}
+
+/* 标签 */
+.char-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 7px;
+}
+
+.tag {
+    display: inline-block;
+    padding: 2px 9px;
+    font-size: 12px;
+    border-radius: 999px;
+    line-height: 1.7;
+}
+
+.tag-power {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.realm-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 6px;
+}
+
+.character-card .char-info h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.char-toolbar {
+    margin-bottom: 14px;
+}
+
+.filter-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 14px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--card);
+    color: var(--text);
+    transition: var(--transition);
+}
+
+.filter-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+@media (max-width: 640px) {
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-bar label {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .filter-bar select {
+        flex: 1;
+        margin-left: 10px;
+    }
+
+    .hero-stats .stat {
+        min-width: 74px;
+        padding: 10px 12px;
+    }
+
+    .ladder-step {
+        gap: 10px;
+        padding: 10px 12px;
     }
 }
