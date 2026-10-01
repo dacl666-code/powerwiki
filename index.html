@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POWERWIKI · 跨宇宙战力论战量级库</title>
+<style>
+:root{--bg:#0a0e17;--panel:#121826;--line:#1f2a3d;--txt:#e6edf7;--dim:#8b9bb4;--acc:#4da3ff;--acc2:#a56bff;--warn:#ffb020}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+header{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:36px}
+h1{font-size:30px;letter-spacing:2px;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sub{color:var(--dim);font-size:13px;margin-top:8px;letter-spacing:1px}
+h2{font-size:18px;margin:40px 0 16px;padding-left:10px;border-left:3px solid var(--acc)}
+h3{font-size:15px;margin:22px 0 10px;color:var(--acc)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-bottom:16px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin-top:8px}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left}
+th{background:#182134;color:var(--dim);font-weight:600;font-size:13px}
+td.num{font-family:ui-monospace,Menlo,Consolas,monospace;color:var(--acc)}
+.formula{background:#0d1320;border:1px solid var(--line);border-radius:8px;padding:14px 16px;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:15px;color:var(--acc2);margin:10px 0}
+.note{color:var(--dim);font-size:13px}
+.badge{display:inline-block;background:rgba(255,176,32,.12);color:var(--warn);border:1px solid rgba(255,176,32,.3);border-radius:5px;padding:3px 10px;font-size:12px;margin-bottom:12px}
+ul{margin:8px 0 8px 20px}li{margin:5px 0;font-size:14px}
+footer{margin-top:56px;padding-top:20px;border-top:1px solid var(--line);color:var(--dim);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>POWERWIKI</h1>
+<div class="sub">跨宇宙战力论战 · 量级标准与元规则库</div>
+</header>
+
+<div class="badge">数据状态：等待导入（当前为框架页，尚未载入角色库）</div>
+
+<h2>一、元规则</h2>
+<div class="panel">
+<ul>
+<li><strong>适用范围</strong>：量级表适用于宇宙类型世界观。非宇宙世界观需另行折算。</li>
+<li><strong>换算形式</strong>：宇宙形式按宇宙能量换算；非宇宙形式或更密集对象，使用能量总和换算。</li>
+<li><strong>取值原则</strong>：战力计算取<strong>最高上限</strong>，并按参照物换算。</li>
+<li><strong>无线索处理</strong>：无明确线索时，默认按现实材质强度计。</li>
+<li><strong>版本区分</strong>：弱化版本（时间磨灭／逐步达到）与强化版本（有余力但未达更高量级）需分别标注。</li>
+<li><strong>交叉验算</strong>：恒星系以下参考汪吧量级标准，须用实际表现与科学数据交叉验算。</li>
+</ul>
+</div>
+
+<h2>二、能量换算公式</h2>
+<div class="panel">
+<div class="formula">E = 2π D² × F*</div>
+<p class="note">其中 <strong>D</strong> 为恒星系<strong>直径</strong>（单位 m），<strong>F* = 1.64 × 10²³ J/m²</strong> 为通量常数。<br>全体系统一使用「直径」表述，不使用半径，以避免二倍误差。</p>
+</div>
+
+<h2>三、恒星系量级分级</h2>
+<div class="panel">
+<table>
+<thead><tr><th>档次</th><th>直径范围</th><th>能量范围（J）</th></tr></thead>
+<tbody>
+<tr><td>弱恒星系</td><td class="num">40 – 80 AU</td><td class="num">3.69×10⁴⁹ – 1.48×10⁵⁰</td></tr>
+<tr><td>标准恒星系</td><td class="num">1000 – 3000 AU</td><td class="num">2.31×10⁵² – 2.08×10⁵³</td></tr>
+<tr><td>强恒星系</td><td class="num">待录入</td><td class="num">待录入</td></tr>
+<tr><td>超恒星系</td><td class="num">待录入</td><td class="num">待录入</td></tr>
+</tbody>
+</table>
+<p class="note" style="margin-top:12px">换算基准：1 AU = 1.496 × 10¹¹ m。强／超两档按逐级倍数递进原则续定义，阈值待录入。</p>
+</div>
+
+<h2>四、角色库</h2>
+<div class="panel">
+<p class="note">角色数据尚未导入。导入 <code>powerwiki.db</code> 后本区块将自动填充。</p>
+</div>
+
+<footer>
+POWERWIKI · 由数据驱动的静态量级库 · 每次导入 db 后重新生成并覆盖部署
+</footer>
+</div>
+</body>
+</html>
