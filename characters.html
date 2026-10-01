@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>角色图鉴 - 全作品战力评鉴所</title>
+    <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/powerwiki/index.html" class="logo">全作品战力评鉴所</a>
+            <nav class="main-nav">
+                <a href="/powerwiki/index.html">首页</a>
+                <a href="/powerwiki/search.html">搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content" id="main">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/powerwiki/index.html">首页</a>
+            <span>/</span>
+            <span>角色图鉴</span>
+        </div>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h1>角色图鉴</h1>
+                <span class="badge">3 位角色</span>
+            </div>
+            <div class="char-toolbar">
+                <input type="text" id="name-filter" placeholder="按名称或作品快速过滤..." class="filter-input">
+            </div>
+            <div class="character-grid" id="char-grid">
+                <a href="/powerwiki/character/3.html" class="character-card" data-name="某论外角色（示例）" data-series="原创">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>某论外角色（示例）</h3>
+                        <p class="char-series">原创</p>
+                        <div class="char-tags"><span class="tag tag-power">论外</span></div>
+                    </div>
+                </a>
+                <a href="/powerwiki/character/2.html" class="character-card" data-name="琦玉（示例）" data-series="一拳超人">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>琦玉（示例）</h3>
+                        <p class="char-series">一拳超人</p>
+                        <div class="char-tags"><span class="tag tag-power">爆星</span><span class="tag tag-realm">神级灾害</span></div>
+                    </div>
+                </a>
+                <a href="/powerwiki/character/1.html" class="character-card" data-name="孙悟空（示例）" data-series="西游记">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>孙悟空（示例）</h3>
+                        <p class="char-series">西游记</p>
+                        <div class="char-tags"><span class="tag tag-power">恒星</span><span class="tag tag-realm">真仙</span></div>
+                    </div>
+                </a>
+            </div>
+            <p class="empty" id="no-result" style="display:none">没有匹配的角色</p>
+        </section>
+    </div>
+
+    <script>
+        (function() {
+            const input = document.getElementById('name-filter');
+            const cards = document.querySelectorAll('#char-grid .character-card');
+            const noResult = document.getElementById('no-result');
+            if (!input) return;
+            input.addEventListener('input', function() {
+                const q = this.value.trim().toLowerCase();
+                let shown = 0;
+                cards.forEach(function(c) {
+                    const hay = (c.dataset.name + ' ' + c.dataset.series).toLowerCase();
+                    const ok = !q || hay.indexOf(q) !== -1;
+                    c.style.display = ok ? '' : 'none';
+                    if (ok) shown++;
+                });
+                noResult.style.display = shown === 0 ? '' : 'none';
+            });
+        })();
+    </script>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>全作品战力评鉴所 · 静态版</p>
+        </div>
+    </footer>
+
+    <script src="/powerwiki/static/js/main.js"></script>
+</body>
+</html>

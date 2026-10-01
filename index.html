@@ -22,11 +22,17 @@
     <div class="container">
         <section class="hero">
             <h1>全作品战力评鉴所</h1>
-            <p>角色战力量级评鉴档案库</p>
+            <p>跨作品角色战力量级评鉴 · 境界体系收集与对照</p>
             <form action="/powerwiki/search.html" method="get" class="search-form">
-                <input type="text" name="q" placeholder="搜索角色、作品...">
+                <input type="text" name="q" placeholder="搜索角色、作品、境界、量级...">
                 <button type="submit">搜索</button>
             </form>
+            <div class="hero-stats">
+                <a href="/powerwiki/characters.html" class="stat"><b>3</b><span>角色</span></a>
+                <a href="/powerwiki/realm/index.html" class="stat"><b>42</b><span>境界</span></a>
+                <span class="stat"><b>76</b><span>量级档位</span></span>
+                <span class="stat"><b>5</b><span>作品体系</span></span>
+            </div>
         </section>
         <section class="panel">
             <div class="panel-header">
@@ -35,6 +41,38 @@
             <div class="page-list">
                 <a href="/powerwiki/page/rules.html" class="page-tag">战力评级规则</a>
                 <a href="/powerwiki/page/cosmology.html" class="page-tag">宇宙学/世界观</a>
+            </div>
+        </section>
+        <section class="panel">
+            <div class="panel-header">
+                <h2>角色图鉴</h2>
+                <a href="/powerwiki/characters.html" class="btn btn-sm">查看全部 3 位</a>
+            </div>
+            <div class="character-grid">
+                <a href="/powerwiki/character/3.html" class="character-card">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>某论外角色（示例）</h3>
+                        <p class="char-series">原创</p>
+                        <div class="char-tags"><span class="tag tag-power">论外</span></div>
+                    </div>
+                </a>
+                <a href="/powerwiki/character/2.html" class="character-card">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>琦玉（示例）</h3>
+                        <p class="char-series">一拳超人</p>
+                        <div class="char-tags"><span class="tag tag-power">爆星</span><span class="tag tag-realm">神级灾害</span></div>
+                    </div>
+                </a>
+                <a href="/powerwiki/character/1.html" class="character-card">
+                    <div class="char-image"><div class="no-image">暂无图片</div></div>
+                    <div class="char-info">
+                        <h3>孙悟空（示例）</h3>
+                        <p class="char-series">西游记</p>
+                        <div class="char-tags"><span class="tag tag-power">恒星</span><span class="tag tag-realm">真仙</span></div>
+                    </div>
+                </a>
             </div>
         </section>
         <section class="panel">
@@ -351,47 +389,48 @@
         <section class="panel">
             <div class="panel-header">
                 <h2>境界体系</h2>
+                <a href="/powerwiki/realm/index.html" class="btn btn-sm">体系总览</a>
             </div>
-            <div class="category-grid realm-grid">
-                <a href="/powerwiki/realm/1.html" class="category-card realm-card">
-                    <span class="cat-name">凡人</span>
-                    <span class="cat-count">0</span>
+            <div class="realm-system-grid">
+                <a href="/powerwiki/realm/index.html#sys-0" class="system-card">
+                    <div class="system-head">
+                        <span class="system-name">一拳超人</span>
+                        <span class="system-count">9 阶</span>
+                    </div>
+                    <div class="system-ladder">C级英雄 → B级英雄 → A级英雄 → S级英雄 → 狼级灾害 → 虎级灾害 → 鬼级灾害 …</div>
+                    <div class="system-meta">收录 1 个角色</div>
                 </a>
-                <a href="/powerwiki/realm/2.html" class="category-card realm-card">
-                    <span class="cat-name">练气</span>
-                    <span class="cat-count">0</span>
+                <a href="/powerwiki/realm/index.html#sys-1" class="system-card">
+                    <div class="system-head">
+                        <span class="system-name">修真通用</span>
+                        <span class="system-count">10 阶</span>
+                    </div>
+                    <div class="system-ladder">凡人 → 练气 → 筑基 → 金丹 → 元婴 → 化神 → 合道 …</div>
+                    <div class="system-meta">收录 1 个角色</div>
                 </a>
-                <a href="/powerwiki/realm/3.html" class="category-card realm-card">
-                    <span class="cat-name">筑基</span>
-                    <span class="cat-count">0</span>
+                <a href="/powerwiki/realm/index.html#sys-2" class="system-card">
+                    <div class="system-head">
+                        <span class="system-name">原神</span>
+                        <span class="system-count">6 阶</span>
+                    </div>
+                    <div class="system-ladder">无神之眼 → 神之眼持有者 → 执行官 → 魔神 → 尘世七执政 → 天理维系者</div>
+                    <div class="system-meta">收录 0 个角色</div>
                 </a>
-                <a href="/powerwiki/realm/4.html" class="category-card realm-card">
-                    <span class="cat-name">金丹</span>
-                    <span class="cat-count">0</span>
+                <a href="/powerwiki/realm/index.html#sys-3" class="system-card">
+                    <div class="system-head">
+                        <span class="system-name">火影忍者</span>
+                        <span class="system-count">7 阶</span>
+                    </div>
+                    <div class="system-ladder">忍者学校 → 下忍 → 中忍 → 上忍 → 影级 → 六道级 → 大筒木级</div>
+                    <div class="system-meta">收录 0 个角色</div>
                 </a>
-                <a href="/powerwiki/realm/5.html" class="category-card realm-card">
-                    <span class="cat-name">元婴</span>
-                    <span class="cat-count">0</span>
-                </a>
-                <a href="/powerwiki/realm/6.html" class="category-card realm-card">
-                    <span class="cat-name">化神</span>
-                    <span class="cat-count">0</span>
-                </a>
-                <a href="/powerwiki/realm/7.html" class="category-card realm-card">
-                    <span class="cat-name">合道</span>
-                    <span class="cat-count">0</span>
-                </a>
-                <a href="/powerwiki/realm/8.html" class="category-card realm-card">
-                    <span class="cat-name">大乘</span>
-                    <span class="cat-count">0</span>
-                </a>
-                <a href="/powerwiki/realm/9.html" class="category-card realm-card">
-                    <span class="cat-name">真仙</span>
-                    <span class="cat-count">0</span>
-                </a>
-                <a href="/powerwiki/realm/10.html" class="category-card realm-card">
-                    <span class="cat-name">未知</span>
-                    <span class="cat-count">0</span>
+                <a href="/powerwiki/realm/index.html#sys-4" class="system-card">
+                    <div class="system-head">
+                        <span class="system-name">龙珠</span>
+                        <span class="system-count">10 阶</span>
+                    </div>
+                    <div class="system-ladder">普通地球人 → 地球武者 → 那美克星战士 → 弗利萨形态 → 超级赛亚人 → 超级赛亚人2 → 超级赛亚人3 …</div>
+                    <div class="system-meta">收录 0 个角色</div>
                 </a>
             </div>
         </section>
@@ -401,7 +440,7 @@
 
     <footer class="site-footer">
         <div class="container">
-            <p>全作品战力评鉴所 · 静态版 · 更新于 2026-10-02 04:32</p>
+            <p>全作品战力评鉴所 · 静态版</p>
         </div>
     </footer>
 
