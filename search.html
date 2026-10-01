@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>搜索 - 全作品战力评鉴所</title>
+    <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/powerwiki/index.html" class="logo">全作品战力评鉴所</a>
+            <nav class="main-nav">
+                <a href="/powerwiki/index.html">首页</a>
+                <a href="/powerwiki/search.html">搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content" id="main">
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="/powerwiki/index.html">首页</a>
+            <span>/</span>
+            <span>搜索</span>
+        </div>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h1>搜索</h1>
+            </div>
+            <form class="search-form inline" id="search-form">
+                <input type="text" id="search-input" placeholder="输入角色名、作品、境界...">
+                <button type="submit">搜索</button>
+            </form>
+            <div id="search-results"></div>
+            <p class="search-tip" id="search-tip">输入关键词开始搜索</p>
+        </section>
+    </div>
+
+    <script>
+        const indexData = [{"id": 1, "name": "孙悟空（示例）", "alias": "", "series": "西游记", "category": "恒星", "realm": ""}, {"id": 2, "name": "琦玉（示例）", "alias": "", "series": "一拳超人", "category": "爆星", "realm": ""}, {"id": 3, "name": "某论外角色（示例）", "alias": "", "series": "原创", "category": "论外", "realm": ""}];
+        const BASE = "/powerwiki";
+
+        function link(id) {
+            return BASE + '/character/' + id + '.html';
+        }
+
+        document.getElementById('search-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const q = document.getElementById('search-input').value.trim().toLowerCase();
+            const resultsEl = document.getElementById('search-results');
+            const tipEl = document.getElementById('search-tip');
+
+            if (!q) {
+                resultsEl.innerHTML = '';
+                tipEl.textContent = '输入关键词开始搜索';
+                return;
+            }
+
+            const results = indexData.filter(c =>
+                c.name.toLowerCase().includes(q) ||
+                (c.alias && c.alias.toLowerCase().includes(q)) ||
+                (c.series && c.series.toLowerCase().includes(q)) ||
+                (c.category && c.category.toLowerCase().includes(q)) ||
+                (c.realm && c.realm.toLowerCase().includes(q))
+            );
+
+            if (results.length === 0) {
+                resultsEl.innerHTML = '<p class="empty">没有找到匹配的角色</p>';
+                tipEl.textContent = '';
+                return;
+            }
+
+            let html = '<div class="character-grid">';
+            results.forEach(c => {
+                html += '<a href="' + link(c.id) + '" class="character-card">' +
+                    '<div class="char-info"><h3>' + c.name + '</h3>' +
+                    (c.series ? '<p class="char-series">' + c.series + '</p>' : '') +
+                    (c.category ? '<span class="char-realm">' + c.category + '</span>' : '') +
+                    '</div></a>';
+            });
+            html += '</div>';
+            resultsEl.innerHTML = html;
+            tipEl.textContent = '找到 ' + results.length + ' 个结果';
+        });
+
+        // 支持从首页带 q 参数跳转过来
+        const params = new URLSearchParams(location.search);
+        const q = params.get('q');
+        if (q) {
+            document.getElementById('search-input').value = q;
+            document.getElementById('search-form').dispatchEvent(new Event('submit'));
+        }
+    </script>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>全作品战力评鉴所 · 静态版 · 更新于 2026-10-02 04:32</p>
+        </div>
+    </footer>
+
+    <script src="/powerwiki/static/js/main.js"></script>
+</body>
+</html>
