@@ -1,307 +1,1087 @@
-# 量级分类（战力量级体系 / 战力等级 档位）
-# 由仓库内 category/*.html 还原；暂存(pending)为新增兜底档。
-# 量级 = 档位 = 战力等级（均指破坏力量级）。
-- slug: low-dimensional
-  name: 低维
-  type: power
-  sort_order: 5
-- slug: weak-room
-  name: 弱爆屋
-  type: power
-  sort_order: 102
-- slug: weak-street
-  name: 弱爆街
-  type: power
-  sort_order: 103
-- slug: weak-building
-  name: 弱爆楼
-  type: power
-  sort_order: 104
-- slug: weak-brick
-  name: 弱爆砖
-  type: power
-  sort_order: 105
-- slug: weak-wall
-  name: 弱爆墙
-  type: power
-  sort_order: 106
-- slug: weak-surface
-  name: 弱地表
-  type: power
-  sort_order: 107
-- slug: weak-city
-  name: 弱爆城
-  type: power
-  sort_order: 108
-- slug: weak-continent
-  name: 弱大陆
-  type: power
-  sort_order: 109
-- slug: weak-country
-  name: 弱爆国
-  type: power
-  sort_order: 110
-- slug: weak-planet
-  name: 弱爆星
-  type: power
-  sort_order: 111
-- slug: weak-star
-  name: 弱恒星
-  type: power
-  sort_order: 112
-- slug: weak-galaxy
-  name: 弱星系
-  type: power
-  sort_order: 113
-- slug: weak-universal-structure
-  name: 弱宇宙结构
-  type: power
-  sort_order: 114
-- slug: weak-universe
-  name: 弱单体
-  type: power
-  sort_order: 115
-- slug: weak-multiverse
-  name: 弱多元
-  type: power
-  sort_order: 116
-- slug: microscopic
-  name: 微观
-  type: power
-  sort_order: 201
-- slug: room
-  name: 爆屋
-  type: power
-  sort_order: 202
-- slug: street
-  name: 爆街
-  type: power
-  sort_order: 203
-- slug: building
-  name: 爆楼
-  type: power
-  sort_order: 204
-- slug: brick
-  name: 爆砖
-  type: power
-  sort_order: 205
-- slug: wall
-  name: 爆墙
-  type: power
-  sort_order: 206
-- slug: surface
-  name: 地表
-  type: power
-  sort_order: 207
-- slug: city
-  name: 爆城
-  type: power
-  sort_order: 208
-- slug: continent
-  name: 大陆
-  type: power
-  sort_order: 209
-- slug: country
-  name: 爆国
-  type: power
-  sort_order: 210
-- slug: high-multiverse
-  name: 高阶多元
-  type: power
-  sort_order: 210
-- slug: planet
-  name: 爆星
-  type: power
-  sort_order: 211
-- slug: star
-  name: 恒星
-  type: power
-  sort_order: 212
-- slug: galaxy
-  name: 星系
-  type: power
-  sort_order: 213
-- slug: universal-structure
-  name: 宇宙结构
-  type: power
-  sort_order: 214
-- slug: universe
-  name: 单体
-  type: power
-  sort_order: 215
-- slug: multiverse
-  name: 多元
-  type: power
-  sort_order: 216
-- slug: strong-room
-  name: 强爆屋
-  type: power
-  sort_order: 302
-- slug: strong-street
-  name: 强爆街
-  type: power
-  sort_order: 303
-- slug: strong-building
-  name: 强爆楼
-  type: power
-  sort_order: 304
-- slug: strong-brick
-  name: 强爆砖
-  type: power
-  sort_order: 305
-- slug: strong-wall
-  name: 强爆墙
-  type: power
-  sort_order: 306
-- slug: strong-surface
-  name: 强地表
-  type: power
-  sort_order: 307
-- slug: strong-city
-  name: 强爆城
-  type: power
-  sort_order: 308
-- slug: strong-continent
-  name: 强大陆
-  type: power
-  sort_order: 309
-- slug: strong-country
-  name: 强爆国
-  type: power
-  sort_order: 310
-- slug: strong-planet
-  name: 强爆星
-  type: power
-  sort_order: 311
-- slug: strong-star
-  name: 强恒星
-  type: power
-  sort_order: 312
-- slug: strong-galaxy
-  name: 强星系
-  type: power
-  sort_order: 313
-- slug: strong-universal-structure
-  name: 强宇宙结构
-  type: power
-  sort_order: 314
-- slug: strong-universe
-  name: 强单体
-  type: power
-  sort_order: 315
-- slug: strong-multiverse
-  name: 强多元
-  type: power
-  sort_order: 316
-- slug: hyper-room
-  name: 超爆屋
-  type: power
-  sort_order: 402
-- slug: hyper-street
-  name: 超爆街
-  type: power
-  sort_order: 403
-- slug: hyper-building
-  name: 超爆楼
-  type: power
-  sort_order: 404
-- slug: hyper-brick
-  name: 超爆砖
-  type: power
-  sort_order: 405
-- slug: hyper-wall
-  name: 超爆墙
-  type: power
-  sort_order: 406
-- slug: hyper-surface
-  name: 超地表
-  type: power
-  sort_order: 407
-- slug: hyper-city
-  name: 超爆城
-  type: power
-  sort_order: 408
-- slug: hyper-continent
-  name: 超大陆
-  type: power
-  sort_order: 409
-- slug: hyper-country
-  name: 超爆国
-  type: power
-  sort_order: 410
-- slug: hyper-planet
-  name: 超爆星
-  type: power
-  sort_order: 411
-- slug: hyper-star
-  name: 超恒星
-  type: power
-  sort_order: 412
-- slug: hyper-galaxy
-  name: 超星系
-  type: power
-  sort_order: 413
-- slug: hyper-universal-structure
-  name: 超宇宙结构
-  type: power
-  sort_order: 414
-- slug: hyper-universe
-  name: 超单体
-  type: power
-  sort_order: 415
-- slug: hyper-multiverse
-  name: 超多元
-  type: power
-  sort_order: 416
-- slug: hyper-exponential-tower
-  name: 超指数塔
-  type: power
-  sort_order: 417
-- slug: high-infinite-layer-box
-  name: 高阶无限层无限盒子
-  type: power
-  sort_order: 502
-- slug: high-infinite-power-box
-  name: 高阶无限次方无限盒子
-  type: power
-  sort_order: 503
-- slug: high-infinite-exponential-tower
-  name: 高阶无限指数塔
-  type: power
-  sort_order: 517
-- slug: infinite-box
-  name: 无限盒子
-  type: power
-  sort_order: 601
-- slug: infinite-layer-box
-  name: 无限层无限盒子
-  type: power
-  sort_order: 602
-- slug: infinite-power-box
-  name: 无限次方无限盒子
-  type: power
-  sort_order: 603
-- slug: infinite-multiverse
-  name: 无限多元
-  type: power
-  sort_order: 616
-- slug: infinite-exponential-tower
-  name: 无限指数塔
-  type: power
-  sort_order: 617
-- slug: multi-infinite-box
-  name: 多层无限盒子
-  type: power
-  sort_order: 701
-- slug: beyond
-  name: 论外
-  type: power
-  sort_order: 800
-- slug: unknown
-  name: 未知
-  type: power
-  sort_order: 850
-- slug: pending
-  name: 暂存
-  type: power
-  sort_order: 9999
+# ============================================================
+# 战力量级体系表（= 首页「战力等级」= 角色分类档位）
+# ------------------------------------------------------------
+# 本文件是站点档位数据的唯一来源，与 data/pages/rules.md《战力量级体系》
+# 一一对应：rules.md 改档位 -> 改这里 -> 重新构建，首页 / 量级体系表页 /
+# 分类页 / 搜索筛选器全部自动同步。
+#
+# 字段说明：
+#   slug        URL 标识（category/<slug>.html），改名会断链，尽量保持稳定
+#   name        档位名，取自 rules.md 1.3 量级表的「细分」列
+#   type        power = 战力量级档位（目前只有这一类）
+#   group       所属体系分段，见下方 groups
+#   parent      所属量级（父档），如「爆砖」；细分档位共享父量级
+#   sort_order  全站由弱到强的排序值，间隔 10 便于插档
+#   energy      能量区间（焦耳），照抄 rules.md，未定档留空
+#   scale       覆盖尺度 / 参照物
+#   note        判定要点、口径说明、修正记录（可选）
+#   source      rules.md 中对应的小节标题，构建时自动解析成锚点链接
+#
+# ── 与旧框架的差异（本次推倒重做的部分）──────────────────────
+# 旧 categories.yaml 沿用汪吧/维基式命名（弱单体·多元·高阶多元·无限盒子·
+# 无限层无限盒子·无限次方无限盒子·多层无限盒子·无限指数塔·超指数塔·
+# 高阶无限×3·无限多元·低维·微观 等），与 rules.md 现行体系已不符，全部废弃。
+# 旧档 -> 新档的归位对照：
+#   低维 / 微观                        -> 取消（昆虫级以下不单列，落 未知/暂存）
+#   弱单体/单体/强单体/超单体           -> 弱宇宙/标准宇宙/强宇宙/超宇宙（3.9）
+#   弱多元/多元/强多元/高阶多元/无限多元 -> 星系团级·宇宙结构级（3.7/3.8）
+#                                        或 广义无限区级（3.10），按覆盖尺度定
+#   无限盒子系列 / 无限指数塔 / 超指数塔 -> 广义无限区级（3.10）或 论外级（4.5）
+#   论外                               -> 论外级八档（4.5：门槛/三线/二线/一线/
+#                                        论天下/论天中/论天上/论天最上）
+# 已收录角色若挂在废弃档上，请改挂新档；无法定档的先放「未知/暂存」。
+# ============================================================
+
+backgrounds:
+  # 首页「战力等级」每个档位卡片的底图
+  # 92 档各一张真实照片，按量级语义挑选：昆虫档就是昆虫微距、爆砖档就是砖墙、
+  # 爆恒星档就是太阳表面、论天最上是抽象几何 —— 由弱到强形成视觉递进。
+  #
+  # 图源：Pexels 免费图库（images.pexels.com），免授权、允许热链、URL 永久。
+  # 全部走外链，仓库内不落地任何图片文件。
+  enabled: true
+  opacity: 0.10        # 底图不透明度，改这里即可
+
+  images:
+    insect: "https://images.pexels.com/photos/35929043/pexels-photo-35929043.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-human: "https://images.pexels.com/photos/30283461/pexels-photo-30283461.jpeg?auto=compress&cs=tinysrgb&w=600"
+    normal-human: "https://images.pexels.com/photos/15046667/pexels-photo-15046667.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-human: "https://images.pexels.com/photos/4164759/pexels-photo-4164759.jpeg?auto=compress&cs=tinysrgb&w=600"
+    super-human: "https://images.pexels.com/photos/39259266/pexels-photo-39259266.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-brick: "https://images.pexels.com/photos/17766225/pexels-photo-17766225.jpeg?auto=compress&cs=tinysrgb&w=600"
+    brick: "https://images.pexels.com/photos/7104016/pexels-photo-7104016.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-brick: "https://images.pexels.com/photos/32282219/pexels-photo-32282219.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-brick: "https://images.pexels.com/photos/12001528/pexels-photo-12001528.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-wall: "https://images.pexels.com/photos/27075754/pexels-photo-27075754.jpeg?auto=compress&cs=tinysrgb&w=600"
+    wall: "https://images.pexels.com/photos/14249938/pexels-photo-14249938.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-wall: "https://images.pexels.com/photos/15060576/pexels-photo-15060576.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-wall: "https://images.pexels.com/photos/4457369/pexels-photo-4457369.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-room: "https://images.pexels.com/photos/32383738/pexels-photo-32383738.jpeg?auto=compress&cs=tinysrgb&w=600"
+    room: "https://images.pexels.com/photos/34916277/pexels-photo-34916277.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-room: "https://images.pexels.com/photos/18078684/pexels-photo-18078684.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-room: "https://images.pexels.com/photos/7031607/pexels-photo-7031607.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-building: "https://images.pexels.com/photos/18802091/pexels-photo-18802091.jpeg?auto=compress&cs=tinysrgb&w=600"
+    building: "https://images.pexels.com/photos/19204496/pexels-photo-19204496.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-building: "https://images.pexels.com/photos/18261856/pexels-photo-18261856.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-building: "https://images.pexels.com/photos/17879690/pexels-photo-17879690.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-street: "https://images.pexels.com/photos/16666912/pexels-photo-16666912.jpeg?auto=compress&cs=tinysrgb&w=600"
+    street: "https://images.pexels.com/photos/17131944/pexels-photo-17131944.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-street: "https://images.pexels.com/photos/14977771/pexels-photo-14977771.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-street: "https://images.pexels.com/photos/30153429/pexels-photo-30153429.jpeg?auto=compress&cs=tinysrgb&w=600"
+    street-plus: "https://images.pexels.com/photos/24071603/pexels-photo-24071603.jpeg?auto=compress&cs=tinysrgb&w=600"
+    city-minus: "https://images.pexels.com/photos/31468386/pexels-photo-31468386.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-city: "https://images.pexels.com/photos/15481205/pexels-photo-15481205.jpeg?auto=compress&cs=tinysrgb&w=600"
+    city: "https://images.pexels.com/photos/14840760/pexels-photo-14840760.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-city: "https://images.pexels.com/photos/19760097/pexels-photo-19760097.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-city: "https://images.pexels.com/photos/31223298/pexels-photo-31223298.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-country: "https://images.pexels.com/photos/28000463/pexels-photo-28000463.jpeg?auto=compress&cs=tinysrgb&w=600"
+    country: "https://images.pexels.com/photos/31887917/pexels-photo-31887917.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-country: "https://images.pexels.com/photos/11749468/pexels-photo-11749468.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-country: "https://images.pexels.com/photos/38345663/pexels-photo-38345663.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-continent: "https://images.pexels.com/photos/30596893/pexels-photo-30596893.jpeg?auto=compress&cs=tinysrgb&w=600"
+    continent: "https://images.pexels.com/photos/30596216/pexels-photo-30596216.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-continent: "https://images.pexels.com/photos/30596234/pexels-photo-30596234.jpeg?auto=compress&cs=tinysrgb&w=600"
+    eurasia-continent: "https://images.pexels.com/photos/30596313/pexels-photo-30596313.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-surface: "https://images.pexels.com/photos/30596223/pexels-photo-30596223.jpeg?auto=compress&cs=tinysrgb&w=600"
+    surface: "https://images.pexels.com/photos/30596214/pexels-photo-30596214.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-surface: "https://images.pexels.com/photos/30596242/pexels-photo-30596242.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-surface: "https://images.pexels.com/photos/30596300/pexels-photo-30596300.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-planet: "https://images.pexels.com/photos/20337602/pexels-photo-20337602.jpeg?auto=compress&cs=tinysrgb&w=600"
+    planet: "https://images.pexels.com/photos/12491524/pexels-photo-12491524.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-planet: "https://images.pexels.com/photos/20376408/pexels-photo-20376408.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-planet: "https://images.pexels.com/photos/12498784/pexels-photo-12498784.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-brown-dwarf: "https://images.pexels.com/photos/4327219/pexels-photo-4327219.jpeg?auto=compress&cs=tinysrgb&w=600"
+    brown-dwarf: "https://images.pexels.com/photos/5109666/pexels-photo-5109666.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-brown-dwarf: "https://images.pexels.com/photos/30004596/pexels-photo-30004596.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-brown-dwarf: "https://images.pexels.com/photos/30894655/pexels-photo-30894655.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star: "https://images.pexels.com/photos/33053394/pexels-photo-33053394.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star: "https://images.pexels.com/photos/87611/pexels-photo-87611.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star: "https://images.pexels.com/photos/29893783/pexels-photo-29893783.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star: "https://images.pexels.com/photos/35974401/pexels-photo-35974401.jpeg?auto=compress&cs=tinysrgb&w=600"
+    transition-a: "https://images.pexels.com/photos/32961169/pexels-photo-32961169.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star-system: "https://images.pexels.com/photos/7568783/pexels-photo-7568783.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star-system: "https://images.pexels.com/photos/36883418/pexels-photo-36883418.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star-system: "https://images.pexels.com/photos/7605840/pexels-photo-7605840.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star-system: "https://images.pexels.com/photos/12491599/pexels-photo-12491599.jpeg?auto=compress&cs=tinysrgb&w=600"
+    transition-b: "https://images.pexels.com/photos/19176514/pexels-photo-19176514.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star-cluster: "https://images.pexels.com/photos/957010/pexels-photo-957010.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star-cluster: "https://images.pexels.com/photos/18247114/pexels-photo-18247114.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star-cluster: "https://images.pexels.com/photos/7736161/pexels-photo-7736161.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star-cluster: "https://images.pexels.com/photos/17997896/pexels-photo-17997896.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-galaxy: "https://images.pexels.com/photos/32386811/pexels-photo-32386811.jpeg?auto=compress&cs=tinysrgb&w=600"
+    galaxy: "https://images.pexels.com/photos/17662490/pexels-photo-17662490.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-galaxy: "https://images.pexels.com/photos/17621401/pexels-photo-17621401.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-galaxy: "https://images.pexels.com/photos/17662489/pexels-photo-17662489.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-galaxy-cluster: "https://images.pexels.com/photos/17505897/pexels-photo-17505897.jpeg?auto=compress&cs=tinysrgb&w=600"
+    galaxy-cluster: "https://images.pexels.com/photos/31510914/pexels-photo-31510914.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-galaxy-cluster: "https://images.pexels.com/photos/18776875/pexels-photo-18776875.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-galaxy-cluster: "https://images.pexels.com/photos/19601165/pexels-photo-19601165.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-cosmic-structure: "https://images.pexels.com/photos/25752810/pexels-photo-25752810.jpeg?auto=compress&cs=tinysrgb&w=600"
+    cosmic-structure: "https://images.pexels.com/photos/37269536/pexels-photo-37269536.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-cosmic-structure: "https://images.pexels.com/photos/20881655/pexels-photo-20881655.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-cosmic-structure: "https://images.pexels.com/photos/38952613/pexels-photo-38952613.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-universe: "https://images.pexels.com/photos/13402171/pexels-photo-13402171.jpeg?auto=compress&cs=tinysrgb&w=600"
+    universe: "https://images.pexels.com/photos/12491590/pexels-photo-12491590.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-universe: "https://images.pexels.com/photos/957061/pexels-photo-957061.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-universe: "https://images.pexels.com/photos/7736087/pexels-photo-7736087.jpeg?auto=compress&cs=tinysrgb&w=600"
+    incomputable-number: "https://images.pexels.com/photos/9007758/pexels-photo-9007758.jpeg?auto=compress&cs=tinysrgb&w=600"
+    incomputable-expansion: "https://images.pexels.com/photos/12891172/pexels-photo-12891172.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-threshold: "https://images.pexels.com/photos/8347500/pexels-photo-8347500.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line3: "https://images.pexels.com/photos/6501743/pexels-photo-6501743.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line2: "https://images.pexels.com/photos/4663108/pexels-photo-4663108.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line1: "https://images.pexels.com/photos/5029184/pexels-photo-5029184.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-low: "https://images.pexels.com/photos/29488854/pexels-photo-29488854.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-mid: "https://images.pexels.com/photos/29738253/pexels-photo-29738253.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-high: "https://images.pexels.com/photos/29474097/pexels-photo-29474097.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-top: "https://images.pexels.com/photos/30004067/pexels-photo-30004067.jpeg?auto=compress&cs=tinysrgb&w=600"
+    unknown: "https://images.pexels.com/photos/3847486/pexels-photo-3847486.jpeg?auto=compress&cs=tinysrgb&w=600"
+
+  # 图源不可达时的兜底（按顺序尝试），{slug} 会替换成档位标识
+  fallback:
+    - "https://picsum.photos/seed/{slug}/400/300"
+  note: >-
+    换图：改 images 里对应档位的 URL 即可，不透明度改 opacity，关掉设 enabled: false。
+    建议图源：Pexels / Unsplash / Wikimedia Commons 等允许热链的免费图库；
+    付费图库（Shutterstock、Getty、Adobe Stock、iStock）有防盗链，外链会显示不出来。
+    主图挂掉时 static/js/main.js 会自动切 fallback，
+    全部失败则摘掉底图退回纯色卡片，不会留破图。
+
+groups:
+  - id: inherit
+    name: 第一部分 · 继承区
+    note: 昆虫 ～ 爆恒星，沿用汪吧标准，本体系已做衔接核查与修正（强大陆倒挂、爆街→爆城过渡区、增设爆褐矮星）
+  - id: transition-a
+    name: 第二部分 · 过渡带 A（恒星 → 恒星系）
+    note: 继承区与覆盖体系之间 7.3 个数量级的命名空白，不新设量级名称，用「弱化/强化 + 相邻档」或直接标能量
+  - id: cover
+    name: 第三部分 · 覆盖体系
+    note: 爆恒星之上，本体系原创。按覆盖范围 × 边缘阈值 F* = 1.64×10²³ J/m² 计算，不按物质能量求和
+  - id: transition-b
+    name: 第二部分 · 过渡带 B（恒星系 → 星团）
+    note: 覆盖体系内部的第二段命名空白，处理方式与过渡带 A 相同
+  - id: infinite
+    name: 3.10 · 广义无限区级
+    note: 有限 · 不可计算。仍是有限量，只是写不出那个焦耳数；跨过 ℵ₀ 才是论外级
+  - id: beyond
+    name: 第四部分 · 论外级
+    note: 真无限，ℵ₀ 起。规模同为 ℵ₀，档内用序数比结构复杂度，不用序数比大小
+  - id: unfiled
+    name: 未归档
+    note: 体系之外的兜底档（未知/暂存），固定排在最末，不参与强弱排序
+
+items:
+  # ─────────────── 第一部分 继承区：昆虫 ～ 爆恒星 ───────────────
+  - slug: insect
+    name: 昆虫
+    type: power
+    group: inherit
+    parent: 昆虫
+    sort_order: 10
+    energy: 5×10⁻⁵ J
+    scale: 昆虫叮咬
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-human
+    name: 弱人类
+    type: power
+    group: inherit
+    parent: 凡人
+    sort_order: 20
+    energy: 50 – 60 J
+    scale: 成年男性不完全发力一拳 / 成年女性全力一拳
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: normal-human
+    name: 普通人
+    type: power
+    group: inherit
+    parent: 凡人
+    sort_order: 30
+    energy: 100 J
+    scale: 普通人类全力一拳
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-human
+    name: 强人类
+    type: power
+    group: inherit
+    parent: 凡人
+    sort_order: 40
+    energy: 150 – 250 J
+    scale: 经系统训练的运动员 / 格斗选手全力一拳
+    note: 本格数值为复算校验时补算的缺项
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: super-human
+    name: 超人类
+    type: power
+    group: inherit
+    parent: 凡人
+    sort_order: 50
+    energy: 300 – 600 J
+    scale: 人类巅峰
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-brick
+    name: 弱爆砖
+    type: power
+    group: inherit
+    parent: 爆砖
+    sort_order: 60
+    energy: 600 J
+    scale: 破坏一块砖的一部分
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: brick
+    name: 标准爆砖
+    type: power
+    group: inherit
+    parent: 爆砖
+    sort_order: 70
+    energy: 2×10³ J
+    scale: 打碎一块 240×115×53 mm 红砖（1463 cc）
+    note: 单位能量密度 1.37 J/cc，为破碎程度分级的最低基准档
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-brick
+    name: 强爆砖
+    type: power
+    group: inherit
+    parent: 爆砖
+    sort_order: 80
+    energy: 6×10³ J
+    scale: 三倍红砖
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-brick
+    name: 超爆砖
+    type: power
+    group: inherit
+    parent: 爆砖
+    sort_order: 90
+    energy: 2×10⁴ J
+    scale: 十倍爆砖
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-wall
+    name: 弱爆墙
+    type: power
+    group: inherit
+    parent: 爆墙
+    sort_order: 100
+    energy: 1.25×10⁵ J（30 g TNT）
+    scale: 打碎一面砖墙的一部分，或将混凝土墙打成数块大碎块
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: wall
+    name: 标准爆墙
+    type: power
+    group: inherit
+    parent: 爆墙
+    sort_order: 110
+    energy: 4.184×10⁵ J（100 g TNT）
+    scale: 打爆 2×2×0.24 m 红砖墙（0.96 m³），破坏程度为较小碎块
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-wall
+    name: 强爆墙
+    type: power
+    group: inherit
+    parent: 爆墙
+    sort_order: 120
+    energy: 1.255×10⁶ J（300 g TNT）
+    scale: 三倍爆墙
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-wall
+    name: 超爆墙
+    type: power
+    group: inherit
+    parent: 爆墙
+    sort_order: 130
+    energy: 4.184×10⁶ J（1 kg TNT）
+    scale: 打碎 2×2×0.2 m、体积 0.8 m³ 的钢筋混凝土墙
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-room
+    name: 弱爆屋
+    type: power
+    group: inherit
+    parent: 爆屋
+    sort_order: 140
+    energy: 1.673×10⁷ J（4 kg TNT）
+    scale: 打碎 2×2×3 m 以上、体积 2.4～数 m³ 的钢混小屋（现代公寓一个厕所或小隔间）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: room
+    name: 标准爆屋
+    type: power
+    group: inherit
+    parent: 爆屋
+    sort_order: 150
+    energy: 8.368×10⁷ J（20 kg TNT）
+    scale: 打碎 6×6×3 m、体积 20 m³ 的钢混屋子（现代公寓一室一厅）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-room
+    name: 强爆屋
+    type: power
+    group: inherit
+    parent: 爆屋
+    sort_order: 160
+    energy: 1.673×10⁸ J（40 kg TNT）
+    scale: 打碎 10×10×3 m、体积 67.5 m³ 的混凝土房屋（居民楼一户住房）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-room
+    name: 超爆屋
+    type: power
+    group: inherit
+    parent: 爆屋
+    sort_order: 170
+    energy: 3.34×10⁸ J（80 kg TNT）
+    scale: 打碎 15×15×3 m、体积 135 m³ 的钢混屋子（平房 / 仓库）
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-building
+    name: 弱爆楼
+    type: power
+    group: inherit
+    parent: 爆楼
+    sort_order: 180
+    energy: 1.255×10⁹ J（300 kg TNT）
+    scale: 打碎 15×15×15 m、体积 675 m³ 的混凝土楼（5–6 层公寓的一个单元楼）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: building
+    name: 标准爆楼
+    type: power
+    group: inherit
+    parent: 爆楼
+    sort_order: 190
+    energy: 4.184×10⁹ J（1 t TNT）
+    scale: 打碎一栋现代 30×30×30 m 的写字楼
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-building
+    name: 强爆楼
+    type: power
+    group: inherit
+    parent: 爆楼
+    sort_order: 200
+    energy: 1.255×10¹⁰ J（3 t TNT）
+    scale: 高层居民楼；3 倍标准爆楼；破坏部分大型建筑（如商场）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-building
+    name: 超爆楼
+    type: power
+    group: inherit
+    parent: 爆楼
+    sort_order: 210
+    energy: 4.184×10¹⁰ J（10 t TNT）
+    scale: 洗地 1 万 m² 小型街区；破坏 30 层大厦；破坏大量大楼
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-street
+    name: 弱爆街
+    type: power
+    group: inherit
+    parent: 爆街
+    sort_order: 220
+    energy: 2.092×10¹¹ J（50 t TNT）
+    scale: 破坏 10 万 m² 街区 / 100 万 m² 古代建筑
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: street
+    name: 标准爆街
+    type: power
+    group: inherit
+    parent: 爆街
+    sort_order: 230
+    energy: 4.184×10¹¹ J（100 t TNT）
+    scale: 破坏 20 万 m² 街区 / 200 万 m² 古代建筑
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-street
+    name: 强爆街
+    type: power
+    group: inherit
+    parent: 爆街
+    sort_order: 240
+    energy: 1.673×10¹² J（400 t TNT）
+    scale: 破坏 50 万 m² 街区 / 近 500 万 m² 古代建筑
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-street
+    name: 超爆街
+    type: power
+    group: inherit
+    parent: 爆街
+    sort_order: 250
+    energy: 1.255×10¹³ J（3000 t TNT）
+    scale: 破坏 200 万 m² 城区 / 20 km² 荒野、古代城市
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: street-plus
+    name: 强化超爆街
+    type: power
+    group: inherit
+    parent: 过渡区
+    sort_order: 260
+    energy: 1.26×10¹³ – 2.3×10¹⁴ J
+    scale: 数 km² 建成城区
+    note: 修正二新增档。超爆街上限到弱爆城下限之间原跨 333 倍无档位，此区间正是常见战绩尺度
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: city-minus
+    name: 弱化弱爆城
+    type: power
+    group: inherit
+    parent: 过渡区
+    sort_order: 270
+    energy: 2.3×10¹⁴ – 4.18×10¹⁵ J
+    scale: 数十 km² 城区
+    note: 修正二新增档，与「强化超爆街」共同填补爆街→爆城的空档
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-city
+    name: 弱爆城
+    type: power
+    group: inherit
+    parent: 爆城
+    sort_order: 280
+    energy: 4.184×10¹⁵ J（100 万 t TNT）
+    scale: 巴黎 105 km²（爆国底线之上的城市级起点）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: city
+    name: 标准爆城
+    type: power
+    group: inherit
+    parent: 爆城
+    sort_order: 290
+    energy: 3.0334×10¹⁶ J（725 万 t TNT）
+    scale: 横滨 437 km²（行政区口径）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-city
+    name: 强爆城
+    type: power
+    group: inherit
+    parent: 爆城
+    sort_order: 300
+    energy: 1.4644×10¹⁷ J（3500 万 t TNT）
+    scale: 纽约 1214 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-city
+    name: 超爆城
+    type: power
+    group: inherit
+    parent: 爆城
+    sort_order: 310
+    energy: 4.184×10¹⁸ J（10 亿 t TNT）
+    scale: 上海 6340 km²（行政区口径）
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-country
+    name: 弱爆国
+    type: power
+    group: inherit
+    parent: 爆国
+    sort_order: 320
+    energy: 6.276×10¹⁹ J（150 亿 t TNT）
+    scale: 荷兰 4 万 km²（爆国底线）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: country
+    name: 标准爆国
+    type: power
+    group: inherit
+    parent: 爆国
+    sort_order: 330
+    energy: 2.092×10²¹ J（5000 亿 t TNT）
+    scale: 日本 37.8 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-country
+    name: 强爆国
+    type: power
+    group: inherit
+    parent: 爆国
+    sort_order: 340
+    energy: 9.414×10²¹ J（2.25 万亿 t TNT）
+    scale: 埃及 100 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-country
+    name: 超爆国
+    type: power
+    group: inherit
+    parent: 爆国
+    sort_order: 350
+    energy: 4.8116×10²² J（10 万亿 t TNT）
+    scale: 印度 300 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-continent
+    name: 弱大陆
+    type: power
+    group: inherit
+    parent: 爆大陆
+    sort_order: 360
+    energy: 2.092×10²³ J（50 万亿 t TNT）
+    scale: 澳大利亚 770 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: continent
+    name: 标准大陆
+    type: power
+    group: inherit
+    parent: 爆大陆
+    sort_order: 370
+    energy: 8.368×10²³ J（200 万亿 t TNT）
+    scale: 俄罗斯 1700 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-continent
+    name: 强大陆
+    type: power
+    group: inherit
+    parent: 爆大陆
+    sort_order: 380
+    energy: 1.85×10²⁴ J
+    scale: 非洲 3000 万 km²
+    note: 修正值。原表 3.89×10²⁶ J 经证实倒挂（能量密度 1.30×10¹⁹ J/km² 远超相邻档），按面积对数插值得 1.85×10²⁴ J
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: eurasia-continent
+    name: 亚欧大陆
+    type: power
+    group: inherit
+    parent: 爆大陆
+    sort_order: 390
+    energy: 4.184×10²⁴ J（1000 万亿 t TNT）
+    scale: 亚欧大陆 5400 万 km²
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-surface
+    name: 弱地表
+    type: power
+    group: inherit
+    parent: 爆地表
+    sort_order: 400
+    energy: 5.0208×10²⁵ J（洗地）– 2.1×10²⁷ J（蒸发整个太平洋）
+    scale: 太平洋 1.8 亿 km²
+    note: 洗地口径 1.22 亿亿 t TNT；蒸发口径 50 亿亿 t TNT，二者须分开标注
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: surface
+    name: 标准爆地表
+    type: power
+    group: inherit
+    parent: 爆地表
+    sort_order: 410
+    energy: 3.2×10²⁶ J（洗地）– 2.9×10²⁸ J（烧玻璃球）
+    scale: 5.1 亿 km²（地球表面积）
+    note: 洗地 / 摧毁整个地表建筑山体 7.714 亿亿 t TNT；加热融化地球表面 7 百亿亿 t TNT
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-surface
+    name: 强地表
+    type: power
+    group: inherit
+    parent: 爆地表
+    sort_order: 420
+    energy: 8.76×10²⁸ J
+    scale: 一击炸飞地球海洋，炸出地球
+    note: 本格数值为复算校验时补算的缺项
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-surface
+    name: 超地表
+    type: power
+    group: inherit
+    parent: 爆地表
+    sort_order: 430
+    energy: 1.63×10³⁰ J
+    scale: 一击炸飞地球地壳，飞出地球
+    note: 本格数值为复算校验时补算的缺项
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-planet
+    name: 弱爆星
+    type: power
+    group: inherit
+    parent: 爆行星
+    sort_order: 440
+    energy: 4.865×10³⁰ J
+    scale: 打爆火星
+    note: 复算值 4.864×10³⁰，与表内值一致
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: planet
+    name: 标准爆星
+    type: power
+    group: inherit
+    parent: 爆行星
+    sort_order: 450
+    energy: 2.24×10³² J
+    scale: 打爆地球（克服引力结合能）
+    note: 复算值 2.241×10³²。束缚能类数据是下限，上限无公式解（通则 0.13）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-planet
+    name: 强爆星
+    type: power
+    group: inherit
+    parent: 爆行星
+    sort_order: 460
+    energy: 4.48×10³² – 2.062×10³⁶ J
+    scale: 打爆两倍地球；将地球蒸发并高速抛飞
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-planet
+    name: 超爆星
+    type: power
+    group: inherit
+    parent: 爆行星
+    sort_order: 470
+    energy: 2.06×10³⁶ – 3.49×10³⁸ J
+    scale: 打爆木星，上探至气态巨行星上限（13 倍木星质量，氘燃烧极限）
+    note: 修正三：上限已上探至氘燃烧极限，与新增的爆褐矮星量级无缝衔接
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-brown-dwarf
+    name: 弱褐矮星
+    type: power
+    group: inherit
+    parent: 爆褐矮星
+    sort_order: 480
+    energy: 3.49×10³⁸ – 8.25×10³⁸ J
+    scale: 13 – 20 倍木星质量（氘燃烧下限起）
+    note: 修正三新增量级，填补爆行星→爆恒星之间 8136 倍空档。半径统一取 R = 1.0 R_J（褐矮星全质量区间半径仅浮动 10–15%），近似不确定度约 ±40%，不影响档位归属
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: brown-dwarf
+    name: 标准褐矮星
+    type: power
+    group: inherit
+    parent: 爆褐矮星
+    sort_order: 490
+    energy: 8.25×10³⁸ – 3.30×10³⁹ J
+    scale: 20 – 40 倍木星质量
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-brown-dwarf
+    name: 强褐矮星
+    type: power
+    group: inherit
+    parent: 爆褐矮星
+    sort_order: 500
+    energy: 3.30×10³⁹ – 8.72×10³⁹ J
+    scale: 40 – 65 倍木星质量
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-brown-dwarf
+    name: 超褐矮星
+    type: power
+    group: inherit
+    parent: 爆褐矮星
+    sort_order: 510
+    energy: 8.72×10³⁹ – 1.32×10⁴⁰ J
+    scale: 65 – 80 倍木星质量（氢燃烧临界）
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  - slug: weak-star
+    name: 弱恒星
+    type: power
+    group: inherit
+    parent: 爆恒星
+    sort_order: 520
+    energy: 2.4×10⁴⁰ J
+    scale: 打爆红矮星
+    note: rules.md 原表对本档标有 ⚠（取值待交叉验算）
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: star
+    name: 标准爆恒星
+    type: power
+    group: inherit
+    parent: 爆恒星
+    sort_order: 530
+    energy: 2.28×10⁴¹ J
+    scale: 打爆太阳
+    note: 复算值 2.277×10⁴¹，与表内值一致。继承区终点
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: strong-star
+    name: 强恒星
+    type: power
+    group: inherit
+    parent: 爆恒星
+    sort_order: 540
+    energy: 4.56×10⁴¹ J
+    scale: 2 倍恒星以上
+    source: 1.3 量级表（昆虫～爆恒星）
+  - slug: hyper-star
+    name: 超恒星
+    type: power
+    group: inherit
+    parent: 爆恒星
+    sort_order: 550
+    energy: 2.28×10⁴² J 以上
+    scale: 一击打爆由十颗以上恒星组成的星团
+    source: 1.3 量级表（昆虫～爆恒星）
+
+  # ─────────────── 第二部分 过渡带 A ───────────────
+  - slug: transition-a
+    name: 过渡带 A
+    type: power
+    group: transition-a
+    parent: 恒星 → 恒星系
+    sort_order: 560
+    energy: 1.8×10⁴² – 3.7×10⁴⁹ J
+    scale: 覆盖直径 一颗恒星直径 ～ 40 AU（半球扩散模型）
+    note: 继承区终点与覆盖体系起点之间 7.3 个数量级的命名空白。本区间不新设量级名称，标注方式二选一：①「弱化/强化 + 相邻档」（如强化超恒星、弱化弱恒星系）②直接标焦耳数。跨 3.5 个数量级，修饰词不携带比较信息，必须写出具体焦耳数。1 AU（2.31×10⁴⁶ J）为分界
+    source: 2.2 过渡带 A：恒星 → 恒星系（半球扩散，1.8×10⁴² ～ 3.7×10⁴⁹ J）
+
+  # ─────────────── 第三部分 覆盖体系 ───────────────
+  - slug: weak-star-system
+    name: 弱恒星系
+    type: power
+    group: cover
+    parent: 恒星系级
+    sort_order: 570
+    energy: 3.7×10⁴⁹ – 1.5×10⁵⁰ J
+    scale: 覆盖直径 40 – 80 AU
+    note: 全力一击毁灭太阳本身到冥王星轨道对面边缘整个范围内的所有物质，最边缘处能量恰好足够摧毁该处的恒星。半球扩散，传播距离取直径。40 AU 为本级正式下限
+    source: 3.3 恒星系级（半球扩散）
+  - slug: star-system
+    name: 标准恒星系
+    type: power
+    group: cover
+    parent: 恒星系级
+    sort_order: 580
+    energy: 2.3×10⁵² – 2.1×10⁵³ J
+    scale: 覆盖直径 1,000 – 3,000 AU（离散盘外边界 / 奥尔特云内起点）
+    note: 直径约为弱恒星系下限的 25–75 倍，能量倍率约 600–6,000 倍
+    source: 3.3 恒星系级（半球扩散）
+  - slug: strong-star-system
+    name: 强恒星系
+    type: power
+    group: cover
+    parent: 恒星系级
+    sort_order: 590
+    energy: 2.3×10⁵⁴ – 2.1×10⁵⁵ J
+    scale: 覆盖直径 1 万 – 3 万 AU（奥尔特云内区 / 深厚彗星云）
+    note: 直径约为弱恒星系下限的 250–750 倍，能量倍率约 6 万–56 万倍
+    source: 3.3 恒星系级（半球扩散）
+  - slug: hyper-star-system
+    name: 超恒星系
+    type: power
+    group: cover
+    parent: 恒星系级
+    sort_order: 600
+    energy: 2.1×10⁵⁶ – 3.7×10⁵⁶ J
+    scale: 覆盖直径 1.5 – 2 光年（约 9.5 万 – 12.6 万 AU，太阳引力边界 / 希尔球极限）
+    note: 直径约为弱恒星系下限的 2400–3200 倍，能量倍率约 560 万–1000 万倍。黄道面适配属同量级形状优化，不跨数量级
+    source: 3.3 恒星系级（半球扩散）
+
+  # ─────────────── 第二部分 过渡带 B ───────────────
+  - slug: transition-b
+    name: 过渡带 B
+    type: power
+    group: transition-b
+    parent: 恒星系 → 星团
+    sort_order: 610
+    energy: 3.7×10⁵⁶ – 3.7×10⁵⁸ J
+    scale: 覆盖直径 2 光年 ～ 20 光年（半球扩散模型）
+    note: 处理方式与过渡带 A 相同：不新设名称，用「弱化/强化 + 相邻档」或直接标能量。6.3 光年（3.66×10⁵⁷ J）为几何中点分界
+    source: 2.3 过渡带 B：恒星系 → 星团（半球扩散，3.7×10⁵⁶ ～ 3.7×10⁵⁸ J）
+
+  - slug: weak-star-cluster
+    name: 弱爆星团
+    type: power
+    group: cover
+    parent: 星团级
+    sort_order: 620
+    energy: 3.7×10⁵⁸ – 2.3×10⁵⁹ J
+    scale: 覆盖直径 20 – 50 光年
+    note: 完全摧毁小型疏散星团（毕宿星团潮汐直径约 66 光年的内部主体、紧凑型疏散星团完整范围）
+    source: 3.4 星团级（半球扩散）
+  - slug: star-cluster
+    name: 标准爆星团
+    type: power
+    group: cover
+    parent: 星团级
+    sort_order: 630
+    energy: 2.3×10⁵⁹ – 9.2×10⁵⁹ J
+    scale: 覆盖直径 50 – 100 光年
+    note: 完全摧毁典型疏散星团（毕宿星团约 66 光年、鬼星团 M44 约 78 光年、昴宿星团约 86 光年）
+    source: 3.4 星团级（半球扩散）
+  - slug: strong-star-cluster
+    name: 强爆星团
+    type: power
+    group: cover
+    parent: 星团级
+    sort_order: 640
+    energy: 9.2×10⁵⁹ – 2.1×10⁶⁰ J
+    scale: 覆盖直径 100 – 150 光年
+    note: 完全摧毁标准球状星团（杜鹃 47 约 120 光年、M13 约 145 光年）
+    source: 3.4 星团级（半球扩散）
+  - slug: hyper-star-cluster
+    name: 超爆星团
+    type: power
+    group: cover
+    parent: 星团级
+    sort_order: 650
+    energy: 2.1×10⁶⁰ – 8.3×10⁶⁰ J
+    scale: 覆盖直径 150 – 300 光年
+    note: 完全摧毁银河系最大球状星团及以上（半人马座 ω 约 150 光年，最大球状星团潮汐范围可达 300 光年）
+    source: 3.4 星团级（半球扩散）
+
+  - slug: weak-galaxy
+    name: 弱星系
+    type: power
+    group: cover
+    parent: 星系级
+    sort_order: 660
+    energy: 1.15×10⁶¹ – 4.6×10⁶³ J
+    scale: 覆盖直径 1,000 – 20,000 光年（矮星系尺度）
+    note: 盘面适配模型 A = πD²/4，边缘阈值 F* = 1.64×10²³ J/m²。参照：小麦哲伦云约 7000 光年、大麦哲伦云约 1.4 万光年
+    source: 3.6 星系级（盘面适配 πD²/4）
+  - slug: galaxy
+    name: 标准星系
+    type: power
+    group: cover
+    parent: 星系级
+    sort_order: 670
+    energy: 4.6×10⁶³ – 1.15×10⁶⁵ J
+    scale: 覆盖直径 2 万 – 10 万光年（中型旋涡星系至银河系级）
+    note: 参照：三角座 M33 约 6 万光年、银河系盘面约 10 万光年
+    source: 3.6 星系级（盘面适配 πD²/4）
+  - slug: strong-galaxy
+    name: 强星系
+    type: power
+    group: cover
+    parent: 星系级
+    sort_order: 680
+    energy: 1.15×10⁶⁵ – 1.04×10⁶⁶ J
+    scale: 覆盖直径 10 万 – 30 万光年（大型旋涡星系与大型椭圆星系）
+    note: 参照：仙女座 M31 约 22 万光年
+    source: 3.6 星系级（盘面适配 πD²/4）
+  - slug: hyper-galaxy
+    name: 超星系
+    type: power
+    group: cover
+    parent: 星系级
+    sort_order: 690
+    energy: 1.04×10⁶⁶ – 4.2×10⁶⁸ J
+    scale: 覆盖直径 30 万 – 600 万光年（巨型椭圆星系至星系群）
+    note: 参照：IC 1101 约 400 万光年。原稿举例「本星系群约 1000 万光年」已移除——超出本级上限且与星系团级下限重复，本星系群归入弱星系团
+    source: 3.6 星系级（盘面适配 πD²/4）
+
+  - slug: weak-galaxy-cluster
+    name: 弱星系团
+    type: power
+    group: cover
+    parent: 星系团级
+    sort_order: 700
+    energy: 9.2×10⁶⁹ – 3.7×10⁷⁰ J
+    scale: 覆盖直径 1,000 万 – 2,000 万光年（星系群至典型星系团）
+    note: 改回半球扩散模型 E = 2πD² × F*（星系团为引力弛豫后的近球状结构）。参照：本星系群约 1000 万光年、室女座星系团约 1500 万光年
+    source: 3.7 星系团级（回到半球扩散）
+  - slug: galaxy-cluster
+    name: 标准星系团
+    type: power
+    group: cover
+    parent: 星系团级
+    sort_order: 710
+    energy: 3.7×10⁷⁰ – 2.3×10⁷¹ J
+    scale: 覆盖直径 2,000 万 – 5,000 万光年（大型星系团）
+    source: 3.7 星系团级（回到半球扩散）
+  - slug: strong-galaxy-cluster
+    name: 强星系团
+    type: power
+    group: cover
+    parent: 星系团级
+    sort_order: 720
+    energy: 2.3×10⁷¹ – 9.2×10⁷¹ J
+    scale: 覆盖直径 5,000 万 – 1 亿光年（小型超星系团）
+    note: 超星系团并非球状（室女座超星系团轴比约 4–5:1），本级上半段形状适配值约为半球值的 1/4–1/8，仅作同量级控制表现标注
+    source: 3.7 星系团级（回到半球扩散）
+  - slug: hyper-galaxy-cluster
+    name: 超星系团
+    type: power
+    group: cover
+    parent: 星系团级
+    sort_order: 730
+    energy: 9.2×10⁷¹ – 3.7×10⁷² J
+    scale: 覆盖直径 1 亿 – 2 亿光年（大型超星系团）
+    note: 参照：室女座超星系团约 1.1 亿光年（长轴口径约 1.47 亿光年）。拉尼亚凯亚（约 5.2 亿光年）已超上限，归入标准宇宙结构——本体系按覆盖尺度定级，不按天文学分类名定级
+    source: 3.7 星系团级（回到半球扩散）
+
+  - slug: weak-cosmic-structure
+    name: 弱宇宙结构
+    type: power
+    group: cover
+    parent: 宇宙结构级
+    sort_order: 740
+    energy: 3.7×10⁷² – 2.3×10⁷³ J
+    scale: 覆盖直径 2 – 5 亿光年（小型宇宙纤维与小型壁状结构）
+    note: 默认半球扩散，D 取结构最长维度。形状适配参考：纤维状约 10⁷⁰–10⁷¹ J，壁状约 10⁷¹–10⁷² J
+    source: 3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）
+  - slug: cosmic-structure
+    name: 标准宇宙结构
+    type: power
+    group: cover
+    parent: 宇宙结构级
+    sort_order: 750
+    energy: 2.3×10⁷³ – 2.1×10⁷⁴ J
+    scale: 覆盖直径 5 – 15 亿光年（已知大型壁状结构）
+    note: 参照：CfA2 长城长约 5 亿光年、斯隆长城长约 14 亿光年；拉尼亚凯亚超星系团（2.49×10⁷³ J）落于本级。形状适配参考：壁状约 10⁷²–10⁷³ J
+    source: 3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）
+  - slug: strong-cosmic-structure
+    name: 强宇宙结构
+    type: power
+    group: cover
+    parent: 宇宙结构级
+    sort_order: 760
+    energy: 2.1×10⁷⁴ – 9.2×10⁷⁵ J
+    scale: 覆盖直径 15 – 100 亿光年（最大已知宇宙结构）
+    note: 参照：巨弧长约 33 亿光年；武仙-北冕座长城长约 100 亿光年（目前已知最大结构，存在争议）。形状适配参考：大型壁状约 10⁷³–10⁷⁴ J
+    source: 3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）
+  - slug: hyper-cosmic-structure
+    name: 超宇宙结构
+    type: power
+    group: cover
+    parent: 宇宙结构级
+    sort_order: 770
+    energy: 9.2×10⁷⁵ – 3.7×10⁷⁶ J
+    scale: 覆盖直径 100 – 200 亿光年（从最大已知结构到接近可观测宇宙尺度）
+    source: 3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）
+
+  - slug: weak-universe
+    name: 弱宇宙
+    type: power
+    group: cover
+    parent: 宇宙级
+    sort_order: 780
+    energy: 3.7×10⁷⁶ – 8.0×10⁷⁷ J
+    scale: 覆盖直径 200 – 930 亿光年
+    note: 覆盖可观测宇宙的显著部分但未完全覆盖。可观测宇宙近似球形，半球扩散直接适用
+    source: 3.9 宇宙级（半球扩散）
+  - slug: universe
+    name: 标准宇宙
+    type: power
+    group: cover
+    parent: 宇宙级
+    sort_order: 790
+    energy: 8.0×10⁷⁷ J
+    scale: 覆盖直径 930 亿光年（可观测宇宙全域）
+    note: 当前物理学能观测确认的最大宇宙尺度
+    source: 3.9 宇宙级（半球扩散）
+  - slug: strong-universe
+    name: 强宇宙
+    type: power
+    group: cover
+    parent: 宇宙级
+    sort_order: 800
+    energy: 8.0×10⁷⁹ – 8.0×10⁸⁵ J
+    scale: 可观测宇宙的 10 – 10,000 倍（9,300 亿 – 930 万亿光年）
+    note: 采用可观测宇宙倍数制，对应「比可观测宇宙更大但仍为单个有限宇宙」的创作设定——这是汪吧、VS Battles Wiki 等主流体系普遍跳过的区间
+    source: 3.9 宇宙级（半球扩散）
+  - slug: hyper-universe
+    name: 超宇宙
+    type: power
+    group: cover
+    parent: 宇宙级
+    sort_order: 810
+    energy: 8.0×10⁸⁵ J 起，上不封顶
+    scale: 可观测宇宙的 10,000 倍以上
+    note: 单个有限宇宙的开放区间。再往上进入广义无限区级（仍属有限），跨过 ℵ₀ 才是论外级；涉及跨位面 / 嵌套结构另见位面跃迁（3.11）
+    source: 3.9 宇宙级（半球扩散）
+
+  # ─────────────── 3.10 广义无限区级（有限 · 不可计算） ───────────────
+  - slug: incomputable-number
+    name: 不可计算数
+    type: power
+    group: infinite
+    parent: 广义无限区级
+    sort_order: 820
+    energy: 有限，但写不出焦耳数
+    scale: 静态：覆盖直径 D 本身是不可计算数
+    note: E = 2πD² × F* 公式不变，能量随之为不可计算数。入档须同时满足三条（分类二）：①角色对力道有梯度控制 ②完全释放时力量强、范围大，但角色不知道实际规模 ③文本没有明确写出阿列夫零。性质上仍是有限，与真无限严格区分；类比忙碌海狸数 BB(n)
+    source: 3.10.2 广义无限区的两个类型
+  - slug: incomputable-expansion
+    name: 不可计算扩张率
+    type: power
+    group: infinite
+    parent: 广义无限区级
+    sort_order: 830
+    energy: 有限，但写不出焦耳数
+    scale: 动态：目标持续膨胀，比较输出速率与增长速率，不比较总量
+    note: 与「不可计算数」完全独立，可单独出现也可叠加；允许横向叠加（同层多个独立不可计算因素）与纵向叠加（连续多次跃迁各自贡献的不可计算性累加），前提是过通则 0.2、0.14 的证据门槛且结果仍低于 ℵ₀。也可由铺垫法（分类三）成立。命中五种证伪信号（增长悖论 / 邻近量化悖论 / 实体化悖论 / 算术组合悖论 / 能量枯竭）任意一种即降级
+    source: 3.10.2 广义无限区的两个类型
+
+  # ─────────────── 第四部分 论外级（真无限 · ℵ₀ 起） ───────────────
+  - slug: beyond-threshold
+    name: 论外门槛
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 840
+    energy: ℵ₀（可数无限）
+    scale: 真无限的第一级台阶，相当于本体系的 T1 / T0 档
+    note: 入档须同时过两道门槛：通则 0.2（明确递进和证据，「无数/无限」默认虚词）与通则 0.15（有限世界内产出无限战力须有机制解释）。证据分三级：结构性证明（可枚举无终点）＞其它数学化描述＞纯文学修饰词。多数作品从未产出结构性证明
+    source: 4.5 论外级内部分档
+  - slug: beyond-line3
+    name: 三线
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 850
+    energy: ℶ₁ = 2^ℵ₀（连续统）
+    scale: 第一次跨入不可数；幂集运算本身
+    note: ZFC 内可证明存在。本体系论外入口设在 ℵ₀，与流行标准（新标 / 日标 / 幻标多设在 ℵ₁）不是同一区间，跨体系引用须说明所用标准
+    source: 4.5 论外级内部分档
+  - slug: beyond-line2
+    name: 二线
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 860
+    energy: ℶ₂、ℶ₃ …… ℶ_ω、ℶ_{ℶ₀} 等极限段
+    scale: 幂集迭代与极限阶段
+    note: ZFC 内可证明存在
+    source: 4.5 论外级内部分档
+  - slug: beyond-line1
+    name: 一线
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 870
+    energy: ℶ 不动点系列（ℶ_κ = κ），巅峰含世界基数
+    scale: ZFC 可证区的最后一段；自我指涉的编号结构
+    note: 选贝斯不动点而非阿列夫不动点（ℶ_α ≥ ℵ_α 恒成立，贝斯不动点更强、且构造性，还绕开连续统假设）。严格说来「ZFC 可证 / 不可证」这条线划在世界基数处，本体系为可读性把论天门槛设在不可达基数
+    source: 4.5 论外级内部分档
+  - slug: beyond-sky-low
+    name: 论天下
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 880
+    energy: 不可达 → 马洛 → 弱紧致 → 不可描述 → 拉姆齐
+    scale: 以「大小 / 组合性质」定义的大基数
+    note: ZFC 无法证明存在，只能作为额外公理假设。论天段一律按一致性强度排序，不按基数大小排序
+    source: 4.5 论外级内部分档
+  - slug: beyond-sky-mid
+    name: 论天中
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 890
+    energy: 0# → 可测 → 强 → 伍丁 → 强紧致 → 超紧致
+    scale: "定义范式转为初等嵌入 j: V→M；强度看 M 与 V 的接近程度"
+    note: 第一个巨大基数的「大小」小于第一个超紧致基数，但一致性强度更高——遇排序颠倒时以一致性强度为准
+    source: 4.5 论外级内部分档
+  - slug: beyond-sky-high
+    name: 论天上
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 900
+    energy: 可扩 → 巨大 → n-巨大 → I3 → I2 → I1 → I0
+    scale: "秩到秩嵌入（j: V_λ→V_λ）；I0 为已知与 ZFC 相容的最强"
+    source: 4.5 论外级内部分档
+  - slug: beyond-sky-top
+    name: 论天最上
+    type: power
+    group: beyond
+    parent: 论外级
+    sort_order: 910
+    energy: 莱茵哈特 → 伯克利
+    scale: Kunen 不一致性定理的逼停处；须在 ZF（无选择公理）中讨论
+    note: 与 ZFC 不相容。含义是「越出了 ZFC 的边界」，不是「规模比 I0 更大」——评级时应标注为越界区，而非单纯更高一档（同 4.4「关系不是规模」原则）
+    source: 4.5 论外级内部分档
+
+  # ─────────────── 未归档（固定排在最末） ───────────────
+  # 只有一档：未知/暂存。二者都是「落不进正式量级」的兜底，分开反而制造无谓的
+  # 归档决策——连区间都圈不出来和区间待坐实，处理动作是一样的：先放着，补齐后再转出。
+  - slug: unknown
+    name: 未知/暂存
+    type: power
+    group: unfiled
+    parent: 兜底档
+    sort_order: 920
+    energy: ''
+    scale: ''
+    note: >-
+      体系之外的兜底档，不属于任何体系分段，不参与强弱排序。两种情况都先放这里：
+      一是「未知」——信息不足、连区间都圈不出来（原文缺失、只有传闻或旁证、表现互相
+      矛盾无法取值、或作品未给出任何可换算的参照物）；二是「暂存」——量级区间已可
+      圈定、只差坐实（已能大致估出覆盖范围，仍待实锤表现或数据补齐后转正；若后续
+      证明高估则下调至对应正式档）。补齐材料后应尽快转出本档，不要长期滞留。

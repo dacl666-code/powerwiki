@@ -6,6 +6,7 @@
     
     <title>搜索 - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script>document.documentElement.className += ' js';try{var t=localStorage.getItem('pw-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
     <header class="site-header">
@@ -15,10 +16,16 @@
                 <a href="/powerwiki/index.html">首页</a>
                 <a href="/powerwiki/characters.html">角色图鉴</a>
                 <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
                 <a href="/powerwiki/page/rules.html">战力评级规则</a>
                 <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
                 <a href="/powerwiki/search.html">搜索</a>
             </nav>
+            <button type="button" class="theme-toggle" id="theme-toggle"
+                    aria-label="切换深浅色主题" title="切换深浅色主题">
+                <span class="icon-sun" aria-hidden="true">☀</span>
+                <span class="icon-moon" aria-hidden="true">☾</span>
+            </button>
         </div>
     </header>
 
@@ -57,12 +64,12 @@
             <div id="active-filters" class="active-filters"></div>
             <p class="search-tip" id="search-tip"></p>
             <div id="search-results" class="character-grid"></div>
-            <p class="empty" id="no-result" style="display:none">暂无角色数据，去 data/characters.yaml 添加后重新生成即可</p>
+            <p class="empty" id="no-result" style="display:none">没有匹配的角色，试试放宽条件</p>
         </section>
     </div>
 
     <script>
-        var indexData = [];
+        var indexData = [{"slug": "gu-chensha", "name": "古尘沙", "alias": "无龙内阁阁主、永界之主、多元宇宙缔造者", "series": "龙符（梦入神机）", "category": "不可计算扩张率", "catOrder": 830, "realm": "不朽第十层·非有无不朽", "realmSeries": "", "realmOrder": 0, "desc": "梦入神机《龙符》的主角，大永王朝十九皇子，无龙内阁阁主，永界之主。\n\n**起点即锚点**：第二章获得祭天符诏，献祭一只大公鸡起步——此时他被公鸡爪抓伤「皮肉抓下大块」，需持匕首才能反杀，文中直言只有「缚鸡之力」。这完全落在现实生理伤害范围内，是全书最干净的一个结论：**《龙符》的基础世界强度 = 现实世界 × 1.0**，凡人层不偏离现实，可直接套用《材质与破坏能量数据库》，不需要先做换算。\n\n反证同样成立：道境三十六变里「刀枪不入」要到**第三变**才达成。把「免疫常规兵刃」设为需要修炼两个阶段才能获得的能力，恰恰反证了这个世界的常人和常规兵器遵循现实物理规律。\n\n**资质与功法**：凭祭天符诏起步（唯一可用者为「天命之子」及以上资质）。核心功法**天子封神术**分三境——日月同辉、天地同寿、众生同心；全书他仅修得第一境「日月炼」的皮毛（不足十分之一），凭此已破入凡境四重宗师，原文称「比", "power": "**终局评级：广义无限区级 · 不可计算扩张率；未触及论外级（真 ℵ₀），且状态本身存在文本自证的不稳定性。**\n\n这条结论的分量不亚于前面任何一批的证伪工作——**如果这里对主角本人网开一面，前面逐条打掉「无龙心法产生无限能量」「无限盒子表」这些宣称就失去了统一标准。**\n\n### 第一步：排除坐实为静态「不可计算数」或论外级\n\n- 「超脱万物、超脱大道、超脱命运」系列描述是**纯定性堆叠**，没有明确递进和证据（不过 0.2 门槛）。\n- 「一千零一尊主角」是叙事者给出的**具体计数**，不是无限个（信号 2，邻近量化悖论）。\n- 按 0.15，古尘沙的力量来自**体系内部**（人心祭祀、无龙心法吸收），而体系内部已确认天界、时空乱流有限；唯一未被证伪的真无限候选**混沌**，本身都还没能坐实为完成态无限——古尘沙没有被证实接入了这个结构之外的资源，理论上限仍受这个资源池约束。\n\n##", "image": "https://img.mp.sohu.com/upload/20170214/83b1334c3a5d42b595e2a36db4138324_th.jpeg"}];
         var BASE = "/powerwiki";
 
         var el = function(id){ return document.getElementById(id); };
@@ -103,7 +110,7 @@
             return true;
         }
 
-        function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
         function render() {
             var list = indexData.filter(match);
@@ -113,7 +120,7 @@
             else list.sort(function(a,b){return String(a.name).localeCompare(String(b.name),'zh');});
 
             resultsEl.innerHTML = list.map(function(c){
-                var img = c.image ? '<img src="'+esc(c.image)+'" alt="">' : '<div class="no-image">暂无图片</div>';
+                var img = c.image ? '<img src="'+esc(c.image)+'" alt="'+esc(c.name)+'" loading="lazy">' : '<div class="no-image">暂无图片</div>';
                 return '<a href="'+BASE+'/character/'+c.slug+'.html" class="character-card">'+
                     '<div class="char-image">'+img+'</div>'+
                     '<div class="char-info"><h3>'+esc(c.name)+'</h3>'+
@@ -201,6 +208,7 @@
                 <a href="/powerwiki/index.html">首页</a>
                 <a href="/powerwiki/characters.html">角色图鉴</a>
                 <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
                 <a href="/powerwiki/page/rules.html">战力评级规则</a>
                 <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
                 <a href="/powerwiki/search.html">搜索</a>

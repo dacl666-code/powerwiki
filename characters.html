@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>角色图鉴 - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="/powerwiki/static/css/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
+    <script>document.documentElement.className += ' js';try{var t=localStorage.getItem('pw-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
     <header class="site-header">
@@ -15,10 +16,16 @@
                 <a href="/powerwiki/index.html">首页</a>
                 <a href="/powerwiki/characters.html">角色图鉴</a>
                 <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
                 <a href="/powerwiki/page/rules.html">战力评级规则</a>
                 <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
                 <a href="/powerwiki/search.html">搜索</a>
             </nav>
+            <button type="button" class="theme-toggle" id="theme-toggle"
+                    aria-label="切换深浅色主题" title="切换深浅色主题">
+                <span class="icon-sun" aria-hidden="true">☀</span>
+                <span class="icon-moon" aria-hidden="true">☾</span>
+            </button>
         </div>
     </header>
 
@@ -33,13 +40,20 @@
         <section class="panel">
             <div class="panel-header">
                 <h1>角色图鉴</h1>
-                <span class="badge">0 位角色</span>
+                <span class="badge">1 位角色</span>
             </div>
             <div class="char-toolbar">
                 <input type="text" id="name-filter" placeholder="按名称或作品快速过滤..." class="filter-input">
             </div>
             <div class="character-grid" id="char-grid">
-            <p class="empty">暂无角色，敬请期待收录</p>
+                <a href="/powerwiki/character/gu-chensha.html" class="character-card" data-name="古尘沙" data-series="龙符（梦入神机）">
+                    <div class="char-image"><img src="https://img.mp.sohu.com/upload/20170214/83b1334c3a5d42b595e2a36db4138324_th.jpeg" alt="古尘沙" loading="lazy"></div>
+                    <div class="char-info">
+                        <h3>古尘沙</h3>
+                        <p class="char-series">龙符（梦入神机）</p>
+                        <div class="char-tags"><span class="tag tag-power">不可计算扩张率</span><span class="tag tag-realm">不朽第十层·非有无不朽</span></div>
+                    </div>
+                </a>
             </div>
             <p class="empty" id="no-result" style="display:none">没有匹配的角色</p>
         </section>
@@ -47,16 +61,16 @@
 
     <script>
         (function() {
-            const input = document.getElementById('name-filter');
-            const cards = document.querySelectorAll('#char-grid .character-card');
-            const noResult = document.getElementById('no-result');
+            var input = document.getElementById('name-filter');
+            var cards = document.querySelectorAll('#char-grid .character-card');
+            var noResult = document.getElementById('no-result');
             if (!input) return;
             input.addEventListener('input', function() {
-                const q = this.value.trim().toLowerCase();
-                let shown = 0;
+                var q = this.value.trim().toLowerCase();
+                var shown = 0;
                 cards.forEach(function(c) {
-                    const hay = (c.dataset.name + ' ' + c.dataset.series).toLowerCase();
-                    const ok = !q || hay.indexOf(q) !== -1;
+                    var hay = (c.dataset.name + ' ' + c.dataset.series).toLowerCase();
+                    var ok = !q || hay.indexOf(q) !== -1;
                     c.style.display = ok ? '' : 'none';
                     if (ok) shown++;
                 });
@@ -77,6 +91,7 @@
                 <a href="/powerwiki/index.html">首页</a>
                 <a href="/powerwiki/characters.html">角色图鉴</a>
                 <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
                 <a href="/powerwiki/page/rules.html">战力评级规则</a>
                 <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
                 <a href="/powerwiki/search.html">搜索</a>
