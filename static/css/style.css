@@ -34,7 +34,7 @@
     --radius:        12px;
     --radius-sm:     8px;
     --radius-lg:     18px;
-    --maxw:          1200px;
+    --maxw:          1320px;
 
     --shadow-xs:     0 1px 2px rgba(16, 24, 40, .05);
     --shadow-sm:     0 2px 8px rgba(16, 24, 40, .06);
@@ -597,8 +597,8 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 .doc-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 190px;
-    gap: 40px;
+    grid-template-columns: minmax(0, 1fr) 160px;
+    gap: 36px;
     align-items: start;
 }
 
@@ -652,7 +652,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------------------------- Markdown 正文 ---------------------------- */
-.markdown-content { font-size: 15px; line-height: 1.9; max-width: none; }
+.markdown-content { font-size: 15px; line-height: 1.9; max-width: 1040px; margin: 0 auto; }
 
 .markdown-content h1,
 .markdown-content h2,
