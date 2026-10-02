@@ -148,7 +148,7 @@ def validate_data(categories, groups, realms, characters, pages):
         if groups and c.get('group') not in group_ids:
             errors.append(f"档位 {c.get('slug')} 的 group「{c.get('group')}」未在 groups 中定义")
 
-    # 未归档兜底档必须在最末（用户约定：未知 / 暂存 排在战力等级最后）
+    # 未归档兜底档必须在最末（用户约定：「未知/暂存」排在战力等级最后）
     if categories:
         ordered = sorted(categories, key=lambda x: x.get('sort_order', 0))
         tail = [c.get('slug') for c in ordered if c.get('group') == 'unfiled']
@@ -773,11 +773,10 @@ def build_tiers_page(categories, characters):
                 <ul>
                     <li><b>排序</b>：<code>sort_order</code> 由弱到强，间隔 10，便于后续插档；首页与本表共用同一顺序。</li>
                     <li><b>分段</b>：<code>group</code> 对应体系分段，按档位在轴上首次出现的位置切分，因此过渡带 A / B 各自落在真实位置，不会被归拢打乱强弱顺序。</li>
-                    <li><b>兜底档</b>：末尾两个档位固定为「未知」与「暂存」，不属于任何体系分段，不参与强弱排序。
-                        <ul>
-                            <li><b>未知</b>——信息不足、连区间都圈不出来，落不进任何档。</li>
-                            <li><b>暂存</b>——区间已可圈定、只差坐实，待实锤表现或数据补齐后转正；若证明高估则下调至对应正式档。</li>
-                        </ul>
+                    <li><b>兜底档</b>：末尾「未知/暂存」是体系之外的兜底档位，不属于任何体系分段，不参与强弱排序。
+                        两种情况都先放这里：<b>未知</b>——信息不足、连区间都圈不出来；
+                        <b>暂存</b>——区间已可圈定、只差坐实（若证明高估则下调至对应正式档）。
+                        二者处理动作一致：先放着，补齐材料后转出正式档，不要长期滞留。
                     </li>
                     <li><b>旧档归位</b>：旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 · 低维 · 微观等）已全部废弃，对照关系写在 <code>data/categories.yaml</code> 文件头注释里。挂在废弃档上的角色须改挂新档。</li>
                     <li><b>改档流程</b>：编辑 <code>data/categories.yaml</code> → 重新构建 → 首页、本表、各档详情页、搜索筛选器同步更新。</li>

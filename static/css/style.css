@@ -533,8 +533,7 @@ img { max-width: 100%; display: block; }
 .tier-src.muted { color: var(--text-3); border-bottom: none; }
 
 /* 未归档两档在表格里弱化显示 */
-.tier-table tbody tr#tier-unknown,
-.tier-table tbody tr#tier-pending { background: #fbfcfe; }
+.tier-table tbody tr#tier-unknown { background: #fbfcfe; }
 
 /* ---------------------------- 档位详情页 ---------------------------- */
 .tier-meta {

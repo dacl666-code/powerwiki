@@ -39,7 +39,7 @@
                     <h1>量级体系表</h1>
                 </div>
                 <p class="tier-intro">
-                    共 <b>93</b> 个量级档位，由弱到强排列。本表与
+                    共 <b>92</b> 个量级档位，由弱到强排列。本表与
                     <a href="/powerwiki/page/rules.html">《战力评级规则》</a> 的战力量级体系表一一对应：
                     档位名取自 1.3 量级表与第三、四部分的定级口径，能量区间与覆盖尺度照抄原文。
                     改档位只需编辑 <code>data/categories.yaml</code>，首页战力等级、本表、
@@ -1021,9 +1021,9 @@
         <section class="panel tier-section" id="group-unfiled">
             <div class="panel-header">
                 <h2>未归档</h2>
-                <span class="badge">2 档</span>
+                <span class="badge">1 档</span>
             </div>
-                    <p class="tier-group-note">体系之外的两个兜底档，固定排在最末</p>
+                    <p class="tier-group-note">体系之外的兜底档（未知/暂存），固定排在最末，不参与强弱排序</p>
             <table class="tier-table">
                 <thead>
                     <tr>
@@ -1039,16 +1039,7 @@
                 <tbody>
                     <tr id="tier-unknown">
                         <td class="col-pos" data-label="位次">92</td>
-                        <td class="col-name" data-label="档位"><a href="/powerwiki/category/unknown.html">未知</a><p class="tier-note">信息不足、落不进任何档位的角色暂放此处：原文缺失、只有传闻或旁证、表现互相矛盾无法取值、或作品未给出任何可换算的参照物。与「暂存」严格区分——未知是连区间都圈不出来，暂存是区间已知、只差坐实。补齐材料后应尽快转出本档</p></td>
-                        <td class="col-parent" data-label="量级">兜底档</td>
-                        <td class="col-energy" data-label="能量">兜底档</td>
-                        <td class="col-scale" data-label="尺度">—</td>
-                        <td class="col-count" data-label="角色">0</td>
-                        <td class="col-src" data-label="原文"><span class="tier-src muted">—</span></td>
-                    </tr>
-                    <tr id="tier-pending">
-                        <td class="col-pos" data-label="位次">93</td>
-                        <td class="col-name" data-label="档位"><a href="/powerwiki/category/pending.html">暂存</a><p class="tier-note">证据待补、量级区间已可圈定但尚未最终确认的战力档位。归入此档表示已能大致估出其覆盖范围，仍待实锤表现或数据补齐后转正；若后续证明高估则下调至对应正式档。与「未知」严格区分：未知是信息不足、落不进任何档，暂存是区间已知、只差坐实</p></td>
+                        <td class="col-name" data-label="档位"><a href="/powerwiki/category/unknown.html">未知/暂存</a><p class="tier-note">体系之外的兜底档，不属于任何体系分段，不参与强弱排序。两种情况都先放这里： 一是「未知」——信息不足、连区间都圈不出来（原文缺失、只有传闻或旁证、表现互相 矛盾无法取值、或作品未给出任何可换算的参照物）；二是「暂存」——量级区间已可 圈定、只差坐实（已能大致估出覆盖范围，仍待实锤表现或数据补齐后转正；若后续 证明高估则下调至对应正式档）。补齐材料后应尽快转出本档，不要长期滞留。</p></td>
                         <td class="col-parent" data-label="量级">兜底档</td>
                         <td class="col-energy" data-label="能量">兜底档</td>
                         <td class="col-scale" data-label="尺度">—</td>
@@ -1067,11 +1058,10 @@
                 <ul>
                     <li><b>排序</b>：<code>sort_order</code> 由弱到强，间隔 10，便于后续插档；首页与本表共用同一顺序。</li>
                     <li><b>分段</b>：<code>group</code> 对应体系分段，按档位在轴上首次出现的位置切分，因此过渡带 A / B 各自落在真实位置，不会被归拢打乱强弱顺序。</li>
-                    <li><b>兜底档</b>：末尾两个档位固定为「未知」与「暂存」，不属于任何体系分段，不参与强弱排序。
-                        <ul>
-                            <li><b>未知</b>——信息不足、连区间都圈不出来，落不进任何档。</li>
-                            <li><b>暂存</b>——区间已可圈定、只差坐实，待实锤表现或数据补齐后转正；若证明高估则下调至对应正式档。</li>
-                        </ul>
+                    <li><b>兜底档</b>：末尾「未知/暂存」是体系之外的兜底档位，不属于任何体系分段，不参与强弱排序。
+                        两种情况都先放这里：<b>未知</b>——信息不足、连区间都圈不出来；
+                        <b>暂存</b>——区间已可圈定、只差坐实（若证明高估则下调至对应正式档）。
+                        二者处理动作一致：先放着，补齐材料后转出正式档，不要长期滞留。
                     </li>
                     <li><b>旧档归位</b>：旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 · 低维 · 微观等）已全部废弃，对照关系写在 <code>data/categories.yaml</code> 文件头注释里。挂在废弃档上的角色须改挂新档。</li>
                     <li><b>改档流程</b>：编辑 <code>data/categories.yaml</code> → 重新构建 → 首页、本表、各档详情页、搜索筛选器同步更新。</li>
@@ -1205,8 +1195,7 @@
     </li>
     <li><a href="#group-unfiled">未归档</a>
       <ul>
-        <li><a href="#tier-unknown">未知</a></li>
-        <li><a href="#tier-pending">暂存</a></li>
+        <li><a href="#tier-unknown">未知/暂存</a></li>
       </ul>
     </li>
   </ul>
