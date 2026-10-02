@@ -9,3 +9,11 @@
   title: 材质与破坏能量数据库
   sort_order: 2
   content_file: pages/cosmology.md
+- slug: chendong-trilogy
+  title: 辰东三部曲战力与世界观综合分析
+  sort_order: 10
+  content_file: pages/chendong-trilogy.md
+- slug: longfu
+  title: 龙符世界观与战力综合分析
+  sort_order: 11
+  content_file: pages/longfu.md
