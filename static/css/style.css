@@ -335,6 +335,303 @@ img { max-width: 100%; display: block; }
     text-decoration: none;
 }
 
+/* ==========================================================================
+   战力量级体系（首页「战力等级」/ 量级体系表 / 各档详情页）
+   由 data/categories.yaml 驱动，与《战力评级规则》体系表同源
+   ========================================================================== */
+
+/* ---------------------------- 档位卡片 ---------------------------- */
+/* 三件套：档位名 + 能量口径（左，纵向堆叠）· 角色计数（右）
+   用 flex-wrap + order 让能量口径换行到名称下方，右侧计数保持垂直居中 */
+.category-card {
+    flex-wrap: wrap;
+    align-items: center;
+    row-gap: 4px;
+}
+.category-card > .cat-name {
+    flex: 1 1 auto;
+    min-width: 0;
+    order: 1;
+}
+.category-card > .cat-count { order: 2; }
+.cat-energy {
+    flex: 0 0 100%;
+    order: 3;
+    font-size: 11.5px;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-3);
+    word-break: break-word;
+}
+/* 兜底档（未知 / 暂存）不是量级，能量位显示「兜底档」，弱化处理 */
+.category-card > .cat-count[data-empty] { color: var(--text-3); background: var(--surface-3); }
+
+/* ---------------------------- 首页分段 ---------------------------- */
+.tier-intro {
+    margin: 0 0 16px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--text-2);
+}
+.tier-intro b { color: var(--primary); }
+.tier-intro a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
+.tier-intro code,
+.panel code {
+    padding: 1px 5px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    background: var(--surface-3);
+    border-radius: 4px;
+}
+
+.tier-groups {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+}
+
+.tier-group {
+    padding: 16px 18px 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+/* 未归档分段单独着色，提示「不属于体系」 */
+.tier-group#group-unfiled {
+    background: repeating-linear-gradient(
+        -45deg,
+        var(--surface-2),
+        var(--surface-2) 10px,
+        #f7f9fc 10px,
+        #f7f9fc 20px
+    );
+}
+
+.tier-group-head {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 12px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--border-strong);
+}
+
+.tier-group-name {
+    margin: 0;
+    font-size: 15.5px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    letter-spacing: .2px;
+}
+
+.tier-group-meta {
+    flex: 1 1 auto;
+    font-size: 12.5px;
+    color: var(--text-3);
+}
+
+.tier-group-link {
+    flex-shrink: 0;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    transition: background .15s, border-color .15s;
+}
+.tier-group-link:hover {
+    background: #dbe8f8;
+    border-color: var(--primary);
+    text-decoration: none;
+}
+
+.tier-group-note {
+    margin: 0 0 12px;
+    font-size: 12.5px;
+    line-height: 1.65;
+    color: var(--text-2);
+}
+
+/* ---------------------------- 量级体系表页 ---------------------------- */
+.tier-section { margin-bottom: 22px; }
+.tier-section .panel-header { margin-bottom: 12px; }
+.tier-section .tier-group-note { margin: -4px 0 14px; }
+
+.tier-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+}
+.tier-table thead th {
+    padding: 10px 12px;
+    font-size: 12px;
+    font-weight: 700;
+    text-align: left;
+    color: var(--text-2);
+    background: var(--surface-3);
+    border-bottom: 1px solid var(--border-strong);
+    white-space: nowrap;
+}
+.tier-table tbody td {
+    padding: 11px 12px;
+    vertical-align: top;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.6;
+}
+.tier-table tbody tr:hover { background: var(--primary-softer); }
+.tier-table tbody tr:last-child td { border-bottom: none; }
+
+.tier-table .col-pos {
+    width: 42px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--text-3);
+    text-align: right;
+}
+.tier-table .col-name {
+    width: 22%;
+    font-weight: 600;
+    color: var(--text);
+}
+.tier-table .col-name a { color: var(--primary-dark); }
+.tier-table .col-name a:hover { color: var(--primary); }
+.tier-table .col-parent { width: 11%; color: var(--text-2); white-space: nowrap; }
+.tier-table .col-energy {
+    width: 17%;
+    font-variant-numeric: tabular-nums;
+    color: var(--text-2);
+}
+.tier-table .col-scale { color: var(--text-2); }
+.tier-table .col-count {
+    width: 58px;
+    font-variant-numeric: tabular-nums;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: right;
+}
+.tier-table .col-src { width: 15%; }
+
+.tier-note {
+    margin: 5px 0 0;
+    font-size: 11.5px;
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text-3);
+}
+
+.tier-src {
+    font-size: 12px;
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--border-strong);
+}
+.tier-src:hover { border-bottom-style: solid; text-decoration: none; }
+.tier-src.muted { color: var(--text-3); border-bottom: none; }
+
+/* 未归档两档在表格里弱化显示 */
+.tier-table tbody tr#tier-unknown,
+.tier-table tbody tr#tier-pending { background: #fbfcfe; }
+
+/* ---------------------------- 档位详情页 ---------------------------- */
+.tier-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2px 24px;
+    margin: 14px 0 4px;
+    padding: 14px 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+}
+.tier-meta-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+}
+.tier-meta-row:last-child { border-bottom: none; }
+.tier-meta-k {
+    flex-shrink: 0;
+    width: 66px;
+    font-size: 12.5px;
+    color: var(--text-3);
+}
+.tier-meta-v {
+    flex: 1 1 auto;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.6;
+}
+.tier-meta-v a { color: var(--primary); }
+
+/* 上/下一档导航 */
+.tier-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 16px 0 4px;
+}
+.tier-nav-item {
+    flex: 1 1 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 11px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color .15s, transform .15s;
+}
+a.tier-nav-item:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+    text-decoration: none;
+}
+.tier-nav-item.is-edge {
+    background: var(--surface-2);
+    color: var(--text-3);
+}
+.tier-nav-dir { font-size: 11.5px; color: var(--text-3); }
+.tier-nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
+.tier-nav-item.is-edge .tier-nav-name { color: var(--text-3); }
+
+/* ---------------------------- 窄屏适配 ---------------------------- */
+@media (max-width: 860px) {
+    .tier-table { font-size: 12.5px; }
+    .tier-table thead { display: none; }
+    .tier-table tbody tr {
+        display: block;
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-strong);
+    }
+    .tier-table tbody td {
+        display: flex;
+        gap: 10px;
+        width: auto !important;
+        padding: 3px 0;
+        border-bottom: none;
+        text-align: left !important;
+    }
+    .tier-table tbody td::before {
+        content: attr(class);
+        flex-shrink: 0;
+        width: 62px;
+        font-size: 11.5px;
+        color: var(--text-3);
+    }
+    .tier-group { padding: 14px 12px 16px; }
+}
+
+@media (max-width: 560px) {
+    .tier-group-head { gap: 6px 8px; }
+    .tier-group-link { margin-left: auto; }
+}
+
 /* ---------------------------- 分类网格 ---------------------------- */
 .category-grid {
     display: grid;

@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>量级体系表 - 全作品战力评鉴所</title>
+    <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="/powerwiki/index.html" class="logo">全作品战力评鉴所</a>
+            <nav class="main-nav">
+                <a href="/powerwiki/index.html">首页</a>
+                <a href="/powerwiki/characters.html">角色图鉴</a>
+                <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
+                <a href="/powerwiki/page/rules.html">战力评级规则</a>
+                <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
+                <a href="/powerwiki/search.html">搜索</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main-content" id="main">
+    <div class="container">
+        <div class="breadcrumb">
+            <a class="back-btn" href="/powerwiki/index.html" data-back>返回</a>
+            <a href="/powerwiki/index.html">首页</a>
+            <span>/</span>
+            <span aria-current="page">量级体系表</span>
+        </div>
+
+        <div class="doc-layout" data-page-slug="tiers">
+            <article class="detail-panel">
+                <div class="panel-header">
+                    <h1>量级体系表</h1>
+                </div>
+                <p class="tier-intro">
+                    共 <b>93</b> 个量级档位，由弱到强排列。本表与
+                    <a href="/powerwiki/page/rules.html">《战力评级规则》</a> 的战力量级体系表一一对应：
+                    档位名取自 1.3 量级表与第三、四部分的定级口径，能量区间与覆盖尺度照抄原文。
+                    改档位只需编辑 <code>data/categories.yaml</code>，首页战力等级、本表、
+                    各档详情页与搜索筛选器会同步更新。
+                </p>
+        <section class="panel tier-section" id="group-inherit">
+            <div class="panel-header">
+                <h2>第一部分 · 继承区</h2>
+                <span class="badge">55 档</span>
+            </div>
+                    <p class="tier-group-note">昆虫 ～ 爆恒星，沿用汪吧标准，本体系已做衔接核查与修正（强大陆倒挂、爆街→爆城过渡区、增设爆褐矮星）</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-insect">
+                        <td class="col-pos">1</td>
+                        <td class="col-name"><a href="/powerwiki/category/insect.html">昆虫</a></td>
+                        <td class="col-parent">昆虫</td>
+                        <td class="col-energy">5×10⁻⁵ J</td>
+                        <td class="col-scale">昆虫叮咬</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-human">
+                        <td class="col-pos">2</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-human.html">弱人类</a></td>
+                        <td class="col-parent">凡人</td>
+                        <td class="col-energy">50 – 60 J</td>
+                        <td class="col-scale">成年男性不完全发力一拳 / 成年女性全力一拳</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-normal-human">
+                        <td class="col-pos">3</td>
+                        <td class="col-name"><a href="/powerwiki/category/normal-human.html">普通人</a></td>
+                        <td class="col-parent">凡人</td>
+                        <td class="col-energy">100 J</td>
+                        <td class="col-scale">普通人类全力一拳</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-human">
+                        <td class="col-pos">4</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-human.html">强人类</a><p class="tier-note">本格数值为复算校验时补算的缺项</p></td>
+                        <td class="col-parent">凡人</td>
+                        <td class="col-energy">150 – 250 J</td>
+                        <td class="col-scale">经系统训练的运动员 / 格斗选手全力一拳</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-super-human">
+                        <td class="col-pos">5</td>
+                        <td class="col-name"><a href="/powerwiki/category/super-human.html">超人类</a></td>
+                        <td class="col-parent">凡人</td>
+                        <td class="col-energy">300 – 600 J</td>
+                        <td class="col-scale">人类巅峰</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-brick">
+                        <td class="col-pos">6</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-brick.html">弱爆砖</a></td>
+                        <td class="col-parent">爆砖</td>
+                        <td class="col-energy">600 J</td>
+                        <td class="col-scale">破坏一块砖的一部分</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-brick">
+                        <td class="col-pos">7</td>
+                        <td class="col-name"><a href="/powerwiki/category/brick.html">标准爆砖</a><p class="tier-note">单位能量密度 1.37 J/cc，为破碎程度分级的最低基准档</p></td>
+                        <td class="col-parent">爆砖</td>
+                        <td class="col-energy">2×10³ J</td>
+                        <td class="col-scale">打碎一块 240×115×53 mm 红砖（1463 cc）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-brick">
+                        <td class="col-pos">8</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-brick.html">强爆砖</a></td>
+                        <td class="col-parent">爆砖</td>
+                        <td class="col-energy">6×10³ J</td>
+                        <td class="col-scale">三倍红砖</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-brick">
+                        <td class="col-pos">9</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-brick.html">超爆砖</a></td>
+                        <td class="col-parent">爆砖</td>
+                        <td class="col-energy">2×10⁴ J</td>
+                        <td class="col-scale">十倍爆砖</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-wall">
+                        <td class="col-pos">10</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-wall.html">弱爆墙</a></td>
+                        <td class="col-parent">爆墙</td>
+                        <td class="col-energy">1.25×10⁵ J（30 g TNT）</td>
+                        <td class="col-scale">打碎一面砖墙的一部分，或将混凝土墙打成数块大碎块</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-wall">
+                        <td class="col-pos">11</td>
+                        <td class="col-name"><a href="/powerwiki/category/wall.html">标准爆墙</a></td>
+                        <td class="col-parent">爆墙</td>
+                        <td class="col-energy">4.184×10⁵ J（100 g TNT）</td>
+                        <td class="col-scale">打爆 2×2×0.24 m 红砖墙（0.96 m³），破坏程度为较小碎块</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-wall">
+                        <td class="col-pos">12</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-wall.html">强爆墙</a></td>
+                        <td class="col-parent">爆墙</td>
+                        <td class="col-energy">1.255×10⁶ J（300 g TNT）</td>
+                        <td class="col-scale">三倍爆墙</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-wall">
+                        <td class="col-pos">13</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-wall.html">超爆墙</a></td>
+                        <td class="col-parent">爆墙</td>
+                        <td class="col-energy">4.184×10⁶ J（1 kg TNT）</td>
+                        <td class="col-scale">打碎 2×2×0.2 m、体积 0.8 m³ 的钢筋混凝土墙</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-room">
+                        <td class="col-pos">14</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-room.html">弱爆屋</a></td>
+                        <td class="col-parent">爆屋</td>
+                        <td class="col-energy">1.673×10⁷ J（4 kg TNT）</td>
+                        <td class="col-scale">打碎 2×2×3 m 以上、体积 2.4～数 m³ 的钢混小屋（现代公寓一个厕所或小隔间）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-room">
+                        <td class="col-pos">15</td>
+                        <td class="col-name"><a href="/powerwiki/category/room.html">标准爆屋</a></td>
+                        <td class="col-parent">爆屋</td>
+                        <td class="col-energy">8.368×10⁷ J（20 kg TNT）</td>
+                        <td class="col-scale">打碎 6×6×3 m、体积 20 m³ 的钢混屋子（现代公寓一室一厅）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-room">
+                        <td class="col-pos">16</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-room.html">强爆屋</a></td>
+                        <td class="col-parent">爆屋</td>
+                        <td class="col-energy">1.673×10⁸ J（40 kg TNT）</td>
+                        <td class="col-scale">打碎 10×10×3 m、体积 67.5 m³ 的混凝土房屋（居民楼一户住房）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-room">
+                        <td class="col-pos">17</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-room.html">超爆屋</a></td>
+                        <td class="col-parent">爆屋</td>
+                        <td class="col-energy">3.34×10⁸ J（80 kg TNT）</td>
+                        <td class="col-scale">打碎 15×15×3 m、体积 135 m³ 的钢混屋子（平房 / 仓库）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-building">
+                        <td class="col-pos">18</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-building.html">弱爆楼</a></td>
+                        <td class="col-parent">爆楼</td>
+                        <td class="col-energy">1.255×10⁹ J（300 kg TNT）</td>
+                        <td class="col-scale">打碎 15×15×15 m、体积 675 m³ 的混凝土楼（5–6 层公寓的一个单元楼）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-building">
+                        <td class="col-pos">19</td>
+                        <td class="col-name"><a href="/powerwiki/category/building.html">标准爆楼</a></td>
+                        <td class="col-parent">爆楼</td>
+                        <td class="col-energy">4.184×10⁹ J（1 t TNT）</td>
+                        <td class="col-scale">打碎一栋现代 30×30×30 m 的写字楼</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-building">
+                        <td class="col-pos">20</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-building.html">强爆楼</a></td>
+                        <td class="col-parent">爆楼</td>
+                        <td class="col-energy">1.255×10¹⁰ J（3 t TNT）</td>
+                        <td class="col-scale">高层居民楼；3 倍标准爆楼；破坏部分大型建筑（如商场）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-building">
+                        <td class="col-pos">21</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-building.html">超爆楼</a></td>
+                        <td class="col-parent">爆楼</td>
+                        <td class="col-energy">4.184×10¹⁰ J（10 t TNT）</td>
+                        <td class="col-scale">洗地 1 万 m² 小型街区；破坏 30 层大厦；破坏大量大楼</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-street">
+                        <td class="col-pos">22</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-street.html">弱爆街</a></td>
+                        <td class="col-parent">爆街</td>
+                        <td class="col-energy">2.092×10¹¹ J（50 t TNT）</td>
+                        <td class="col-scale">破坏 10 万 m² 街区 / 100 万 m² 古代建筑</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-street">
+                        <td class="col-pos">23</td>
+                        <td class="col-name"><a href="/powerwiki/category/street.html">标准爆街</a></td>
+                        <td class="col-parent">爆街</td>
+                        <td class="col-energy">4.184×10¹¹ J（100 t TNT）</td>
+                        <td class="col-scale">破坏 20 万 m² 街区 / 200 万 m² 古代建筑</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-street">
+                        <td class="col-pos">24</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-street.html">强爆街</a></td>
+                        <td class="col-parent">爆街</td>
+                        <td class="col-energy">1.673×10¹² J（400 t TNT）</td>
+                        <td class="col-scale">破坏 50 万 m² 街区 / 近 500 万 m² 古代建筑</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-street">
+                        <td class="col-pos">25</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-street.html">超爆街</a></td>
+                        <td class="col-parent">爆街</td>
+                        <td class="col-energy">1.255×10¹³ J（3000 t TNT）</td>
+                        <td class="col-scale">破坏 200 万 m² 城区 / 20 km² 荒野、古代城市</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-street-plus">
+                        <td class="col-pos">26</td>
+                        <td class="col-name"><a href="/powerwiki/category/street-plus.html">强化超爆街</a><p class="tier-note">修正二新增档。超爆街上限到弱爆城下限之间原跨 333 倍无档位，此区间正是常见战绩尺度</p></td>
+                        <td class="col-parent">过渡区</td>
+                        <td class="col-energy">1.26×10¹³ – 2.3×10¹⁴ J</td>
+                        <td class="col-scale">数 km² 建成城区</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-city-minus">
+                        <td class="col-pos">27</td>
+                        <td class="col-name"><a href="/powerwiki/category/city-minus.html">弱化弱爆城</a><p class="tier-note">修正二新增档，与「强化超爆街」共同填补爆街→爆城的空档</p></td>
+                        <td class="col-parent">过渡区</td>
+                        <td class="col-energy">2.3×10¹⁴ – 4.18×10¹⁵ J</td>
+                        <td class="col-scale">数十 km² 城区</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-city">
+                        <td class="col-pos">28</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-city.html">弱爆城</a></td>
+                        <td class="col-parent">爆城</td>
+                        <td class="col-energy">4.184×10¹⁵ J（100 万 t TNT）</td>
+                        <td class="col-scale">巴黎 105 km²（爆国底线之上的城市级起点）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-city">
+                        <td class="col-pos">29</td>
+                        <td class="col-name"><a href="/powerwiki/category/city.html">标准爆城</a></td>
+                        <td class="col-parent">爆城</td>
+                        <td class="col-energy">3.0334×10¹⁶ J（725 万 t TNT）</td>
+                        <td class="col-scale">横滨 437 km²（行政区口径）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-city">
+                        <td class="col-pos">30</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-city.html">强爆城</a></td>
+                        <td class="col-parent">爆城</td>
+                        <td class="col-energy">1.4644×10¹⁷ J（3500 万 t TNT）</td>
+                        <td class="col-scale">纽约 1214 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-city">
+                        <td class="col-pos">31</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-city.html">超爆城</a></td>
+                        <td class="col-parent">爆城</td>
+                        <td class="col-energy">4.184×10¹⁸ J（10 亿 t TNT）</td>
+                        <td class="col-scale">上海 6340 km²（行政区口径）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-country">
+                        <td class="col-pos">32</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-country.html">弱爆国</a></td>
+                        <td class="col-parent">爆国</td>
+                        <td class="col-energy">6.276×10¹⁹ J（150 亿 t TNT）</td>
+                        <td class="col-scale">荷兰 4 万 km²（爆国底线）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-country">
+                        <td class="col-pos">33</td>
+                        <td class="col-name"><a href="/powerwiki/category/country.html">标准爆国</a></td>
+                        <td class="col-parent">爆国</td>
+                        <td class="col-energy">2.092×10²¹ J（5000 亿 t TNT）</td>
+                        <td class="col-scale">日本 37.8 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-country">
+                        <td class="col-pos">34</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-country.html">强爆国</a></td>
+                        <td class="col-parent">爆国</td>
+                        <td class="col-energy">9.414×10²¹ J（2.25 万亿 t TNT）</td>
+                        <td class="col-scale">埃及 100 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-country">
+                        <td class="col-pos">35</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-country.html">超爆国</a></td>
+                        <td class="col-parent">爆国</td>
+                        <td class="col-energy">4.8116×10²² J（10 万亿 t TNT）</td>
+                        <td class="col-scale">印度 300 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-continent">
+                        <td class="col-pos">36</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-continent.html">弱大陆</a></td>
+                        <td class="col-parent">爆大陆</td>
+                        <td class="col-energy">2.092×10²³ J（50 万亿 t TNT）</td>
+                        <td class="col-scale">澳大利亚 770 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-continent">
+                        <td class="col-pos">37</td>
+                        <td class="col-name"><a href="/powerwiki/category/continent.html">标准大陆</a></td>
+                        <td class="col-parent">爆大陆</td>
+                        <td class="col-energy">8.368×10²³ J（200 万亿 t TNT）</td>
+                        <td class="col-scale">俄罗斯 1700 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-continent">
+                        <td class="col-pos">38</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-continent.html">强大陆</a><p class="tier-note">修正值。原表 3.89×10²⁶ J 经证实倒挂（能量密度 1.30×10¹⁹ J/km² 远超相邻档），按面积对数插值得 1.85×10²⁴ J</p></td>
+                        <td class="col-parent">爆大陆</td>
+                        <td class="col-energy">1.85×10²⁴ J</td>
+                        <td class="col-scale">非洲 3000 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-eurasia-continent">
+                        <td class="col-pos">39</td>
+                        <td class="col-name"><a href="/powerwiki/category/eurasia-continent.html">亚欧大陆</a></td>
+                        <td class="col-parent">爆大陆</td>
+                        <td class="col-energy">4.184×10²⁴ J（1000 万亿 t TNT）</td>
+                        <td class="col-scale">亚欧大陆 5400 万 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-surface">
+                        <td class="col-pos">40</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-surface.html">弱地表</a><p class="tier-note">洗地口径 1.22 亿亿 t TNT；蒸发口径 50 亿亿 t TNT，二者须分开标注</p></td>
+                        <td class="col-parent">爆地表</td>
+                        <td class="col-energy">5.0208×10²⁵ J（洗地）– 2.1×10²⁷ J（蒸发整个太平洋）</td>
+                        <td class="col-scale">太平洋 1.8 亿 km²</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-surface">
+                        <td class="col-pos">41</td>
+                        <td class="col-name"><a href="/powerwiki/category/surface.html">标准爆地表</a><p class="tier-note">洗地 / 摧毁整个地表建筑山体 7.714 亿亿 t TNT；加热融化地球表面 7 百亿亿 t TNT</p></td>
+                        <td class="col-parent">爆地表</td>
+                        <td class="col-energy">3.2×10²⁶ J（洗地）– 2.9×10²⁸ J（烧玻璃球）</td>
+                        <td class="col-scale">5.1 亿 km²（地球表面积）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-surface">
+                        <td class="col-pos">42</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-surface.html">强地表</a><p class="tier-note">本格数值为复算校验时补算的缺项</p></td>
+                        <td class="col-parent">爆地表</td>
+                        <td class="col-energy">8.76×10²⁸ J</td>
+                        <td class="col-scale">一击炸飞地球海洋，炸出地球</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-surface">
+                        <td class="col-pos">43</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-surface.html">超地表</a><p class="tier-note">本格数值为复算校验时补算的缺项</p></td>
+                        <td class="col-parent">爆地表</td>
+                        <td class="col-energy">1.63×10³⁰ J</td>
+                        <td class="col-scale">一击炸飞地球地壳，飞出地球</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-planet">
+                        <td class="col-pos">44</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-planet.html">弱爆星</a><p class="tier-note">复算值 4.864×10³⁰，与表内值一致</p></td>
+                        <td class="col-parent">爆行星</td>
+                        <td class="col-energy">4.865×10³⁰ J</td>
+                        <td class="col-scale">打爆火星</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-planet">
+                        <td class="col-pos">45</td>
+                        <td class="col-name"><a href="/powerwiki/category/planet.html">标准爆星</a><p class="tier-note">复算值 2.241×10³²。束缚能类数据是下限，上限无公式解（通则 0.13）</p></td>
+                        <td class="col-parent">爆行星</td>
+                        <td class="col-energy">2.24×10³² J</td>
+                        <td class="col-scale">打爆地球（克服引力结合能）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-planet">
+                        <td class="col-pos">46</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-planet.html">强爆星</a></td>
+                        <td class="col-parent">爆行星</td>
+                        <td class="col-energy">4.48×10³² – 2.062×10³⁶ J</td>
+                        <td class="col-scale">打爆两倍地球；将地球蒸发并高速抛飞</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-planet">
+                        <td class="col-pos">47</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-planet.html">超爆星</a><p class="tier-note">修正三：上限已上探至氘燃烧极限，与新增的爆褐矮星量级无缝衔接</p></td>
+                        <td class="col-parent">爆行星</td>
+                        <td class="col-energy">2.06×10³⁶ – 3.49×10³⁸ J</td>
+                        <td class="col-scale">打爆木星，上探至气态巨行星上限（13 倍木星质量，氘燃烧极限）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-brown-dwarf">
+                        <td class="col-pos">48</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-brown-dwarf.html">弱褐矮星</a><p class="tier-note">修正三新增量级，填补爆行星→爆恒星之间 8136 倍空档。半径统一取 R = 1.0 R_J（褐矮星全质量区间半径仅浮动 10–15%），近似不确定度约 ±40%，不影响档位归属</p></td>
+                        <td class="col-parent">爆褐矮星</td>
+                        <td class="col-energy">3.49×10³⁸ – 8.25×10³⁸ J</td>
+                        <td class="col-scale">13 – 20 倍木星质量（氘燃烧下限起）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-brown-dwarf">
+                        <td class="col-pos">49</td>
+                        <td class="col-name"><a href="/powerwiki/category/brown-dwarf.html">标准褐矮星</a></td>
+                        <td class="col-parent">爆褐矮星</td>
+                        <td class="col-energy">8.25×10³⁸ – 3.30×10³⁹ J</td>
+                        <td class="col-scale">20 – 40 倍木星质量</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-brown-dwarf">
+                        <td class="col-pos">50</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-brown-dwarf.html">强褐矮星</a></td>
+                        <td class="col-parent">爆褐矮星</td>
+                        <td class="col-energy">3.30×10³⁹ – 8.72×10³⁹ J</td>
+                        <td class="col-scale">40 – 65 倍木星质量</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-brown-dwarf">
+                        <td class="col-pos">51</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-brown-dwarf.html">超褐矮星</a></td>
+                        <td class="col-parent">爆褐矮星</td>
+                        <td class="col-energy">8.72×10³⁹ – 1.32×10⁴⁰ J</td>
+                        <td class="col-scale">65 – 80 倍木星质量（氢燃烧临界）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-weak-star">
+                        <td class="col-pos">52</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-star.html">弱恒星</a><p class="tier-note">rules.md 原表对本档标有 ⚠（取值待交叉验算）</p></td>
+                        <td class="col-parent">爆恒星</td>
+                        <td class="col-energy">2.4×10⁴⁰ J</td>
+                        <td class="col-scale">打爆红矮星</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-star">
+                        <td class="col-pos">53</td>
+                        <td class="col-name"><a href="/powerwiki/category/star.html">标准爆恒星</a><p class="tier-note">复算值 2.277×10⁴¹，与表内值一致。继承区终点</p></td>
+                        <td class="col-parent">爆恒星</td>
+                        <td class="col-energy">2.28×10⁴¹ J</td>
+                        <td class="col-scale">打爆太阳</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-strong-star">
+                        <td class="col-pos">54</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-star.html">强恒星</a></td>
+                        <td class="col-parent">爆恒星</td>
+                        <td class="col-energy">4.56×10⁴¹ J</td>
+                        <td class="col-scale">2 倍恒星以上</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-star">
+                        <td class="col-pos">55</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-star.html">超恒星</a></td>
+                        <td class="col-parent">爆恒星</td>
+                        <td class="col-energy">2.28×10⁴² J 以上</td>
+                        <td class="col-scale">一击打爆由十颗以上恒星组成的星团</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#13-量级表昆虫爆恒星" class="tier-src">1.3 量级表（昆虫～爆恒星）</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-transition-a">
+            <div class="panel-header">
+                <h2>第二部分 · 过渡带 A（恒星 → 恒星系）</h2>
+                <span class="badge">1 档</span>
+            </div>
+                    <p class="tier-group-note">继承区与覆盖体系之间 7.3 个数量级的命名空白，不新设量级名称，用「弱化/强化 + 相邻档」或直接标能量</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-transition-a">
+                        <td class="col-pos">56</td>
+                        <td class="col-name"><a href="/powerwiki/category/transition-a.html">过渡带 A</a><p class="tier-note">继承区终点与覆盖体系起点之间 7.3 个数量级的命名空白。本区间不新设量级名称，标注方式二选一：①「弱化/强化 + 相邻档」（如强化超恒星、弱化弱恒星系）②直接标焦耳数。跨 3.5 个数量级，修饰词不携带比较信息，必须写出具体焦耳数。1 AU（2.31×10⁴⁶ J）为分界</p></td>
+                        <td class="col-parent">恒星 → 恒星系</td>
+                        <td class="col-energy">1.8×10⁴² – 3.7×10⁴⁹ J</td>
+                        <td class="col-scale">覆盖直径 一颗恒星直径 ～ 40 AU（半球扩散模型）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#22-过渡带-a恒星-恒星系半球扩散1810⁴²-3710⁴⁹-j" class="tier-src">2.2 过渡带 A：恒星 → 恒星系（半球扩散，1.8×10⁴² ～ 3.7×10⁴⁹ J）</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-cover">
+            <div class="panel-header">
+                <h2>第三部分 · 覆盖体系（1/2）</h2>
+                <span class="badge">4 档</span>
+            </div>
+                    <p class="tier-group-note">爆恒星之上，本体系原创。按覆盖范围 × 边缘阈值 F* = 1.64×10²³ J/m² 计算，不按物质能量求和</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-weak-star-system">
+                        <td class="col-pos">57</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-star-system.html">弱恒星系</a><p class="tier-note">全力一击毁灭太阳本身到冥王星轨道对面边缘整个范围内的所有物质，最边缘处能量恰好足够摧毁该处的恒星。半球扩散，传播距离取直径。40 AU 为本级正式下限</p></td>
+                        <td class="col-parent">恒星系级</td>
+                        <td class="col-energy">3.7×10⁴⁹ – 1.5×10⁵⁰ J</td>
+                        <td class="col-scale">覆盖直径 40 – 80 AU</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#33-恒星系级半球扩散" class="tier-src">3.3 恒星系级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-star-system">
+                        <td class="col-pos">58</td>
+                        <td class="col-name"><a href="/powerwiki/category/star-system.html">标准恒星系</a><p class="tier-note">直径约为弱恒星系下限的 25–75 倍，能量倍率约 600–6,000 倍</p></td>
+                        <td class="col-parent">恒星系级</td>
+                        <td class="col-energy">2.3×10⁵² – 2.1×10⁵³ J</td>
+                        <td class="col-scale">覆盖直径 1,000 – 3,000 AU（离散盘外边界 / 奥尔特云内起点）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#33-恒星系级半球扩散" class="tier-src">3.3 恒星系级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-strong-star-system">
+                        <td class="col-pos">59</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-star-system.html">强恒星系</a><p class="tier-note">直径约为弱恒星系下限的 250–750 倍，能量倍率约 6 万–56 万倍</p></td>
+                        <td class="col-parent">恒星系级</td>
+                        <td class="col-energy">2.3×10⁵⁴ – 2.1×10⁵⁵ J</td>
+                        <td class="col-scale">覆盖直径 1 万 – 3 万 AU（奥尔特云内区 / 深厚彗星云）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#33-恒星系级半球扩散" class="tier-src">3.3 恒星系级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-star-system">
+                        <td class="col-pos">60</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-star-system.html">超恒星系</a><p class="tier-note">直径约为弱恒星系下限的 2400–3200 倍，能量倍率约 560 万–1000 万倍。黄道面适配属同量级形状优化，不跨数量级</p></td>
+                        <td class="col-parent">恒星系级</td>
+                        <td class="col-energy">2.1×10⁵⁶ – 3.7×10⁵⁶ J</td>
+                        <td class="col-scale">覆盖直径 1.5 – 2 光年（约 9.5 万 – 12.6 万 AU，太阳引力边界 / 希尔球极限）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#33-恒星系级半球扩散" class="tier-src">3.3 恒星系级（半球扩散）</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-transition-b">
+            <div class="panel-header">
+                <h2>第二部分 · 过渡带 B（恒星系 → 星团）</h2>
+                <span class="badge">1 档</span>
+            </div>
+                    <p class="tier-group-note">覆盖体系内部的第二段命名空白，处理方式与过渡带 A 相同</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-transition-b">
+                        <td class="col-pos">61</td>
+                        <td class="col-name"><a href="/powerwiki/category/transition-b.html">过渡带 B</a><p class="tier-note">处理方式与过渡带 A 相同：不新设名称，用「弱化/强化 + 相邻档」或直接标能量。6.3 光年（3.66×10⁵⁷ J）为几何中点分界</p></td>
+                        <td class="col-parent">恒星系 → 星团</td>
+                        <td class="col-energy">3.7×10⁵⁶ – 3.7×10⁵⁸ J</td>
+                        <td class="col-scale">覆盖直径 2 光年 ～ 20 光年（半球扩散模型）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#23-过渡带-b恒星系-星团半球扩散3710⁵⁶-3710⁵⁸-j" class="tier-src">2.3 过渡带 B：恒星系 → 星团（半球扩散，3.7×10⁵⁶ ～ 3.7×10⁵⁸ J）</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-cover-2">
+            <div class="panel-header">
+                <h2>第三部分 · 覆盖体系（2/2）</h2>
+                <span class="badge">20 档</span>
+            </div>
+                    <p class="tier-group-note">爆恒星之上，本体系原创。按覆盖范围 × 边缘阈值 F* = 1.64×10²³ J/m² 计算，不按物质能量求和</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-weak-star-cluster">
+                        <td class="col-pos">62</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-star-cluster.html">弱爆星团</a><p class="tier-note">完全摧毁小型疏散星团（毕宿星团潮汐直径约 66 光年的内部主体、紧凑型疏散星团完整范围）</p></td>
+                        <td class="col-parent">星团级</td>
+                        <td class="col-energy">3.7×10⁵⁸ – 2.3×10⁵⁹ J</td>
+                        <td class="col-scale">覆盖直径 20 – 50 光年</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#34-星团级半球扩散" class="tier-src">3.4 星团级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-star-cluster">
+                        <td class="col-pos">63</td>
+                        <td class="col-name"><a href="/powerwiki/category/star-cluster.html">标准爆星团</a><p class="tier-note">完全摧毁典型疏散星团（毕宿星团约 66 光年、鬼星团 M44 约 78 光年、昴宿星团约 86 光年）</p></td>
+                        <td class="col-parent">星团级</td>
+                        <td class="col-energy">2.3×10⁵⁹ – 9.2×10⁵⁹ J</td>
+                        <td class="col-scale">覆盖直径 50 – 100 光年</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#34-星团级半球扩散" class="tier-src">3.4 星团级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-strong-star-cluster">
+                        <td class="col-pos">64</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-star-cluster.html">强爆星团</a><p class="tier-note">完全摧毁标准球状星团（杜鹃 47 约 120 光年、M13 约 145 光年）</p></td>
+                        <td class="col-parent">星团级</td>
+                        <td class="col-energy">9.2×10⁵⁹ – 2.1×10⁶⁰ J</td>
+                        <td class="col-scale">覆盖直径 100 – 150 光年</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#34-星团级半球扩散" class="tier-src">3.4 星团级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-star-cluster">
+                        <td class="col-pos">65</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-star-cluster.html">超爆星团</a><p class="tier-note">完全摧毁银河系最大球状星团及以上（半人马座 ω 约 150 光年，最大球状星团潮汐范围可达 300 光年）</p></td>
+                        <td class="col-parent">星团级</td>
+                        <td class="col-energy">2.1×10⁶⁰ – 8.3×10⁶⁰ J</td>
+                        <td class="col-scale">覆盖直径 150 – 300 光年</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#34-星团级半球扩散" class="tier-src">3.4 星团级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-weak-galaxy">
+                        <td class="col-pos">66</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-galaxy.html">弱星系</a><p class="tier-note">盘面适配模型 A = πD²/4，边缘阈值 F* = 1.64×10²³ J/m²。参照：小麦哲伦云约 7000 光年、大麦哲伦云约 1.4 万光年</p></td>
+                        <td class="col-parent">星系级</td>
+                        <td class="col-energy">1.15×10⁶¹ – 4.6×10⁶³ J</td>
+                        <td class="col-scale">覆盖直径 1,000 – 20,000 光年（矮星系尺度）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#36-星系级盘面适配-πd²4" class="tier-src">3.6 星系级（盘面适配 πD²/4）</a></td>
+                    </tr>
+                    <tr id="tier-galaxy">
+                        <td class="col-pos">67</td>
+                        <td class="col-name"><a href="/powerwiki/category/galaxy.html">标准星系</a><p class="tier-note">参照：三角座 M33 约 6 万光年、银河系盘面约 10 万光年</p></td>
+                        <td class="col-parent">星系级</td>
+                        <td class="col-energy">4.6×10⁶³ – 1.15×10⁶⁵ J</td>
+                        <td class="col-scale">覆盖直径 2 万 – 10 万光年（中型旋涡星系至银河系级）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#36-星系级盘面适配-πd²4" class="tier-src">3.6 星系级（盘面适配 πD²/4）</a></td>
+                    </tr>
+                    <tr id="tier-strong-galaxy">
+                        <td class="col-pos">68</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-galaxy.html">强星系</a><p class="tier-note">参照：仙女座 M31 约 22 万光年</p></td>
+                        <td class="col-parent">星系级</td>
+                        <td class="col-energy">1.15×10⁶⁵ – 1.04×10⁶⁶ J</td>
+                        <td class="col-scale">覆盖直径 10 万 – 30 万光年（大型旋涡星系与大型椭圆星系）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#36-星系级盘面适配-πd²4" class="tier-src">3.6 星系级（盘面适配 πD²/4）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-galaxy">
+                        <td class="col-pos">69</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-galaxy.html">超星系</a><p class="tier-note">参照：IC 1101 约 400 万光年。原稿举例「本星系群约 1000 万光年」已移除——超出本级上限且与星系团级下限重复，本星系群归入弱星系团</p></td>
+                        <td class="col-parent">星系级</td>
+                        <td class="col-energy">1.04×10⁶⁶ – 4.2×10⁶⁸ J</td>
+                        <td class="col-scale">覆盖直径 30 万 – 600 万光年（巨型椭圆星系至星系群）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#36-星系级盘面适配-πd²4" class="tier-src">3.6 星系级（盘面适配 πD²/4）</a></td>
+                    </tr>
+                    <tr id="tier-weak-galaxy-cluster">
+                        <td class="col-pos">70</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-galaxy-cluster.html">弱星系团</a><p class="tier-note">改回半球扩散模型 E = 2πD² × F*（星系团为引力弛豫后的近球状结构）。参照：本星系群约 1000 万光年、室女座星系团约 1500 万光年</p></td>
+                        <td class="col-parent">星系团级</td>
+                        <td class="col-energy">9.2×10⁶⁹ – 3.7×10⁷⁰ J</td>
+                        <td class="col-scale">覆盖直径 1,000 万 – 2,000 万光年（星系群至典型星系团）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#37-星系团级回到半球扩散" class="tier-src">3.7 星系团级（回到半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-galaxy-cluster">
+                        <td class="col-pos">71</td>
+                        <td class="col-name"><a href="/powerwiki/category/galaxy-cluster.html">标准星系团</a></td>
+                        <td class="col-parent">星系团级</td>
+                        <td class="col-energy">3.7×10⁷⁰ – 2.3×10⁷¹ J</td>
+                        <td class="col-scale">覆盖直径 2,000 万 – 5,000 万光年（大型星系团）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#37-星系团级回到半球扩散" class="tier-src">3.7 星系团级（回到半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-strong-galaxy-cluster">
+                        <td class="col-pos">72</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-galaxy-cluster.html">强星系团</a><p class="tier-note">超星系团并非球状（室女座超星系团轴比约 4–5:1），本级上半段形状适配值约为半球值的 1/4–1/8，仅作同量级控制表现标注</p></td>
+                        <td class="col-parent">星系团级</td>
+                        <td class="col-energy">2.3×10⁷¹ – 9.2×10⁷¹ J</td>
+                        <td class="col-scale">覆盖直径 5,000 万 – 1 亿光年（小型超星系团）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#37-星系团级回到半球扩散" class="tier-src">3.7 星系团级（回到半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-galaxy-cluster">
+                        <td class="col-pos">73</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-galaxy-cluster.html">超星系团</a><p class="tier-note">参照：室女座超星系团约 1.1 亿光年（长轴口径约 1.47 亿光年）。拉尼亚凯亚（约 5.2 亿光年）已超上限，归入标准宇宙结构——本体系按覆盖尺度定级，不按天文学分类名定级</p></td>
+                        <td class="col-parent">星系团级</td>
+                        <td class="col-energy">9.2×10⁷¹ – 3.7×10⁷² J</td>
+                        <td class="col-scale">覆盖直径 1 亿 – 2 亿光年（大型超星系团）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#37-星系团级回到半球扩散" class="tier-src">3.7 星系团级（回到半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-weak-cosmic-structure">
+                        <td class="col-pos">74</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-cosmic-structure.html">弱宇宙结构</a><p class="tier-note">默认半球扩散，D 取结构最长维度。形状适配参考：纤维状约 10⁷⁰–10⁷¹ J，壁状约 10⁷¹–10⁷² J</p></td>
+                        <td class="col-parent">宇宙结构级</td>
+                        <td class="col-energy">3.7×10⁷² – 2.3×10⁷³ J</td>
+                        <td class="col-scale">覆盖直径 2 – 5 亿光年（小型宇宙纤维与小型壁状结构）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#38-宇宙结构级半球扩散默认-形状适配参考值" class="tier-src">3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）</a></td>
+                    </tr>
+                    <tr id="tier-cosmic-structure">
+                        <td class="col-pos">75</td>
+                        <td class="col-name"><a href="/powerwiki/category/cosmic-structure.html">标准宇宙结构</a><p class="tier-note">参照：CfA2 长城长约 5 亿光年、斯隆长城长约 14 亿光年；拉尼亚凯亚超星系团（2.49×10⁷³ J）落于本级。形状适配参考：壁状约 10⁷²–10⁷³ J</p></td>
+                        <td class="col-parent">宇宙结构级</td>
+                        <td class="col-energy">2.3×10⁷³ – 2.1×10⁷⁴ J</td>
+                        <td class="col-scale">覆盖直径 5 – 15 亿光年（已知大型壁状结构）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#38-宇宙结构级半球扩散默认-形状适配参考值" class="tier-src">3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）</a></td>
+                    </tr>
+                    <tr id="tier-strong-cosmic-structure">
+                        <td class="col-pos">76</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-cosmic-structure.html">强宇宙结构</a><p class="tier-note">参照：巨弧长约 33 亿光年；武仙-北冕座长城长约 100 亿光年（目前已知最大结构，存在争议）。形状适配参考：大型壁状约 10⁷³–10⁷⁴ J</p></td>
+                        <td class="col-parent">宇宙结构级</td>
+                        <td class="col-energy">2.1×10⁷⁴ – 9.2×10⁷⁵ J</td>
+                        <td class="col-scale">覆盖直径 15 – 100 亿光年（最大已知宇宙结构）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#38-宇宙结构级半球扩散默认-形状适配参考值" class="tier-src">3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-cosmic-structure">
+                        <td class="col-pos">77</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-cosmic-structure.html">超宇宙结构</a></td>
+                        <td class="col-parent">宇宙结构级</td>
+                        <td class="col-energy">9.2×10⁷⁵ – 3.7×10⁷⁶ J</td>
+                        <td class="col-scale">覆盖直径 100 – 200 亿光年（从最大已知结构到接近可观测宇宙尺度）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#38-宇宙结构级半球扩散默认-形状适配参考值" class="tier-src">3.8 宇宙结构级（半球扩散默认 + 形状适配参考值）</a></td>
+                    </tr>
+                    <tr id="tier-weak-universe">
+                        <td class="col-pos">78</td>
+                        <td class="col-name"><a href="/powerwiki/category/weak-universe.html">弱宇宙</a><p class="tier-note">覆盖可观测宇宙的显著部分但未完全覆盖。可观测宇宙近似球形，半球扩散直接适用</p></td>
+                        <td class="col-parent">宇宙级</td>
+                        <td class="col-energy">3.7×10⁷⁶ – 8.0×10⁷⁷ J</td>
+                        <td class="col-scale">覆盖直径 200 – 930 亿光年</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#39-宇宙级半球扩散" class="tier-src">3.9 宇宙级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-universe">
+                        <td class="col-pos">79</td>
+                        <td class="col-name"><a href="/powerwiki/category/universe.html">标准宇宙</a><p class="tier-note">当前物理学能观测确认的最大宇宙尺度</p></td>
+                        <td class="col-parent">宇宙级</td>
+                        <td class="col-energy">8.0×10⁷⁷ J</td>
+                        <td class="col-scale">覆盖直径 930 亿光年（可观测宇宙全域）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#39-宇宙级半球扩散" class="tier-src">3.9 宇宙级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-strong-universe">
+                        <td class="col-pos">80</td>
+                        <td class="col-name"><a href="/powerwiki/category/strong-universe.html">强宇宙</a><p class="tier-note">采用可观测宇宙倍数制，对应「比可观测宇宙更大但仍为单个有限宇宙」的创作设定——这是汪吧、VS Battles Wiki 等主流体系普遍跳过的区间</p></td>
+                        <td class="col-parent">宇宙级</td>
+                        <td class="col-energy">8.0×10⁷⁹ – 8.0×10⁸⁵ J</td>
+                        <td class="col-scale">可观测宇宙的 10 – 10,000 倍（9,300 亿 – 930 万亿光年）</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#39-宇宙级半球扩散" class="tier-src">3.9 宇宙级（半球扩散）</a></td>
+                    </tr>
+                    <tr id="tier-hyper-universe">
+                        <td class="col-pos">81</td>
+                        <td class="col-name"><a href="/powerwiki/category/hyper-universe.html">超宇宙</a><p class="tier-note">单个有限宇宙的开放区间。再往上进入广义无限区级（仍属有限），跨过 ℵ₀ 才是论外级；涉及跨位面 / 嵌套结构另见位面跃迁（3.11）</p></td>
+                        <td class="col-parent">宇宙级</td>
+                        <td class="col-energy">8.0×10⁸⁵ J 起，上不封顶</td>
+                        <td class="col-scale">可观测宇宙的 10,000 倍以上</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#39-宇宙级半球扩散" class="tier-src">3.9 宇宙级（半球扩散）</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-infinite">
+            <div class="panel-header">
+                <h2>3.10 · 广义无限区级</h2>
+                <span class="badge">2 档</span>
+            </div>
+                    <p class="tier-group-note">有限 · 不可计算。仍是有限量，只是写不出那个焦耳数；跨过 ℵ₀ 才是论外级</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-incomputable-number">
+                        <td class="col-pos">82</td>
+                        <td class="col-name"><a href="/powerwiki/category/incomputable-number.html">不可计算数</a><p class="tier-note">E = 2πD² × F* 公式不变，能量随之为不可计算数。入档须同时满足三条（分类二）：①角色对力道有梯度控制 ②完全释放时力量强、范围大，但角色不知道实际规模 ③文本没有明确写出阿列夫零。性质上仍是有限，与真无限严格区分；类比忙碌海狸数 BB(n)</p></td>
+                        <td class="col-parent">广义无限区级</td>
+                        <td class="col-energy">有限，但写不出焦耳数</td>
+                        <td class="col-scale">静态：覆盖直径 D 本身是不可计算数</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#3102-广义无限区的两个类型" class="tier-src">3.10.2 广义无限区的两个类型</a></td>
+                    </tr>
+                    <tr id="tier-incomputable-expansion">
+                        <td class="col-pos">83</td>
+                        <td class="col-name"><a href="/powerwiki/category/incomputable-expansion.html">不可计算扩张率</a><p class="tier-note">与「不可计算数」完全独立，可单独出现也可叠加；允许横向叠加（同层多个独立不可计算因素）与纵向叠加（连续多次跃迁各自贡献的不可计算性累加），前提是过通则 0.2、0.14 的证据门槛且结果仍低于 ℵ₀。也可由铺垫法（分类三）成立。命中五种证伪信号（增长悖论 / 邻近量化悖论 / 实体化悖论 / 算术组合悖论 / 能量枯竭）任意一种即降级</p></td>
+                        <td class="col-parent">广义无限区级</td>
+                        <td class="col-energy">有限，但写不出焦耳数</td>
+                        <td class="col-scale">动态：目标持续膨胀，比较输出速率与增长速率，不比较总量</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#3102-广义无限区的两个类型" class="tier-src">3.10.2 广义无限区的两个类型</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-beyond">
+            <div class="panel-header">
+                <h2>第四部分 · 论外级</h2>
+                <span class="badge">8 档</span>
+            </div>
+                    <p class="tier-group-note">真无限，ℵ₀ 起。规模同为 ℵ₀，档内用序数比结构复杂度，不用序数比大小</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-beyond-threshold">
+                        <td class="col-pos">84</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-threshold.html">论外门槛</a><p class="tier-note">入档须同时过两道门槛：通则 0.2（明确递进和证据，「无数/无限」默认虚词）与通则 0.15（有限世界内产出无限战力须有机制解释）。证据分三级：结构性证明（可枚举无终点）＞其它数学化描述＞纯文学修饰词。多数作品从未产出结构性证明</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">ℵ₀（可数无限）</td>
+                        <td class="col-scale">真无限的第一级台阶，相当于本体系的 T1 / T0 档</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-line3">
+                        <td class="col-pos">85</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-line3.html">三线</a><p class="tier-note">ZFC 内可证明存在。本体系论外入口设在 ℵ₀，与流行标准（新标 / 日标 / 幻标多设在 ℵ₁）不是同一区间，跨体系引用须说明所用标准</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">ℶ₁ = 2^ℵ₀（连续统）</td>
+                        <td class="col-scale">第一次跨入不可数；幂集运算本身</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-line2">
+                        <td class="col-pos">86</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-line2.html">二线</a><p class="tier-note">ZFC 内可证明存在</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">ℶ₂、ℶ₃ …… ℶ_ω、ℶ_{ℶ₀} 等极限段</td>
+                        <td class="col-scale">幂集迭代与极限阶段</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-line1">
+                        <td class="col-pos">87</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-line1.html">一线</a><p class="tier-note">选贝斯不动点而非阿列夫不动点（ℶ_α ≥ ℵ_α 恒成立，贝斯不动点更强、且构造性，还绕开连续统假设）。严格说来「ZFC 可证 / 不可证」这条线划在世界基数处，本体系为可读性把论天门槛设在不可达基数</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">ℶ 不动点系列（ℶ_κ = κ），巅峰含世界基数</td>
+                        <td class="col-scale">ZFC 可证区的最后一段；自我指涉的编号结构</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-sky-low">
+                        <td class="col-pos">88</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-sky-low.html">论天下</a><p class="tier-note">ZFC 无法证明存在，只能作为额外公理假设。论天段一律按一致性强度排序，不按基数大小排序</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">不可达 → 马洛 → 弱紧致 → 不可描述 → 拉姆齐</td>
+                        <td class="col-scale">以「大小 / 组合性质」定义的大基数</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-sky-mid">
+                        <td class="col-pos">89</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-sky-mid.html">论天中</a><p class="tier-note">第一个巨大基数的「大小」小于第一个超紧致基数，但一致性强度更高——遇排序颠倒时以一致性强度为准</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">0# → 可测 → 强 → 伍丁 → 强紧致 → 超紧致</td>
+                        <td class="col-scale">定义范式转为初等嵌入 j: V→M；强度看 M 与 V 的接近程度</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-sky-high">
+                        <td class="col-pos">90</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-sky-high.html">论天上</a></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">可扩 → 巨大 → n-巨大 → I3 → I2 → I1 → I0</td>
+                        <td class="col-scale">秩到秩嵌入（j: V_λ→V_λ）；I0 为已知与 ZFC 相容的最强</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                    <tr id="tier-beyond-sky-top">
+                        <td class="col-pos">91</td>
+                        <td class="col-name"><a href="/powerwiki/category/beyond-sky-top.html">论天最上</a><p class="tier-note">与 ZFC 不相容。含义是「越出了 ZFC 的边界」，不是「规模比 I0 更大」——评级时应标注为越界区，而非单纯更高一档（同 4.4「关系不是规模」原则）</p></td>
+                        <td class="col-parent">论外级</td>
+                        <td class="col-energy">莱茵哈特 → 伯克利</td>
+                        <td class="col-scale">Kunen 不一致性定理的逼停处；须在 ZF（无选择公理）中讨论</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><a href="/powerwiki/page/rules.html#45-论外级内部分档" class="tier-src">4.5 论外级内部分档</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section class="panel tier-section" id="group-unfiled">
+            <div class="panel-header">
+                <h2>未归档</h2>
+                <span class="badge">2 档</span>
+            </div>
+                    <p class="tier-group-note">体系之外的两个兜底档，固定排在最末</p>
+            <table class="tier-table">
+                <thead>
+                    <tr>
+                        <th class="col-pos">#</th>
+                        <th class="col-name">档位</th>
+                        <th class="col-parent">所属量级</th>
+                        <th class="col-energy">能量区间</th>
+                        <th class="col-scale">覆盖尺度 / 参照</th>
+                        <th class="col-count">角色</th>
+                        <th class="col-src">规则原文</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="tier-unknown">
+                        <td class="col-pos">92</td>
+                        <td class="col-name"><a href="/powerwiki/category/unknown.html">未知</a><p class="tier-note">信息不足、落不进任何档位的角色暂放此处：原文缺失、只有传闻或旁证、表现互相矛盾无法取值、或作品未给出任何可换算的参照物。与「暂存」严格区分——未知是连区间都圈不出来，暂存是区间已知、只差坐实。补齐材料后应尽快转出本档</p></td>
+                        <td class="col-parent">兜底档</td>
+                        <td class="col-energy">兜底档</td>
+                        <td class="col-scale">—</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><span class="tier-src muted">—</span></td>
+                    </tr>
+                    <tr id="tier-pending">
+                        <td class="col-pos">93</td>
+                        <td class="col-name"><a href="/powerwiki/category/pending.html">暂存</a><p class="tier-note">证据待补、量级区间已可圈定但尚未最终确认的战力档位。归入此档表示已能大致估出其覆盖范围，仍待实锤表现或数据补齐后转正；若后续证明高估则下调至对应正式档。与「未知」严格区分：未知是信息不足、落不进任何档，暂存是区间已知、只差坐实</p></td>
+                        <td class="col-parent">兜底档</td>
+                        <td class="col-energy">兜底档</td>
+                        <td class="col-scale">—</td>
+                        <td class="col-count">0</td>
+                        <td class="col-src"><span class="tier-src muted">—</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="panel">
+            <div class="panel-header">
+                <h2>口径与维护</h2>
+            </div>
+            <div class="markdown-content">
+                <ul>
+                    <li><b>排序</b>：<code>sort_order</code> 由弱到强，间隔 10，便于后续插档；首页与本表共用同一顺序。</li>
+                    <li><b>分段</b>：<code>group</code> 对应体系分段，按档位在轴上首次出现的位置切分，因此过渡带 A / B 各自落在真实位置，不会被归拢打乱强弱顺序。</li>
+                    <li><b>兜底档</b>：末尾两个档位固定为「未知」与「暂存」，不属于任何体系分段，不参与强弱排序。
+                        <ul>
+                            <li><b>未知</b>——信息不足、连区间都圈不出来，落不进任何档。</li>
+                            <li><b>暂存</b>——区间已可圈定、只差坐实，待实锤表现或数据补齐后转正；若证明高估则下调至对应正式档。</li>
+                        </ul>
+                    </li>
+                    <li><b>旧档归位</b>：旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 · 低维 · 微观等）已全部废弃，对照关系写在 <code>data/categories.yaml</code> 文件头注释里。挂在废弃档上的角色须改挂新档。</li>
+                    <li><b>改档流程</b>：编辑 <code>data/categories.yaml</code> → 重新构建 → 首页、本表、各档详情页、搜索筛选器同步更新。</li>
+                </ul>
+            </div>
+        </section>
+            </article>
+        </div>
+    </div>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div>
+                <p class="footer-brand">全作品战力评鉴所</p>
+                <p class="footer-note">跨作品角色战力量级评鉴 · 静态资料站</p>
+            </div>
+            <nav class="footer-nav">
+                <a href="/powerwiki/index.html">首页</a>
+                <a href="/powerwiki/characters.html">角色图鉴</a>
+                <a href="/powerwiki/realm/index.html">境界体系</a>
+                <a href="/powerwiki/page/tiers.html">量级体系表</a>
+                <a href="/powerwiki/page/rules.html">战力评级规则</a>
+                <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
+                <a href="/powerwiki/search.html">搜索</a>
+            </nav>
+        </div>
+    </footer>
+
+    <script src="/powerwiki/static/js/main.js"></script>
+</body>
+</html>
