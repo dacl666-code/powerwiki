@@ -578,12 +578,13 @@ def build_pages(pages):
             toc_block = ''
         body = f'''    <div class="container">
         <div class="breadcrumb">
+            <a class="back-btn" href="{url('/index.html')}" data-back>返回</a>
             <a href="{url('/index.html')}">首页</a>
             <span>/</span>
-            <span>{page['title']}</span>
+            <span aria-current="page">{page['title']}</span>
         </div>
 
-        <div class="doc-layout">
+        <div class="doc-layout" data-page-slug="{page['slug']}">
             <article class="detail-panel">
                 <div class="panel-header">
                     <h1>{page['title']}</h1>

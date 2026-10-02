@@ -469,6 +469,7 @@ img { max-width: 100%; display: block; }
 .breadcrumb {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 8px;
     margin-bottom: 18px;
     font-size: 13.5px;
@@ -477,6 +478,31 @@ img { max-width: 100%; display: block; }
 .breadcrumb a { color: var(--text-2); }
 .breadcrumb a:hover { color: var(--primary); }
 .breadcrumb span[aria-current] { color: var(--text); font-weight: 600; }
+
+/* 返回按钮 */
+.back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-right: 4px;
+    padding: 3px 12px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    background: var(--primary-soft);
+    border: 1px solid rgba(31, 95, 174, .2);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, transform .15s, color .15s;
+}
+.back-btn:hover {
+    background: #dbe8f8;
+    border-color: var(--primary);
+    color: var(--primary-dark);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+.back-btn::before { content: "‹"; font-size: 16px; line-height: 1; margin-top: -1px; }
 
 /* ---------------------------- 工具条 / 筛选 ---------------------------- */
 .char-toolbar, .filter-bar {
@@ -571,8 +597,8 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 .doc-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 286px;
-    gap: 52px;
+    grid-template-columns: minmax(0, 1fr) 232px;
+    gap: 40px;
     align-items: start;
 }
 
@@ -581,7 +607,7 @@ img { max-width: 100%; display: block; }
     top: 86px;
     max-height: calc(100vh - 110px);
     overflow-y: auto;
-    padding-left: 20px;
+    padding-left: 18px;
     border-left: 1px solid var(--border);
     scrollbar-width: thin;
 }
@@ -626,7 +652,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---------------------------- Markdown 正文 ---------------------------- */
-.markdown-content { font-size: 15px; line-height: 1.9; max-width: 78ch; }
+.markdown-content { font-size: 15px; line-height: 1.9; max-width: none; }
 
 .markdown-content h1,
 .markdown-content h2,
