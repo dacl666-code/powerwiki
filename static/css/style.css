@@ -284,7 +284,7 @@ img { max-width: 100%; display: block; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     min-width: 96px;
     padding: 14px 22px;
     background: rgba(255, 255, 255, .12);
@@ -404,7 +404,7 @@ img { max-width: 100%; display: block; }
 .tier-intro a { color: var(--primary); text-decoration: underline; text-underline-offset: 2px; }
 .tier-intro code,
 .panel code {
-    padding: 1px 5px;
+    padding: 3px 7px;
     font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     font-size: 12.5px;
     background: var(--surface-3);
@@ -461,7 +461,7 @@ img { max-width: 100%; display: block; }
 
 .tier-group-link {
     flex-shrink: 0;
-    padding: 3px 10px;
+    padding: 5px 13px;
     font-size: 12px;
     font-weight: 600;
     color: var(--primary);
@@ -566,7 +566,7 @@ img { max-width: 100%; display: block; }
 .tier-meta {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 2px 24px;
+    gap: 9px 24px;
     margin: 14px 0 4px;
     padding: 14px 18px;
     background: var(--surface-2);
@@ -606,7 +606,7 @@ img { max-width: 100%; display: block; }
     flex: 1 1 220px;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     padding: 11px 16px;
     background: var(--surface);
     border: 1px solid var(--border);
@@ -702,8 +702,8 @@ a.tier-nav-item:hover {
 
 .cat-count {
     flex-shrink: 0;
-    min-width: 28px;
-    padding: 2px 9px;
+    min-width: 32px;
+    padding: 4px 11px;
     font-size: 12.5px;
     font-weight: 700;
     text-align: center;
@@ -770,7 +770,7 @@ a.tier-nav-item:hover {
 /* ---------------------------- 标签 / 徽章 ---------------------------- */
 .tag, .chip, .badge {
     display: inline-block;
-    padding: 2px 10px;
+    padding: 4px 12px;
     font-size: 12px;
     line-height: 1.6;
     font-weight: 500;
@@ -822,7 +822,7 @@ a.tier-nav-item:hover {
     align-items: center;
     gap: 4px;
     margin-right: 4px;
-    padding: 3px 12px;
+    padding: 5px 14px;
     font-size: 13px;
     font-weight: 600;
     color: var(--primary);
@@ -1054,7 +1054,7 @@ a.tier-nav-item:hover {
 .markdown-content blockquote p { margin: .45em 0; }
 
 .markdown-content code {
-    padding: 2px 6px;
+    padding: 3px 7px;
     font-family: var(--font-mono);
     font-size: .88em;
     color: var(--primary-dark);
@@ -1431,7 +1431,7 @@ html {
     .tier-table tbody td {
         display: flex;
         gap: 10px;
-        padding: 3px 0;
+        padding: 5px 0;
         border-bottom: none;
         text-align: left;
         font-size: 13px;
@@ -1553,10 +1553,10 @@ html[data-theme="dark"] img:hover { opacity: 1; }
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 36px;
+    height: 36px;
     padding: 0;
-    font-size: 15px;
+    font-size: 16px;
     line-height: 1;
     color: var(--text-2);
     background: var(--surface-2);
