@@ -1,10 +1,6 @@
 # 量级分类（战力量级体系 / 战力等级 档位）
 # 由仓库内 category/*.html 还原；暂存(pending)为新增兜底档。
 # 量级 = 档位 = 战力等级（均指破坏力量级）。
-- slug: draft
-  name: 暂存
-  type: power
-  sort_order: 0
 - slug: low-dimensional
   name: 低维
   type: power
@@ -308,4 +304,4 @@
 - slug: pending
   name: 暂存
   type: power
-  sort_order: 860
+  sort_order: 9999
