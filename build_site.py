@@ -572,7 +572,7 @@ def character_card_html(char, power_categories=None):
     href = url('/character/%s.html' % char['slug'])
     name = html_escape(char.get('name'))
     if char.get('image_url'):
-        img = '<img src="%s" alt="%s">' % (html_escape(char['image_url'], True), html_escape(char.get('name'), True))
+        img = '<img src="%s" alt="%s" loading="lazy">' % (html_escape(char['image_url'], True), html_escape(char.get('name'), True))
     else:
         img = '<div class="no-image">暂无图片</div>'
     cat = _CAT_BY_SLUG.get(char.get('category')) or {}
@@ -887,7 +887,7 @@ def build_characters_index(characters, power_categories=None):
     cards = []
     for char in characters:
         href = url('/character/%s.html' % char['slug'])
-        img = ('<img src="%s" alt="%s">' % (html_escape(char['image_url'], True), html_escape(char.get('name'), True))
+        img = ('<img src="%s" alt="%s" loading="lazy">' % (html_escape(char['image_url'], True), html_escape(char.get('name'), True))
                if char.get('image_url') else '<div class="no-image">暂无图片</div>')
         cat = _CAT_BY_SLUG.get(char.get('category')) or {}
         cat_tag = ('<span class="tag tag-power">%s</span>' % html_escape(cat.get('name'))
@@ -939,16 +939,34 @@ def build_character_detail(characters, categories, realms):
     for char in characters:
         cat = next((c for c in categories if c.get('slug') == char.get('category')), None)
         realm = next((r for r in realms if r.get('name') == char.get('realm')), None)
-        img = f'<img src="{char["image_url"]}" alt="{char["name"]}">' if char.get('image_url') else '<div class="no-image">暂无图片</div>'
-        alias = f'<p class="alias">别名：{char["alias"]}</p>' if char.get('alias') else ''
+        # 图片、别名、标签一律转义：外链 URL 常带 & 参数，写进 HTML 属性前必须转义
+        img = ('<img src="%s" alt="%s" loading="lazy">'
+               % (html_escape(char['image_url'], True), html_escape(char.get('name'), True))
+               if char.get('image_url') else '<div class="no-image">暂无图片</div>')
+        # 配图说明与来源（可选）：明确标注素材出处，避免把漫画宣传图误当小说原设
+        img_note = ''
+        if char.get('image_note'):
+            source_link = ''
+            if char.get('image_source_url'):
+                source_link = ' · <a href="%s" target="_blank" rel="noopener noreferrer">%s</a>' % (
+                    html_escape(char['image_source_url'], True),
+                    html_escape(char.get('image_source_name') or '查看图源'))
+            img_note = '<p class="img-note">%s%s</p>' % (
+                html_escape(char['image_note']), source_link)
+        alias = ('<p class="alias">别名：%s</p>' % html_escape(char['alias'])
+                 if char.get('alias') else '')
         cat_href = url(f"/category/{cat['slug']}.html") if cat else ''
-        cat_tag = f'<a href="{cat_href}" class="tag">{cat["name"]}</a>' if cat else ''
+        cat_tag = ('<a href="%s" class="tag">%s</a>' % (cat_href, html_escape(cat['name']))
+                   if cat else '')
         realm_href = url(f"/realm/{realm['slug']}.html") if realm else ''
         # 境界名始终显示；只有在 realms.yaml 里定义过才生成境界页链接
-        realm_tag = (f'<a href="{realm_href}" class="tag tag-realm">{realm["name"]}</a>' if realm
-                     else (f'<span class="tag tag-realm">{html_escape(char["realm"])}</span>'
+        realm_tag = ('<a href="%s" class="tag tag-realm">%s</a>'
+                     % (realm_href, html_escape(realm['name'])) if realm
+                     else ('<span class="tag tag-realm">%s</span>' % html_escape(char['realm'])
                            if char.get('realm') else ''))
-        series_tag = f'<span class="tag tag-series">{char["series"]}</span>' if char.get('series') else ''
+        series_tag = ('<span class="tag tag-series">%s</span>' % html_escape(char['series'])
+                      if char.get('series') else '')
+        name_esc = html_escape(char['name'])
 
         desc_html = render_markdown(char.get('description'))
         power_html = render_markdown(char.get('power_description'))
@@ -962,14 +980,14 @@ def build_character_detail(characters, categories, realms):
             body += f'''            <a href="{url(f"/category/{cat['slug']}.html")}">{cat['name']}</a>
             <span>/</span>
 '''
-        body += f'''            <span>{char['name']}</span>
+        body += f'''            <span>{name_esc}</span>
         </div>
 
         <article class="detail-panel">
             <div class="detail-header">
-                <div class="detail-image">{img}</div>
+                <div class="detail-image">{img}{img_note}</div>
                 <div class="detail-meta">
-                    <h1>{char['name']}</h1>
+                    <h1>{name_esc}</h1>
                     {alias}
                     <div class="meta-tags">
                         {cat_tag}
@@ -1327,7 +1345,7 @@ SEARCH_JS_TEMPLATE = '''
             return true;
         }
 
-        function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
 
         function render() {
             var list = indexData.filter(match);
@@ -1337,7 +1355,7 @@ SEARCH_JS_TEMPLATE = '''
             else list.sort(function(a,b){return String(a.name).localeCompare(String(b.name),'zh');});
 
             resultsEl.innerHTML = list.map(function(c){
-                var img = c.image ? '<img src="'+esc(c.image)+'" alt="">' : '<div class="no-image">暂无图片</div>';
+                var img = c.image ? '<img src="'+esc(c.image)+'" alt="'+esc(c.name)+'" loading="lazy">' : '<div class="no-image">暂无图片</div>';
                 return '<a href="'+BASE+'/character/'+c.slug+'.html" class="character-card">'+
                     '<div class="char-image">'+img+'</div>'+
                     '<div class="char-info"><h3>'+esc(c.name)+'</h3>'+

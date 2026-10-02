@@ -345,6 +345,27 @@ console.log('\n[9] 角色收录与档位并入');
         ok('角色档位均存在于档位体系', badCat.length === 0, badCat.join(', '));
     }
     ok('角色数据标注了最终形态口径', /最终形态|祭道之上|无不朽/.test(cy));
+
+    // 暗色模式：避免浅色斑马纹底与浅色文字撞色；未归档斜纹也必须跟主题走
+    const visualCss = cssNoComments();
+    ok('表格斑马纹使用主题底色（暗色模式保持对比）',
+       /\.markdown-content tbody tr:nth-child\(even\)\s*\{[^}]*background:\s*var\(--surface-2\)/.test(visualCss));
+    const unfiledCss = (visualCss.match(/\.tier-group#group-unfiled\s*\{[^}]*\}/) || [''])[0];
+    ok('未归档斜纹使用主题色、不再写死浅白色',
+       unfiledCss.includes('var(--surface-2)') && unfiledCss.includes('var(--surface-3)') && !/#f7f9fc/i.test(unfiledCss));
+
+    // 人物图片：约束 object-fit 防止变形，并使用外链图及可追溯来源
+    ok('角色图鉴图片有 object-fit: cover',
+       /\.char-image img\s*\{[^}]*object-fit:\s*cover/.test(visualCss));
+    ok('角色详情图片有 object-fit: contain',
+       /\.detail-image img\s*\{[^}]*object-fit:\s*contain/.test(visualCss));
+    ok('详情页标题/别名/标签竖向排布',
+       /\.detail-meta\s*\{[^}]*flex-direction:\s*column/.test(visualCss));
+    for (const [slug, label] of [['ye-fan', '叶凡'], ['gu-chensha', '古尘沙']]) {
+        const page = read('character/' + slug + '.html') || '';
+        ok(label + '详情页已显示外链人物图', /<img[^>]+src="https?:\/\//.test(page));
+        ok(label + '详情页图片注明并链接图源', /class="img-note"[^>]*>[\s\S]*?href="https?:\/\//.test(page));
+    }
 }
 
 console.log('\n========================================');

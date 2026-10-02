@@ -8,7 +8,10 @@
 #   category          所属档位 slug，必须存在于 data/categories.yaml
 #   realm             作品内的境界名（可选，仅作标签显示；
 #                     若要生成境界页链接，需在 data/realms.yaml 中定义）
-#   image_url         立绘/剧照外链（可选，留空显示「暂无图片」）
+#   image_url         角色图片外链（可选，留空显示「暂无图片」）
+#   image_note        图片性质说明（可选，区分角色图 / 宣传图 / 意境图）
+#   image_source_url  图片来源页面外链（可选）
+#   image_source_name 来源链接文字（可选）
 #   description       角色介绍 / 战绩，支持 Markdown（含表格）
 #   power_description 能力说明，支持 Markdown（含表格）
 #
@@ -23,7 +26,10 @@
   series: 遮天（辰东三部曲）
   category: incomputable-expansion
   realm: 祭道之上
-  image_url: ''
+  image_url: 'https://static.wikia.nocookie.net/shrouding-the-heavens/images/4/49/Ye_Fan_Great_Heavenly_Emperor.jpeg/revision/latest/scale-to-width-down/770?cb=20230304002403'
+  image_note: '叶凡·Great Heavenly Emperor 角色图；社区画廊收录，非本站制作'
+  image_source_url: 'https://shrouding-the-heavens.fandom.com/wiki/Ye_Fan/Gallery'
+  image_source_name: '查看图源'
   description: |
     辰东三部曲《遮天》的主角，后于《完美世界》《圣墟》中继续登场，最终与石昊、楚风并列为「三天帝」之一。
 
@@ -92,7 +98,10 @@
   series: 龙符（梦入神机）
   category: incomputable-expansion
   realm: 不朽第十层·非有无不朽
-  image_url: ''
+  image_url: 'https://img.mp.sohu.com/upload/20170214/83b1334c3a5d42b595e2a36db4138324_th.jpeg'
+  image_note: '古尘沙人物设定图；《龙符之天下王道》宣传物料，非本站制作'
+  image_source_url: 'https://www.sohu.com/a/126260655_485920'
+  image_source_name: '查看图源'
   description: |
     梦入神机《龙符》的主角，大永王朝十九皇子，无龙内阁阁主，永界之主。
 
