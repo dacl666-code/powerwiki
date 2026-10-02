@@ -87,6 +87,19 @@ def render_markdown(text):
     return markdown.markdown(text, extensions=['extra', 'tables', 'toc'])
 
 
+def render_markdown_full(text):
+    """返回 (正文 HTML, 目录 HTML)。目录由 TOC 扩展生成，与正文标题 id 完全一致。"""
+    if not text:
+        return '', ''
+    md = markdown.Markdown(extensions=['extra', 'tables', 'toc'])
+    body = md.convert(text)
+    toc = md.toc or ''
+    # 移除空白 toctitle 容器（title 为空时可能残留 <div class="toctitle"></div>）
+    toc = re.sub(r'<div class="toctitle">.*?</div>', '', toc, flags=re.S)
+    toc = re.sub(r'<span class="toctitle">.*?</span>', '', toc, flags=re.S)
+    return body, toc
+
+
 # ---------------------- 页面骨架 ----------------------
 def nav_links_html():
     """全局导航：固定入口 + data/pages.yaml 中的独立页面（改名后自动同步）。"""
@@ -553,7 +566,16 @@ def resolve_page_content(page):
 
 def build_pages(pages):
     for page in sorted(pages, key=lambda x: x.get('sort_order', 0)):
-        content_html = render_markdown(resolve_page_content(page))
+        content_html, toc_html = render_markdown_full(resolve_page_content(page))
+        if toc_html.strip():
+            toc_block = f'''            <aside class="doc-toc" id="doc-toc">
+                <p class="doc-toc-title">目录</p>
+                <div class="doc-toc-body">
+{toc_html}
+                </div>
+            </aside>'''
+        else:
+            toc_block = ''
         body = f'''    <div class="container">
         <div class="breadcrumb">
             <a href="{url('/index.html')}">首页</a>
@@ -561,14 +583,17 @@ def build_pages(pages):
             <span>{page['title']}</span>
         </div>
 
-        <article class="detail-panel">
-            <div class="panel-header">
-                <h1>{page['title']}</h1>
-            </div>
-            <div class="detail-body">
-                <div class="markdown-content">{content_html}</div>
-            </div>
-        </article>
+        <div class="doc-layout">
+            <article class="detail-panel">
+                <div class="panel-header">
+                    <h1>{page['title']}</h1>
+                </div>
+                <div class="detail-body">
+                    <div class="markdown-content">{content_html}</div>
+                </div>
+            </article>
+{toc_block}
+        </div>
     </div>
 '''
         write(os.path.join('page', f'{page["slug"]}.html'), render_page(page['title'], body))
