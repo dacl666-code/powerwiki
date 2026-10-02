@@ -113,6 +113,10 @@ def load_data():
         seen_r.add(s)
         r['slug'] = s
 
+    # 档位卡片背景图（categories.yaml 的 backgrounds 块，外链不入库）
+    if isinstance(raw_categories, dict):
+        load_backgrounds(raw_categories)
+
     return categories, groups, realms, characters, pages
 
 
@@ -346,8 +350,23 @@ def tier_card_html(cat, count):
         tip += f"｜{cat['energy']}"
     href = url(f"/category/{cat['slug']}.html")
     count_attr = ' data-empty' if count == 0 else ''
+    # 背景图：外链、不入库。主源写在内联 style 里（无 JS 也能看到），
+    # 备源放 data-bg-alt，由 main.js 在主源加载失败时顶上；都失败就撤掉底图。
+    bg_style = ''
+    bg_class = ''
+    bg_attr = ''
+    urls = tier_bg_urls(cat)
+    if urls:
+        bg_class = ' has-bg'
+        bg_style = (
+            f" style=\"--tier-bg:url('{html_escape(urls[0], True)}');"
+            f"--tier-bg-opacity:{_BG_OPACITY}\""
+        )
+        bg_attr = f' data-bg="{html_escape(urls[0], True)}"'
+        if len(urls) > 1:
+            bg_attr += f' data-bg-alt="{html_escape(urls[1], True)}"'
     return (
-        f'                <a href="{href}" class="category-card"'
+        f'                <a href="{href}" class="category-card{bg_class}"{bg_style}{bg_attr}'
         f' title="{html_escape(tip, True)}">\n'
         f'                    <span class="cat-name">{html_escape(cat.get("name"))}</span>\n'
         f'                    <span class="cat-count"{count_attr}>{count}</span>\n'
@@ -426,13 +445,18 @@ def iter_segments(power_categories):
 
 
 def tier_position(power_categories, slug):
-    """返回 (本档序号, 总档数, 上一档, 下一档)。"""
-    for i, c in enumerate(power_categories):
+    """返回 (本档序号, 总档数, 上一档, 下一档)。
+
+    强弱轴只包含参与排序的档位；未归档的兜底档（未知/暂存）不在轴上，
+    查询它时返回 (0, 排名档总数, None, None) —— 它既不是最强也不是最弱。
+    """
+    ranked = [c for c in power_categories if c.get('group') != 'unfiled']
+    for i, c in enumerate(ranked):
         if c.get('slug') == slug:
-            prev_c = power_categories[i - 1] if i > 0 else None
-            next_c = power_categories[i + 1] if i + 1 < len(power_categories) else None
-            return i + 1, len(power_categories), prev_c, next_c
-    return 0, len(power_categories), None, None
+            prev_c = ranked[i - 1] if i > 0 else None
+            next_c = ranked[i + 1] if i + 1 < len(ranked) else None
+            return i + 1, len(ranked), prev_c, next_c
+    return 0, len(ranked), None, None
 
 # ---------------------- 各页面构建 ----------------------
 def build_index(categories, groups, realms, characters, pages):
@@ -585,6 +609,56 @@ _PAGES = []
 _PAGE_ANCHORS = {}
 # page slug -> (正文 HTML, 目录 HTML)，避免同一份 Markdown 渲染两遍
 _PAGE_CACHE = {}
+# 档位卡片背景图配置（categories.yaml 的 backgrounds 块）
+_BG_ENABLED = False
+_BG_OPACITY = 0.15
+_BG_URLS = {}   # slug -> [主源 URL, 备源 URL, ...]
+
+
+def load_backgrounds(raw):
+    """解析 categories.yaml 的 backgrounds 块。
+
+    图源全部走外链，不下载进仓库。占位符 {slug}/{w}/{h} 在渲染时替换，
+    同一档位永远拿到同一张图（图源支持 seed，seed 取档位 slug）。
+    """
+    global _BG_ENABLED, _BG_OPACITY, _BG_URLS
+    _BG_ENABLED, _BG_OPACITY, _BG_URLS = False, 0.15, {}
+    if not isinstance(raw, dict):
+        raw = {}
+    cfg = raw.get('backgrounds') or {}
+    if not cfg.get('enabled'):
+        return
+    sources = [str(s).strip() for s in (cfg.get('sources') or []) if str(s).strip()]
+    if not sources:
+        return
+    try:
+        w = int(cfg.get('width') or 400)
+        h = int(cfg.get('height') or 300)
+    except (TypeError, ValueError):
+        w, h = 400, 300
+    try:
+        op = float(cfg.get('opacity'))
+        if not 0 < op <= 1:
+            raise ValueError
+    except (TypeError, ValueError):
+        op = 0.15
+
+    _BG_ENABLED = True
+    _BG_OPACITY = op
+    for cat in raw.get('items') or []:
+        slug = cat.get('slug')
+        if not slug:
+            continue
+        _BG_URLS[slug] = [
+            s.format(slug=slug, w=w, h=h) for s in sources
+        ]
+
+
+def tier_bg_urls(cat):
+    """该档位卡片的背景图候选 URL（按优先级）。未启用时返回空列表。"""
+    if not _BG_ENABLED:
+        return []
+    return _BG_URLS.get(cat.get('slug')) or []
 
 # 量级体系表页：由 categories.yaml 直接生成，与首页「战力等级」同源同步
 TIERS_PAGE_SLUG = 'tiers'
@@ -626,7 +700,8 @@ def build_categories(categories, characters, power_categories=None):
             ('体系分段', group_display(cat.get('group'))),
             ('能量区间', cat.get('energy') or '—'),
             ('覆盖尺度', cat.get('scale') or '—'),
-            ('体系位次', f"第 {pos} / {total} 档" if pos else '—'),
+            ('体系位次', (f"第 {pos} / {total} 档" if pos
+                        else f"兜底档 · 不参与强弱排序（共 {total} 档正式量级）")),
         ]
         for label, value in meta_rows:
             body += (f'                <div class="tier-meta-row">'
@@ -642,8 +717,14 @@ def build_categories(categories, characters, power_categories=None):
         if cat.get('note'):
             body += f'            <p class="category-desc">{html_escape(cat.get("note"))}</p>\n'
 
-        # 上/下一档快捷跳转（体系内相邻档，不是分段内相邻）
-        if prev_c or next_c:
+        # 上/下一档快捷跳转（强弱轴上的相邻档，不是分段内相邻）
+        if cat.get('group') == 'unfiled':
+            # 兜底档不在强弱轴上，给它「更强/更弱」标签是错的
+            body += ('            <div class="tier-nav tier-nav--flat">\n'
+                     '                <span class="tier-nav-note">本档为体系之外的兜底档，'
+                     '不与正式量级比较强弱；补齐材料后应转出到对应档位。</span>\n'
+                     '            </div>\n')
+        elif prev_c or next_c:
             body += '            <div class="tier-nav">\n'
             if prev_c:
                 prev_href = url('/category/%s.html' % prev_c['slug'])
@@ -748,7 +829,8 @@ def build_tiers_page(categories, characters):
                         if src_href else '<span class="tier-src muted">—</span>')
             # data-label：移动端隐藏表头后，靠它渲染中文列名
             cells = [
-                ('col-pos', '位次', str(pos)),
+                # 兜底档不在强弱轴上，位次列给「—」而不是 0 或 92
+                ('col-pos', '位次', str(pos) if pos else '—'),
                 ('col-name', '档位', name_html + note_cell),
                 ('col-parent', '量级', html_escape(cat.get('parent') or '—')),
                 ('col-energy', '能量', html_escape(tier_energy_label(cat))),

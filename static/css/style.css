@@ -71,6 +71,17 @@ body {
 a { color: var(--primary); text-decoration: none; transition: color .15s; }
 a:hover { color: var(--primary-dark); text-decoration: underline; }
 
+/* 键盘可访问性：Tab 聚焦时给明确轮廓（鼠标点击不显示，避免视觉噪音） */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible { text-decoration: none; }
+
 img { max-width: 100%; display: block; }
 
 ::selection { background: rgba(31, 95, 174, .16); }
@@ -599,6 +610,23 @@ a.tier-nav-item:hover {
 .tier-nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .tier-nav-item.is-edge .tier-nav-name { color: var(--text-3); }
 
+/* 兜底档（未知/暂存）不在强弱轴上：不渲染更强/更弱切换标签，
+   只给一句说明，避免读成「暂存比论天最上更强」 */
+.tier-nav--flat {
+    display: block;
+    margin: 16px 0 4px;
+}
+.tier-nav-note {
+    display: block;
+    padding: 11px 16px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--text-2);
+    background: var(--surface-2);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-sm);
+}
+
 /* ---------------------------- 分类网格 ---------------------------- */
 .category-grid {
     display: grid;
@@ -623,6 +651,33 @@ a.tier-nav-item:hover {
     border-color: var(--primary);
     box-shadow: var(--shadow);
     text-decoration: none;
+}
+
+/* ------------------- 档位卡片背景图（外链，15% 不透明度） -------------------
+   底图挂在 ::before 伪元素上、只让这一层半透明，卡片文字保持 100% 实色——
+   不能给 .category-card 整体加 opacity，那会把文字一起拖淡。
+   主源写死在内联 style，备源由 main.js 在主源加载失败时换上；
+   两个源都挂掉就摘掉 .has-bg，退化为纯色卡片，不会留破图。 */
+.category-card { position: relative; overflow: hidden; }
+.category-card > * { position: relative; z-index: 1; }
+.category-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background-image: var(--tier-bg, none);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    opacity: 0;
+    transition: opacity .2s ease;
+    pointer-events: none;
+}
+.category-card.has-bg::before { opacity: var(--tier-bg-opacity, .15); }
+/* 悬停时底图略微加深，作为可点击的反馈（幅度很小，不影响阅读） */
+.category-card.has-bg:hover::before { opacity: calc(var(--tier-bg-opacity, .15) * 1.8); }
+@media (prefers-reduced-motion: reduce) {
+    .category-card::before { transition: none; }
 }
 
 .cat-name { font-size: 14.5px; font-weight: 600; color: var(--text); }

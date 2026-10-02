@@ -383,6 +383,28 @@
     }
 
     /* ==================================================================
+       档位卡片背景图：主源挂了自动换备源，都挂了就撤掉底图不留破图
+       ================================================================== */
+    function probeBg(card, urls, i) {
+        if (i >= urls.length) { card.classList.remove('has-bg'); return; }
+        var probe = new Image();
+        probe.onload = function () {
+            card.style.setProperty('--tier-bg', 'url("' + urls[i] + '")');
+            card.classList.add('has-bg');
+        };
+        probe.onerror = function () { probeBg(card, urls, i + 1); };
+        probe.src = urls[i];
+    }
+
+    function tierBackgrounds() {
+        $$('.category-card.has-bg[data-bg]').forEach(function (card) {
+            var urls = [card.getAttribute('data-bg'), card.getAttribute('data-bg-alt')]
+                .filter(function (u) { return !!u; });
+            if (urls.length) probeBg(card, urls, 0);
+        });
+    }
+
+    /* ==================================================================
        启动
        ================================================================== */
     function init() {
@@ -395,6 +417,7 @@
         injectBreadcrumbBack();
         bindStaticBack();
         misc();
+        tierBackgrounds();
 
         headerH = syncHeaderHeight();
         onScroll();

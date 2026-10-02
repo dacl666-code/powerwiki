@@ -176,6 +176,35 @@ Windows 上直接双击 `deploy.bat` 即可（内部调用的就是上面这套�
 旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 ·
 低维 · 微观等）已全部废弃，完整对照写在 `data/categories.yaml` 文件头注释里。
 
+### 档位卡片背景图
+
+首页「战力等级」每个档位卡片都带一张底图，**全部走外链，仓库里不放任何图片文件**。
+配置集中在 `data/categories.yaml` 顶部的 `backgrounds` 块：
+
+```yaml
+backgrounds:
+  enabled: true
+  opacity: 0.15      # 底图不透明度，改这里即可
+  width: 400
+  height: 300
+  sources:
+    - "https://cdn.devimg.cn/photo/{w}/{h}?seed={slug}"   # 主源，国内 CDN
+    - "https://picsum.photos/seed/{slug}/{w}/{h}"         # 备源
+```
+
+占位符 `{slug}` `{w}` `{h}` 在构建时替换。两个源都支持 seed，seed 取档位 slug，
+所以**同一档位永远是同一张图**，刷新不会变。
+
+容错逻辑（`static/js/main.js` 的 `tierBackgrounds`）：
+
+1. 主源 URL 直接写进卡片的内联 style —— 即使 JS 被禁用也有底图；
+2. 加载失败自动换备源；
+3. 两个源都挂掉就摘掉 `has-bg`，卡片退回纯色底，**不会留破图**。
+
+选型理由：`cdn.devimg.cn`（图即）是国内部署的占位图 CDN（腾讯云 + COS + CDN），
+大陆访问快，免注册免 API Key，picsum 兼容写法；`picsum.photos` 作境外备源。
+换图源只改 `sources` 两行，不需要动代码；关掉把 `enabled` 设为 `false`。
+
 ### 加一个档位
 
 在 `data/categories.yaml` 的 `items` 里加一条：
