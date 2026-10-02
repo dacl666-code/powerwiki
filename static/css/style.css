@@ -597,9 +597,13 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 .doc-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 160px;
-    gap: 36px;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    gap: 40px;
     align-items: start;
+}
+/* 文档页标题与正文对齐：补左右内边距，避免标题贴左边框 */
+.doc-layout .panel-header {
+    padding: 28px 32px 16px;
 }
 
 .doc-toc {

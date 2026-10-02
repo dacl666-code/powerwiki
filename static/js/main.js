@@ -1,6 +1,30 @@
 // 通用交互脚本
 
 document.addEventListener('DOMContentLoaded', function () {
+    // 全站返回按钮：除首页与文档页（文档页已有静态返回）外，所有页面面包屑注入"返回"
+    // 点击优先 history.back() 回上一页，避免跳回首页后还要往下翻
+    (function () {
+        var path = location.pathname;
+        var BASE = '/powerwiki';
+        var isHome = path === BASE + '/index.html' || path === BASE + '/' ||
+                     path === BASE || path === BASE + '/index.html/';
+        if (isHome || document.querySelector('.doc-layout')) return;
+        document.querySelectorAll('.breadcrumb').forEach(function (crumb) {
+            if (crumb.querySelector('[data-back]')) return;
+            var back = document.createElement('a');
+            back.className = 'back-btn';
+            back.setAttribute('data-back', '');
+            back.setAttribute('href', BASE + '/index.html');
+            back.textContent = '返回';
+            crumb.insertBefore(back, crumb.firstChild);
+            back.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (window.history.length > 1) window.history.back();
+                else window.location.href = BASE + '/index.html';
+            });
+        });
+    })();
+
     // 自动隐藏 flash 消息
     const alerts = document.querySelectorAll('.alert');
     alerts.forEach(function (alert) {
