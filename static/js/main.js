@@ -383,6 +383,42 @@
     }
 
     /* ==================================================================
+       深浅色主题切换
+       ------------------------------------------------------------------
+       引导脚本（每页 <head> 内联）已在首屏前定好 data-theme，这里只负责
+       切换与持久化。图标的显示/隐藏交给 CSS，JS 不碰样式。
+       ================================================================== */
+    var THEME_KEY = 'pw-theme';
+
+    function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') === 'dark'
+            ? 'dark' : 'light';
+    }
+
+    function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    }
+
+    function bindThemeToggle() {
+        var btn = $('#theme-toggle');
+        if (!btn) return;
+        btn.addEventListener('click', function () {
+            applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+        });
+        // 用户没手动选过时，跟随系统偏好的实时变化
+        var mq = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+        if (!mq) return;
+        var onChange = function (e) {
+            var saved = null;
+            try { saved = localStorage.getItem(THEME_KEY); } catch (err) {}
+            if (!saved) applyTheme(e.matches ? 'dark' : 'light');
+        };
+        if (mq.addEventListener) mq.addEventListener('change', onChange);
+        else if (mq.addListener) mq.addListener(onChange);
+    }
+
+    /* ==================================================================
        档位卡片背景图：主源挂了自动换备源，都挂了就撤掉底图不留破图
        ================================================================== */
     function probeBg(card, urls, i) {
@@ -418,6 +454,7 @@
         bindStaticBack();
         misc();
         tierBackgrounds();
+        bindThemeToggle();
 
         headerH = syncHeaderHeight();
         onScroll();

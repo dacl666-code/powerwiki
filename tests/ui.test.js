@@ -56,14 +56,6 @@ function cssNoComments() {
     return (read('static/css/style.css') || '').replace(/\/\*[\s\S]*?\*\//g, '');
 }
 
-// cdn.devimg.cn 已开放的 82 项中文题材（写错会 404）
-const VALID_CATS = new Set(('包包 电脑 电商主图 电子产品 耳机 服装 家电 键盘 礼物 美妆 母婴 ' +
-    '手机 鼠标 数码产品 玩具 鞋子 餐饮门店 咖啡 咖啡馆 美食 水果 甜品 饮料 办公 办公桌 ' +
-    '婚礼 健身 人物 书籍 新闻 学校 运动 城市 飞机 风景 火车 酒店 露营 旅行 轮船 摩托 ' +
-    '汽车 无人机 中国城市 自行车 宠物 电竞 动漫 动物 古建筑 家具 建筑 商务 室内 医院 ' +
-    '游戏 3DRender 玻璃 抽象艺术 国风 海洋 极简 节日 金属 科技 木纹 赛博朋克 森林 石头 ' +
-    '水彩 太空 天空 天气 纹理 像素风 烟花 植物 植物盆栽 纸张 AI插画 CG LowPoly').split(' '));
-
 console.log('\n=== powerwiki UI 回归测试 ===\n');
 
 /* ---------------- 1. 产物存在性 ---------------- */
@@ -168,46 +160,43 @@ console.log('\n[5] 档位卡片背景图（外链 · 语义题材 · 10% 不透�
     const alt = [...idxHtml.matchAll(/data-bg-alt="([^"]+)"/g)].map(m => m[1]);
     ok('主源 URL 92 条', primary.length === 92);
     ok('备源 URL 92 条', alt.length === 92);
-    ok('主源为国内 CDN cdn.devimg.cn', primary.every(u => u.startsWith('https://cdn.devimg.cn/')));
-    ok('备源为 picsum', alt.every(u => u.startsWith('https://picsum.photos/')));
-    ok('主源全部带 seed 且互不相同',
-        primary.every(u => /seed=/.test(u)) && new Set(primary).size === 92);
     ok('内联 style 写入 --tier-bg（无 JS 也有底图）',
         (idxHtml.match(/--tier-bg:url\(/g) || []).length === 92);
     ok('不透明度为 0.10', idxHtml.includes('--tier-bg-opacity:0.1'));
     ok('图片未下载进仓库（无本地图片产物）',
         !fs.existsSync(path.join(ROOT, 'static/img/tiers')));
 
-    // 题材语义：底图内容必须跟档位量级对得上，不能是随机图
-    const catOf = {};
+    // 底图必须是「每档一张、互不重复」的真实照片，而不是图库的随机/题材图
+    const bgOf = {};
     [...idxHtml.matchAll(/href="\/powerwiki\/category\/([^"]+)\.html"[^>]*data-bg="([^"]+)"/g)]
-        .forEach(m => {
-            const mm = /cat=([^&]+)/.exec(m[2]);
-            catOf[m[1]] = mm ? decodeURIComponent(mm[1]) : null;
-        });
-    const catValues = Object.values(catOf);
-    ok('全部 92 档都拿到了题材', catValues.length === 92 && catValues.every(Boolean),
-        '实际 ' + catValues.filter(Boolean).length);
-    ok('题材全部在图源开放的 82 项白名单内',
-        catValues.every(c => VALID_CATS.has(c)),
-        catValues.filter(c => !VALID_CATS.has(c)).join(','));
-    ok('题材有多种（不是全站同一张图）', new Set(catValues).size >= 10,
-        '实际 ' + new Set(catValues).size + ' 种');
+        .forEach(m => { bgOf[m[1]] = m[2]; });
+    const bgUrls = Object.values(bgOf);
+    ok('92 档每档都有底图 URL', bgUrls.length === 92, '实际 ' + bgUrls.length);
+    ok('92 张底图互不重复', new Set(bgUrls).size === 92,
+        '实际 ' + new Set(bgUrls).size + ' 张');
 
-    const expect = {
-        'insect': '动物', 'weak-human': '人物', 'weak-brick': '石头',
-        'city': '城市', 'country': '风景', 'eurasia-continent': '森林',
-        'surface': '海洋', 'planet': '太空', 'star': '太空',
-        'star-system': '天空', 'universe': '太空',
-        'beyond-threshold': '抽象艺术', 'beyond-sky-top': '赛博朋克',
-        'unknown': '纹理',
-    };
-    const missing = Object.keys(expect).filter(s => !(s in catOf));
-    ok('关键档位都在首页卡片里', missing.length === 0, missing.join(','));
-    const wrong = Object.entries(expect)
-        .filter(([slug, c]) => catOf[slug] && catOf[slug] !== c)
-        .map(([slug, c]) => `${slug}: 期望${c} 实际${catOf[slug]}`);
-    ok('关键档位题材与量级语义一致', wrong.length === 0, wrong.join(' | '));
+    // 图源必须允许热链：免费图库可以，付费图库有防盗链会显示不出来
+    const FREE = ['images.pexels.com', 'images.unsplash.com',
+                  'upload.wikimedia.org', 'live.staticflickr.com', 'cdn.pixabay.com'];
+    const PAID = ['shutterstock', 'gettyimages', 'istockphoto', 'adobe.com',
+                  'dreamstime', 'alamy', 'vecteezy'];
+    ok('底图全部来自允许热链的免费图库',
+        bgUrls.every(u => FREE.some(d => u.includes(d))),
+        bgUrls.filter(u => !FREE.some(d => u.includes(d)))[0]);
+    ok('底图不含付费图库域名（防盗链会挂）',
+        bgUrls.every(u => !PAID.some(d => u.includes(d))),
+        bgUrls.filter(u => PAID.some(d => u.includes(d)))[0]);
+    ok('底图是图片文件（jpeg/jpg/png/webp）',
+        bgUrls.every(u => /\.(jpe?g|png|webp)(\?|$)/i.test(u)));
+
+    // 关键档位的底图必须存在（语义映射没漏档）
+    const mustHave = ['insect', 'weak-human', 'brick', 'wall', 'room', 'building',
+                      'street', 'city', 'country', 'continent', 'surface', 'planet',
+                      'brown-dwarf', 'star', 'star-system', 'star-cluster', 'galaxy',
+                      'galaxy-cluster', 'cosmic-structure', 'universe',
+                      'beyond-sky-top', 'unknown'];
+    const noImg = mustHave.filter(s => !bgOf[s]);
+    ok('关键档位都配到了底图', noImg.length === 0, noImg.join(','));
 }
 {
     const js = read('static/js/main.js') || '';
@@ -250,6 +239,33 @@ console.log('\n[7] HTML 结构');
         if (open !== close) bad.push(f + `(div ${open}/${close})`);
     }
     ok('关键页面 div 标签闭合平衡', bad.length === 0, bad.join(' '));
+}
+
+/* ---------------- 8. 暗色模式 ---------------- */
+console.log('\n[8] 暗色模式');
+{
+    const css = cssNoComments();
+    ok('CSS 定义了 html[data-theme="dark"] 变量块',
+        /html\[data-theme="dark"\]\s*\{[^}]*--surface:/.test(css));
+    ok('暗色块覆盖了阴影色（改黑）',
+        /html\[data-theme="dark"\][\s\S]{0,1200}--shadow-rgb:\s*0, 0, 0/.test(css));
+    ok('暗色块声明了 color-scheme: dark', /html\[data-theme="dark"\][\s\S]*?color-scheme:\s*dark/.test(css));
+    ok('CSS 含主题切换按钮样式', /\.theme-toggle\s*\{/.test(css));
+    ok('暗色下压暗了档位底图', /data-theme="dark"\][\s\S]{0,200}category-card::before/.test(css));
+
+    const idxHtml2 = read('index.html') || '';
+    ok('每页有主题切换按钮 #theme-toggle', idxHtml2.includes('id="theme-toggle"'));
+    ok('head 内有防闪烁引导脚本（首屏前定主题）',
+        /<script>[^<]*data-theme[^<]*<\/script>/.test(idxHtml2));
+    ok('引导脚本在 </head> 之前',
+        idxHtml2.indexOf('data-theme') < idxHtml2.indexOf('</head>'));
+
+    const js = read('static/js/main.js') || '';
+    ok('JS 含主题切换 applyTheme', /function applyTheme/.test(js));
+    ok('JS 含按钮绑定 bindThemeToggle', /function bindThemeToggle/.test(js));
+    ok('JS 记住用户选择（localStorage）', /localStorage.setItem\(THEME_KEY/.test(js));
+    ok('JS 在系统偏好变化时跟随', /prefers-color-scheme: dark/.test(js));
+    ok('init 里调用了 bindThemeToggle', /bindThemeToggle\(\);/.test(js));
 }
 
 console.log('\n========================================');

@@ -6,7 +6,7 @@
     
     <title>弱爆星 - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="/powerwiki/static/css/style.css">
-    <script>document.documentElement.className += ' js';</script>
+    <script>document.documentElement.className += ' js';try{var t=localStorage.getItem('pw-theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
     <header class="site-header">
@@ -21,6 +21,11 @@
                 <a href="/powerwiki/page/cosmology.html">材质与破坏能量数据库</a>
                 <a href="/powerwiki/search.html">搜索</a>
             </nav>
+            <button type="button" class="theme-toggle" id="theme-toggle"
+                    aria-label="切换深浅色主题" title="切换深浅色主题">
+                <span class="icon-sun" aria-hidden="true">☀</span>
+                <span class="icon-moon" aria-hidden="true">☾</span>
+            </button>
         </div>
     </header>
 

@@ -33,82 +33,118 @@
 # ============================================================
 
 backgrounds:
-  # 首页「战力等级」每个档位卡片的背景图（外链，不入库、不下载）
-  enabled: true
-  opacity: 0.10          # 背景图不透明度，改这里即可
-  width: 400
-  height: 300
-  # 占位符：{slug} 档位标识  {w} 宽  {h} 高  {cat} 题材（见下方映射）
-  sources:
-    - "https://cdn.devimg.cn/photo/{w}/{h}?cat={cat}&seed={slug}"  # 主源：国内 CDN，按题材取图
-    - "https://picsum.photos/seed/{slug}/{w}/{h}"                  # 备源：境外，无题材但稳定
-
-  # ---- 题材映射：让底图跟档位的量级语义对上 ----
-  # 取值必须是 cdn.devimg.cn 已开放的 82 项中文题材之一，写错会返回 404。
-  # 有效题材（全量）：
-  #   商品：包包 电脑 电商主图 电子产品 耳机 服装 家电 键盘 礼物 美妆 母婴
-  #         手机 鼠标 数码产品 玩具 鞋子
-  #   餐饮：餐饮门店 咖啡 咖啡馆 美食 水果 甜品 饮料
-  #   内容：办公 办公桌 婚礼 健身 人物 书籍 新闻 学校 运动
-  #   出行：城市 飞机 风景 火车 酒店 露营 旅行 轮船 摩托 汽车 无人机
-  #         中国城市 自行车
-  #   垂直：宠物 电竞 动漫 动物 古建筑 家具 建筑 商务 室内 医院 游戏
-  #   装饰：3DRender 玻璃 抽象艺术 国风 海洋 极简 节日 金属 科技 木纹
-  #         赛博朋克 森林 石头 水彩 太空 天空 天气 纹理 像素风 烟花
-  #         植物 植物盆栽 纸张 AI插画 CG LowPoly
+  # 首页「战力等级」每个档位卡片的底图
+  # 92 档各一张真实照片，按量级语义挑选：昆虫档就是昆虫微距、爆砖档就是砖墙、
+  # 爆恒星档就是太阳表面、论天最上是抽象几何 —— 由弱到强形成视觉递进。
   #
-  # 查找顺序：cat_by_slug（按档位精确指定）→ cat_by_parent（按所属量级）→ default_cat
-  default_cat: 纹理
+  # 图源：Pexels 免费图库（images.pexels.com），免授权、允许热链、URL 永久。
+  # 全部走外链，仓库内不落地任何图片文件。
+  enabled: true
+  opacity: 0.10        # 底图不透明度，改这里即可
 
-  cat_by_slug:
-    # 论外级单独指定，体现「超出体系」的递进
-    beyond-threshold: 抽象艺术        # 论外门槛
-    beyond-line3:     抽象艺术        # 三线
-    beyond-line2:     抽象艺术        # 二线
-    beyond-line1:     抽象艺术        # 一线
-    beyond-sky-low:   赛博朋克        # 论天下
-    beyond-sky-mid:   赛博朋克        # 论天中
-    beyond-sky-high:  赛博朋克        # 论天上
-    beyond-sky-top:   赛博朋克        # 论天最上
-    incomputable-number:    像素风    # 不可计算数
-    incomputable-expansion: 3DRender  # 不可计算扩张率
-    unknown:          纹理            # 兜底档，中性底纹
+  images:
+    insect: "https://images.pexels.com/photos/35929043/pexels-photo-35929043.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-human: "https://images.pexels.com/photos/30283461/pexels-photo-30283461.jpeg?auto=compress&cs=tinysrgb&w=600"
+    normal-human: "https://images.pexels.com/photos/15046667/pexels-photo-15046667.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-human: "https://images.pexels.com/photos/4164759/pexels-photo-4164759.jpeg?auto=compress&cs=tinysrgb&w=600"
+    super-human: "https://images.pexels.com/photos/39259266/pexels-photo-39259266.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-brick: "https://images.pexels.com/photos/17766225/pexels-photo-17766225.jpeg?auto=compress&cs=tinysrgb&w=600"
+    brick: "https://images.pexels.com/photos/7104016/pexels-photo-7104016.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-brick: "https://images.pexels.com/photos/32282219/pexels-photo-32282219.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-brick: "https://images.pexels.com/photos/12001528/pexels-photo-12001528.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-wall: "https://images.pexels.com/photos/27075754/pexels-photo-27075754.jpeg?auto=compress&cs=tinysrgb&w=600"
+    wall: "https://images.pexels.com/photos/14249938/pexels-photo-14249938.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-wall: "https://images.pexels.com/photos/15060576/pexels-photo-15060576.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-wall: "https://images.pexels.com/photos/4457369/pexels-photo-4457369.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-room: "https://images.pexels.com/photos/32383738/pexels-photo-32383738.jpeg?auto=compress&cs=tinysrgb&w=600"
+    room: "https://images.pexels.com/photos/34916277/pexels-photo-34916277.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-room: "https://images.pexels.com/photos/18078684/pexels-photo-18078684.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-room: "https://images.pexels.com/photos/7031607/pexels-photo-7031607.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-building: "https://images.pexels.com/photos/18802091/pexels-photo-18802091.jpeg?auto=compress&cs=tinysrgb&w=600"
+    building: "https://images.pexels.com/photos/19204496/pexels-photo-19204496.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-building: "https://images.pexels.com/photos/18261856/pexels-photo-18261856.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-building: "https://images.pexels.com/photos/17879690/pexels-photo-17879690.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-street: "https://images.pexels.com/photos/16666912/pexels-photo-16666912.jpeg?auto=compress&cs=tinysrgb&w=600"
+    street: "https://images.pexels.com/photos/17131944/pexels-photo-17131944.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-street: "https://images.pexels.com/photos/14977771/pexels-photo-14977771.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-street: "https://images.pexels.com/photos/30153429/pexels-photo-30153429.jpeg?auto=compress&cs=tinysrgb&w=600"
+    street-plus: "https://images.pexels.com/photos/24071603/pexels-photo-24071603.jpeg?auto=compress&cs=tinysrgb&w=600"
+    city-minus: "https://images.pexels.com/photos/31468386/pexels-photo-31468386.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-city: "https://images.pexels.com/photos/15481205/pexels-photo-15481205.jpeg?auto=compress&cs=tinysrgb&w=600"
+    city: "https://images.pexels.com/photos/14840760/pexels-photo-14840760.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-city: "https://images.pexels.com/photos/19760097/pexels-photo-19760097.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-city: "https://images.pexels.com/photos/31223298/pexels-photo-31223298.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-country: "https://images.pexels.com/photos/28000463/pexels-photo-28000463.jpeg?auto=compress&cs=tinysrgb&w=600"
+    country: "https://images.pexels.com/photos/31887917/pexels-photo-31887917.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-country: "https://images.pexels.com/photos/11749468/pexels-photo-11749468.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-country: "https://images.pexels.com/photos/38345663/pexels-photo-38345663.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-continent: "https://images.pexels.com/photos/30596893/pexels-photo-30596893.jpeg?auto=compress&cs=tinysrgb&w=600"
+    continent: "https://images.pexels.com/photos/30596216/pexels-photo-30596216.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-continent: "https://images.pexels.com/photos/30596234/pexels-photo-30596234.jpeg?auto=compress&cs=tinysrgb&w=600"
+    eurasia-continent: "https://images.pexels.com/photos/30596313/pexels-photo-30596313.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-surface: "https://images.pexels.com/photos/30596223/pexels-photo-30596223.jpeg?auto=compress&cs=tinysrgb&w=600"
+    surface: "https://images.pexels.com/photos/30596214/pexels-photo-30596214.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-surface: "https://images.pexels.com/photos/30596242/pexels-photo-30596242.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-surface: "https://images.pexels.com/photos/30596300/pexels-photo-30596300.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-planet: "https://images.pexels.com/photos/20337602/pexels-photo-20337602.jpeg?auto=compress&cs=tinysrgb&w=600"
+    planet: "https://images.pexels.com/photos/12491524/pexels-photo-12491524.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-planet: "https://images.pexels.com/photos/20376408/pexels-photo-20376408.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-planet: "https://images.pexels.com/photos/12498784/pexels-photo-12498784.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-brown-dwarf: "https://images.pexels.com/photos/4327219/pexels-photo-4327219.jpeg?auto=compress&cs=tinysrgb&w=600"
+    brown-dwarf: "https://images.pexels.com/photos/5109666/pexels-photo-5109666.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-brown-dwarf: "https://images.pexels.com/photos/30004596/pexels-photo-30004596.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-brown-dwarf: "https://images.pexels.com/photos/30894655/pexels-photo-30894655.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star: "https://images.pexels.com/photos/33053394/pexels-photo-33053394.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star: "https://images.pexels.com/photos/87611/pexels-photo-87611.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star: "https://images.pexels.com/photos/29893783/pexels-photo-29893783.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star: "https://images.pexels.com/photos/35974401/pexels-photo-35974401.jpeg?auto=compress&cs=tinysrgb&w=600"
+    transition-a: "https://images.pexels.com/photos/32961169/pexels-photo-32961169.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star-system: "https://images.pexels.com/photos/7568783/pexels-photo-7568783.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star-system: "https://images.pexels.com/photos/36883418/pexels-photo-36883418.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star-system: "https://images.pexels.com/photos/7605840/pexels-photo-7605840.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star-system: "https://images.pexels.com/photos/12491599/pexels-photo-12491599.jpeg?auto=compress&cs=tinysrgb&w=600"
+    transition-b: "https://images.pexels.com/photos/19176514/pexels-photo-19176514.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-star-cluster: "https://images.pexels.com/photos/957010/pexels-photo-957010.jpeg?auto=compress&cs=tinysrgb&w=600"
+    star-cluster: "https://images.pexels.com/photos/18247114/pexels-photo-18247114.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-star-cluster: "https://images.pexels.com/photos/7736161/pexels-photo-7736161.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-star-cluster: "https://images.pexels.com/photos/17997896/pexels-photo-17997896.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-galaxy: "https://images.pexels.com/photos/32386811/pexels-photo-32386811.jpeg?auto=compress&cs=tinysrgb&w=600"
+    galaxy: "https://images.pexels.com/photos/17662490/pexels-photo-17662490.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-galaxy: "https://images.pexels.com/photos/17621401/pexels-photo-17621401.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-galaxy: "https://images.pexels.com/photos/17662489/pexels-photo-17662489.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-galaxy-cluster: "https://images.pexels.com/photos/17505897/pexels-photo-17505897.jpeg?auto=compress&cs=tinysrgb&w=600"
+    galaxy-cluster: "https://images.pexels.com/photos/31510914/pexels-photo-31510914.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-galaxy-cluster: "https://images.pexels.com/photos/18776875/pexels-photo-18776875.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-galaxy-cluster: "https://images.pexels.com/photos/19601165/pexels-photo-19601165.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-cosmic-structure: "https://images.pexels.com/photos/25752810/pexels-photo-25752810.jpeg?auto=compress&cs=tinysrgb&w=600"
+    cosmic-structure: "https://images.pexels.com/photos/37269536/pexels-photo-37269536.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-cosmic-structure: "https://images.pexels.com/photos/20881655/pexels-photo-20881655.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-cosmic-structure: "https://images.pexels.com/photos/38952613/pexels-photo-38952613.jpeg?auto=compress&cs=tinysrgb&w=600"
+    weak-universe: "https://images.pexels.com/photos/13402171/pexels-photo-13402171.jpeg?auto=compress&cs=tinysrgb&w=600"
+    universe: "https://images.pexels.com/photos/12491590/pexels-photo-12491590.jpeg?auto=compress&cs=tinysrgb&w=600"
+    strong-universe: "https://images.pexels.com/photos/957061/pexels-photo-957061.jpeg?auto=compress&cs=tinysrgb&w=600"
+    hyper-universe: "https://images.pexels.com/photos/7736087/pexels-photo-7736087.jpeg?auto=compress&cs=tinysrgb&w=600"
+    incomputable-number: "https://images.pexels.com/photos/9007758/pexels-photo-9007758.jpeg?auto=compress&cs=tinysrgb&w=600"
+    incomputable-expansion: "https://images.pexels.com/photos/12891172/pexels-photo-12891172.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-threshold: "https://images.pexels.com/photos/8347500/pexels-photo-8347500.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line3: "https://images.pexels.com/photos/6501743/pexels-photo-6501743.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line2: "https://images.pexels.com/photos/4663108/pexels-photo-4663108.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-line1: "https://images.pexels.com/photos/5029184/pexels-photo-5029184.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-low: "https://images.pexels.com/photos/29488854/pexels-photo-29488854.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-mid: "https://images.pexels.com/photos/29738253/pexels-photo-29738253.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-high: "https://images.pexels.com/photos/29474097/pexels-photo-29474097.jpeg?auto=compress&cs=tinysrgb&w=600"
+    beyond-sky-top: "https://images.pexels.com/photos/30004067/pexels-photo-30004067.jpeg?auto=compress&cs=tinysrgb&w=600"
+    unknown: "https://images.pexels.com/photos/3847486/pexels-photo-3847486.jpeg?auto=compress&cs=tinysrgb&w=600"
 
-  cat_by_parent:
-    # 由弱到强，题材跟着量级一路从生物走向太空再走向抽象
-    昆虫:           动物
-    凡人:           人物
-    爆砖:           石头
-    爆墙:           建筑
-    爆屋:           室内
-    爆楼:           城市
-    爆街:           中国城市
-    过渡区:         中国城市
-    爆城:           城市
-    爆国:           风景
-    爆大陆:         森林
-    爆地表:         海洋
-    爆行星:         太空
-    爆褐矮星:       烟花
-    爆恒星:         太空
-    "恒星 → 恒星系":   天空
-    恒星系级:       天空
-    "恒星系 → 星团":   天空
-    星团级:         太空
-    星系级:         天气
-    星系团级:       太空
-    宇宙结构级:     天空
-    宇宙级:         太空
-    论外级:         抽象艺术
-    兜底档:         纹理
-
+  # 图源不可达时的兜底（按顺序尝试），{slug} 会替换成档位标识
+  fallback:
+    - "https://picsum.photos/seed/{slug}/400/300"
   note: >-
-    两个源都支持 seed，同一档位永远拿到同一张图，不会每次刷新都变。
-    题材取自 cdn.devimg.cn 已开放的 82 项中文题材，按档位量级映射，
-    使底图内容跟档位语义一致（昆虫→动物、爆楼→城市、爆恒星→太空…）。
-    若图源不可达，卡片退化为纯色底，不会出现破图。
-    换图源只改 sources；换题材映射改 cat_by_slug / cat_by_parent；
-    关掉把 enabled 设为 false。
+    换图：改 images 里对应档位的 URL 即可，不透明度改 opacity，关掉设 enabled: false。
+    建议图源：Pexels / Unsplash / Wikimedia Commons 等允许热链的免费图库；
+    付费图库（Shutterstock、Getty、Adobe Stock、iStock）有防盗链，外链会显示不出来。
+    主图挂掉时 static/js/main.js 会自动切 fallback，
+    全部失败则摘掉底图退回纯色卡片，不会留破图。
 
 groups:
   - id: inherit

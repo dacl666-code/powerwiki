@@ -268,7 +268,7 @@ def render_page(title, body, desc=''):
     {meta}
     <title>{title} - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="{url('/static/css/style.css')}">
-    <script>document.documentElement.className += ' js';</script>
+    <script>{THEME_BOOTSTRAP}</script>
 </head>
 <body>
     <header class="site-header">
@@ -277,6 +277,11 @@ def render_page(title, body, desc=''):
             <nav class="main-nav">
 {nav_links_html()}
             </nav>
+            <button type="button" class="theme-toggle" id="theme-toggle"
+                    aria-label="切换深浅色主题" title="切换深浅色主题">
+                <span class="icon-sun" aria-hidden="true">☀</span>
+                <span class="icon-moon" aria-hidden="true">☾</span>
+            </button>
         </div>
     </header>
 
@@ -619,10 +624,9 @@ _BG_URLS = {}   # slug -> [主源 URL, 备源 URL, ...]
 def load_backgrounds(raw):
     """解析 categories.yaml 的 backgrounds 块。
 
-    图源全部走外链，不下载进仓库。占位符 {slug}/{w}/{h}/{cat} 在渲染时替换。
-    seed 取档位 slug，所以同一档位永远拿到同一张图；
-    cat 取题材，由 cat_by_slug → cat_by_parent → default_cat 三级查表得到，
-    让底图内容跟档位的量级语义对上（爆砖→石头、爆恒星→太空…）。
+    每档一张真实照片，URL 直接写在 images 里（外链，不下载进仓库），
+    按量级语义挑选：昆虫档就是昆虫微距、爆砖档就是砖墙、爆恒星档就是太阳表面。
+    图源挂掉时按顺序退到 fallback，再不行就摘掉底图退回纯色卡片。
     """
     global _BG_ENABLED, _BG_OPACITY, _BG_URLS
     _BG_ENABLED, _BG_OPACITY, _BG_URLS = False, 0.10, {}
@@ -631,14 +635,10 @@ def load_backgrounds(raw):
     cfg = raw.get('backgrounds') or {}
     if not cfg.get('enabled'):
         return
-    sources = [str(s).strip() for s in (cfg.get('sources') or []) if str(s).strip()]
-    if not sources:
+    images = cfg.get('images') or {}
+    if not images:
         return
-    try:
-        w = int(cfg.get('width') or 400)
-        h = int(cfg.get('height') or 300)
-    except (TypeError, ValueError):
-        w, h = 400, 300
+    fallback = [str(u) for u in (cfg.get('fallback') or []) if str(u).strip()]
     try:
         op = float(cfg.get('opacity'))
         if not 0 < op <= 1:
@@ -646,25 +646,13 @@ def load_backgrounds(raw):
     except (TypeError, ValueError):
         op = 0.10
 
-    by_slug = cfg.get('cat_by_slug') or {}
-    by_parent = cfg.get('cat_by_parent') or {}
-    default_cat = cfg.get('default_cat')
-
     _BG_ENABLED = True
     _BG_OPACITY = op
-    for cat in raw.get('items') or []:
-        slug = cat.get('slug')
-        if not slug:
+    for slug, url in images.items():
+        if not url:
             continue
-        topic = (by_slug.get(slug)
-                 or by_parent.get(cat.get('parent'))
-                 or default_cat)
-        if not topic:
-            continue
-        # 题材是中文，URL 里要 percent-encode
-        _BG_URLS[slug] = [
-            s.format(slug=slug, w=w, h=h, cat=quote(str(topic), safe=''))
-            for s in sources
+        _BG_URLS[slug] = [str(url)] + [
+            f.format(slug=slug) for f in fallback
         ]
 
 
@@ -673,6 +661,15 @@ def tier_bg_urls(cat):
     if not _BG_ENABLED:
         return []
     return _BG_URLS.get(cat.get('slug')) or []
+
+# 主题引导脚本：同步执行，在首屏渲染前定好 data-theme，避免深浅色切换时闪一下白屏。
+# 优先级：用户手动选择（localStorage）> 系统偏好（prefers-color-scheme）> 浅色。
+THEME_BOOTSTRAP = (
+    "document.documentElement.className += ' js';"
+    "try{var t=localStorage.getItem('pw-theme');"
+    "if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}"
+    "document.documentElement.setAttribute('data-theme',t);}catch(e){}"
+)
 
 # 量级体系表页：由 categories.yaml 直接生成，与首页「战力等级」同源同步
 TIERS_PAGE_SLUG = 'tiers'

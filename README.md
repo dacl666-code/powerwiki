@@ -176,67 +176,84 @@ Windows 上直接双击 `deploy.bat` 即可（内部调用的就是上面这套�
 旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 ·
 低维 · 微观等）已全部废弃，完整对照写在 `data/categories.yaml` 文件头注释里。
 
-### 档位卡片背景图
+### 档位卡片底图
 
-首页「战力等级」每个档位卡片都带一张底图，**全部走外链，仓库里不放任何图片文件**。
-底图内容**跟档位的量级语义挂钩**——不是随机图：昆虫档配动物、爆砖档配石头、
-爆楼档配城市、爆恒星档配太空、论天最上配赛博朋克，由弱到强形成一条视觉递进。
+首页「战力等级」92 个档位**每档一张真实照片**，按量级语义挑的：
 
-配置集中在 `data/categories.yaml` 顶部的 `backgrounds` 块：
+```
+昆虫 → 昆虫微距      爆砖 → 砖墙        爆楼 → 摩天楼        爆国 → 航拍乡野
+凡人 → 健身人像      爆墙 → 混凝土墙     爆街 → 城市街道       爆大陆 → 卫星地球
+爆屋 → 住宅外观      爆城 → 城市天际线    爆地表 → 太空看地球
+爆行星 → 木星        爆褐矮星 → 星空     爆恒星 → 太阳表面
+恒星系 → 太阳系      星团 → 星团        星系 → 螺旋星系
+星系团 → 星系团      宇宙结构 → 星云     宇宙 → 深空星野
+广义无限区 → 分形    论外级 → 抽象几何    兜底档 → 中性底纹
+```
+
+92 张互不重复，由弱到强形成一条视觉递进。**全部外链，仓库内不落地任何图片文件。**
+
+配置在 `data/categories.yaml` 的 `backgrounds` 块：
 
 ```yaml
 backgrounds:
   enabled: true
-  opacity: 0.10      # 底图不透明度，改这里即可
-  width: 400
-  height: 300
-  sources:
-    - "https://cdn.devimg.cn/photo/{w}/{h}?cat={cat}&seed={slug}"  # 主源，国内 CDN
-    - "https://picsum.photos/seed/{slug}/{w}/{h}"                  # 备源
-
-  default_cat: 纹理                 # 兜底题材
-  cat_by_slug:                      # 按档位精确指定（优先）
-    beyond-sky-top: 赛博朋克        # 论天最上
-    unknown: 纹理                   # 兜底档
-  cat_by_parent:                    # 按所属量级指定（其次）
-    昆虫:   动物
-    凡人:   人物
-    爆砖:   石头
-    爆楼:   城市
-    爆国:   风景
-    爆大陆: 森林
-    爆地表: 海洋
-    爆恒星: 太空
-    宇宙级: 太空
-    # ...
+  opacity: 0.10        # 底图不透明度
+  images:
+    insect:  "https://images.pexels.com/photos/35929043/pexels-photo-35929043.jpeg?auto=compress&cs=tinysrgb&w=600"
+    brick:   "https://images.pexels.com/photos/7104016/pexels-photo-7104016.jpeg?auto=compress&cs=tinysrgb&w=600"
+    # ... 92 档
+  fallback:
+    - "https://picsum.photos/seed/{slug}/400/300"
 ```
 
-占位符 `{slug}` `{w}` `{h}` `{cat}` 在构建时替换：
+**图源选择的两条硬规矩：**
 
-- **seed 取档位 slug** —— 同一档位永远是同一张图，刷新不会变，92 档互不重图；
-- **cat 取题材** —— 查表顺序 `cat_by_slug` → `cat_by_parent` → `default_cat`。
+1. **必须用允许热链的免费图库** —— Pexels、Unsplash、Wikimedia Commons、
+   Pixabay 等。付费图库（Shutterstock、Getty、iStock、Adobe Stock、
+   Dreamstime、Alamy）有防盗链，外链过去要么显示不出来要么带水印。
+2. **URL 要带尺寸参数** —— Pexels 用 `?w=600&cs=tinysrgb`，Unsplash 用
+   `?w=600&q=60&fm=jpg`。卡片只有 170×??px，拉原图纯属浪费流量。
 
-**题材必须是 `cdn.devimg.cn` 已开放的 82 项中文题材之一**，写错会返回
-`404 Category not found`。完整清单写在 `data/categories.yaml` 的
-`backgrounds` 注释里；想验证某个题材是否可用，直接请求一次看是否 404：
+找图的时候可以直接用图片搜索加域名限定，一次拿一批候选：
 
-```bash
-curl -i "https://cdn.devimg.cn/photo/400/300?cat=%E5%A4%AA%E7%A9%BA&seed=test"
-# 200 + 图片二进制 → 题材有效；404 + {"message":"Category not found: ..."} → 题材无效
+```
+site:pexels.com brick wall texture
+site:unsplash.com spiral galaxy
 ```
 
-容错逻辑（`static/js/main.js` 的 `tierBackgrounds`）：
+容错（`static/js/main.js` 的 `tierBackgrounds`）：主图写进内联 style，
+禁用 JS 也能显示；加载失败自动切 `fallback`；全挂了就摘掉 `has-bg`
+退回纯色卡片，**不会留破图**。
 
-1. 主源 URL 直接写进卡片的内联 style —— 即使 JS 被禁用也有底图；
-2. 加载失败自动换备源；
-3. 两个源都挂掉就摘掉 `has-bg`，卡片退回纯色底，**不会留破图**。
+实现要点：底图挂在 `.category-card::before` 上、只对这一层做半透明，
+文字保持实色——不能给卡片整体加 `opacity`，那会把文字一起拖淡。
+底图还压了一档饱和度（`filter: saturate(.8)`），再真实的照片也只做氛围底。
 
-选型理由：`cdn.devimg.cn`（图即）是国内部署的占位图 CDN（腾讯云 + COS + CDN），
-大陆访问快，免注册免 API Key，且是少数支持**中文题材**（82 项）的照片接口；
-`picsum.photos` 作境外备源。
+### 暗色模式
 
-换不透明度改 `opacity`；换图源只改 `sources`；换题材映射改
-`cat_by_slug` / `cat_by_parent`；关掉把 `enabled` 设为 `false`。都不需要动代码。
+顶栏右侧的 ☀ / ☾ 按钮切换，选择记在 `localStorage`；
+没手动选过时跟随系统的 `prefers-color-scheme`。
+
+实现上**只覆盖 `:root` 的 30 个语义变量**，下面 1400 行规则一行没动：
+
+```css
+html[data-theme="dark"] {
+    --surface: #161b22;
+    --text:    #e6edf3;
+    --primary: #4f9cf9;
+    --shadow-rgb: 0, 0, 0;   /* 阴影改黑 */
+    ...
+}
+```
+
+所以加新样式时**记得用变量、别写死颜色**，否则暗色下会露馅。
+阴影和主色的透明变体统一走 `rgba(var(--shadow-rgb), .05)` 这种写法。
+
+每页 `<head>` 有一段内联引导脚本，在首屏渲染前就把 `data-theme` 定好，
+避免深浅切换时闪一下白屏。
+
+暗色下档位底图会自动压暗降饱和（`brightness(.72) saturate(.7)`），
+否则亮照片在深色卡片上会发飘、抢文字。
 
 ### 加一个档位
 
