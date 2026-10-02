@@ -147,11 +147,23 @@ Windows 上直接双击 `deploy.bat` 即可（内部调用的就是上面这套�
 | 评级方法论 / 体系原文 | `data/pages/rules.md` |
 | 材质与破坏能量数据 | `data/pages/cosmology.md` |
 | 独立页面（新增、改名、调导航顺序） | `data/pages.yaml` |
-| 角色 | `data/characters.yaml` |
+| 角色（定级口径见下节） | `data/characters.yaml` |
 | 境界体系 | `data/realms.yaml` |
 | 站点样式 | `static/css/style.css` |
 
 改完重新构建，首页、体系表、各档详情页、搜索筛选器、全局导航全部同步更新。
+
+### 角色收录与定级口径
+
+角色写进 `data/characters.yaml`，`category` 填 `categories.yaml` 里已有的档位 slug。构建时角色会自动出现在三处，不需要再改别的地方：
+
+1. 角色图鉴 `/characters.html`
+2. 角色详情页 `/character/<slug>.html`
+3. **所属档位详情页的角色列表**（按 `series, name` 排序）——这就是「并入对应等级」的实现方式
+
+**定级口径：一律取该角色的最终 / 最高形态，不以中期表现为准。**
+
+定级依据来自仓库根目录的两份分析文档（`辰东三部曲战力与世界观综合分析.md`、`龙符世界观与战力综合分析.md`）。这两份文档的共同立场是**修辞不予升格**——「无限迭代」「超脱万物」这类描述按增长悖论判定为进行中的过程而非完成态，「如画中人」这类带「如」字的比较句按明喻处理。因此两位主角的定级都远低于作品宣传口径，这是按方法论得出的结果，不是保守估计。
 
 ### 改档流程
 
@@ -287,7 +299,7 @@ powerwiki/
 │   ├── pages/
 │   │   ├── rules.md       《战力量级体系》原文
 │   │   └── cosmology.md   材质与破坏能量数据库
-│   ├── characters.yaml    角色（尚未收录）
+│   ├── characters.yaml    角色图鉴（已收录 2 位）
 │   └── realms.yaml        境界体系（尚未收录）
 ├── static/
 │   ├── css/style.css      样式

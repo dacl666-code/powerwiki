@@ -268,6 +268,85 @@ console.log('\n[8] 暗色模式');
     ok('init 里调用了 bindThemeToggle', /bindThemeToggle\(\);/.test(js));
 }
 
+/* ---------------- 9. 角色与档位联动 ---------------- */
+console.log('\n[9] 角色收录与档位并入');
+{
+    const charsDir = path.join(ROOT, 'character');
+    const wrong_names = [];
+    const charFiles = fs.existsSync(charsDir)
+        ? fs.readdirSync(charsDir).filter(f => f.endsWith('.html')) : [];
+    ok('生成了角色详情页', charFiles.length >= 2, '实际 ' + charFiles.length);
+    ok('叶凡角色页存在', charFiles.includes('ye-fan.html'));
+    ok('古尘沙角色页存在', charFiles.includes('gu-chensha.html'));
+
+    // 角色必须并进所属档位：档位页要出现该角色，首页卡片计数要大于 0。
+    // 直接从 data/characters.yaml 读取映射，新增角色无需改测试。
+    const rawCharYaml = (() => {
+        try {
+            return fs.readFileSync(path.join(ROOT, 'data/characters.yaml'), 'utf-8');
+        } catch (e) { return ''; }
+    })();
+    const expectCat = {};
+    {
+        const blocks = rawCharYaml.split(/^- name:/m).slice(1);
+        for (const b of blocks) {
+            const slugM = b.match(/^\s+slug:\s*(\S+)/m);
+            const catM  = b.match(/^\s+category:\s*(\S+)/m);
+            const nameM = b.match(/^\s+name:\s*(\S+)/m);
+            const slug = slugM ? slugM[1] : null;
+            if (slug && catM) expectCat[slug] = catM[1];
+            else if (catM) wrong_names.push(nameM ? nameM[1] : '(无名)');
+        }
+    }
+    ok('解析到角色—档位映射', Object.keys(expectCat).length >= 2,
+       JSON.stringify(expectCat));
+
+    const wrong = [];
+    for (const [slug, cat] of Object.entries(expectCat)) {
+        // 档位 slug 必须是真实存在的档位
+        if (!fs.existsSync(path.join(ROOT, 'category', cat + '.html'))) {
+            wrong.push(slug + ' 挂在不存在于 categories.yaml 的档位 ' + cat);
+            continue;
+        }
+        const page = read('category/' + cat + '.html') || '';
+        if (!page.includes('/character/' + slug + '.html')) {
+            wrong.push(slug + ' 未出现在 ' + cat + ' 档位页');
+        }
+        const idx2 = read('index.html') || '';
+        const card = new RegExp(
+            'href="/powerwiki/category/' + cat + '\\.html"[^>]*>[\\s\\S]{0,400}?</a>', 'm');
+        const m = idx2.match(card);
+        if (m && /cat-count" data-empty/.test(m[0])) {
+            wrong.push(cat + ' 首页卡片计数仍为 0');
+        }
+    }
+    ok('两位主角已并入各自档位', wrong.length === 0, wrong.join(' | '));
+
+    const idxHtml3 = read('index.html') || '';
+    ok('首页角色统计已更新（非 0）', !/<b>0<\/b><span>角色<\/span>/.test(idxHtml3));
+    const charsPage = read('characters.html') || '';
+    ok('角色图鉴列出了角色', charsPage.includes('/character/ye-fan.html'));
+    ok('角色图鉴不再显示「暂无角色」', !charsPage.includes('角色图鉴正在整理中'));
+
+    // 角色数据挂在真实存在的档位上（构建期校验已拦，这里兜个底）
+    const cy = (() => {
+        try {
+            return fs.readFileSync(path.join(ROOT, 'data/characters.yaml'), 'utf-8');
+        } catch (e) { return ''; }
+    })();
+    // 每个角色的 category 都必须是 categories.yaml 里真实存在的档位 slug
+    ok('角色数据里写明了所属档位', /category:\s*\S+/.test(cy));
+    {
+        const catYaml = fs.readFileSync(path.join(ROOT, 'data/categories.yaml'), 'utf-8');
+        const valid = new Set((catYaml.match(/^\s+-?\s*slug:\s*(\S+)/gm) || [])
+            .map(m => m.split(/:\s*/)[1]));
+        const badCat = Object.entries(expectCat)
+            .filter(([, cat]) => !valid.has(cat)).map(([s2, c]) => s2 + '→' + c);
+        ok('角色档位均存在于档位体系', badCat.length === 0, badCat.join(', '));
+    }
+    ok('角色数据标注了最终形态口径', /最终形态|祭道之上|无不朽/.test(cy));
+}
+
 console.log('\n========================================');
 console.log(`结果：${pass} 通过 / ${fail} 失败（共 ${pass + fail}）`);
 if (fail) { console.log('\n失败项：'); fails.forEach(f => console.log('  - ' + f)); }

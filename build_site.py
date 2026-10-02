@@ -944,7 +944,10 @@ def build_character_detail(characters, categories, realms):
         cat_href = url(f"/category/{cat['slug']}.html") if cat else ''
         cat_tag = f'<a href="{cat_href}" class="tag">{cat["name"]}</a>' if cat else ''
         realm_href = url(f"/realm/{realm['slug']}.html") if realm else ''
-        realm_tag = f'<a href="{realm_href}" class="tag tag-realm">{realm["name"]}</a>' if realm else ''
+        # 境界名始终显示；只有在 realms.yaml 里定义过才生成境界页链接
+        realm_tag = (f'<a href="{realm_href}" class="tag tag-realm">{realm["name"]}</a>' if realm
+                     else (f'<span class="tag tag-realm">{html_escape(char["realm"])}</span>'
+                           if char.get('realm') else ''))
         series_tag = f'<span class="tag tag-series">{char["series"]}</span>' if char.get('series') else ''
 
         desc_html = render_markdown(char.get('description'))
