@@ -88,6 +88,31 @@ def render_markdown(text):
 
 
 # ---------------------- 页面骨架 ----------------------
+def nav_links_html():
+    """全局导航：固定入口 + data/pages.yaml 中的独立页面（改名后自动同步）。"""
+    items = [
+        (url('/index.html'), '首页'),
+        (url('/characters.html'), '角色图鉴'),
+        (url('/realm/index.html'), '境界体系'),
+    ]
+    for p in _PAGES:
+        items.append((url(f"/page/{p['slug']}.html"), p['title']))
+    items.append((url('/search.html'), '搜索'))
+    return '\n'.join(f'                <a href="{h}">{t}</a>' for h, t in items)
+
+
+def footer_nav_html():
+    items = [
+        (url('/index.html'), '首页'),
+        (url('/characters.html'), '角色图鉴'),
+        (url('/realm/index.html'), '境界体系'),
+    ]
+    for p in _PAGES:
+        items.append((url(f"/page/{p['slug']}.html"), p['title']))
+    items.append((url('/search.html'), '搜索'))
+    return '\n'.join(f'                <a href="{h}">{t}</a>' for h, t in items)
+
+
 def render_page(title, body, desc=''):
     meta = f'<meta name="description" content="{desc}">' if desc else ''
     return f'''<!DOCTYPE html>
@@ -104,8 +129,7 @@ def render_page(title, body, desc=''):
         <div class="container header-inner">
             <a href="{url('/index.html')}" class="logo">全作品战力评鉴所</a>
             <nav class="main-nav">
-                <a href="{url('/index.html')}">首页</a>
-                <a href="{url('/search.html')}">搜索</a>
+{nav_links_html()}
             </nav>
         </div>
     </header>
@@ -115,8 +139,14 @@ def render_page(title, body, desc=''):
     </main>
 
     <footer class="site-footer">
-        <div class="container">
-            <p>全作品战力评鉴所 · 静态资料站</p>
+        <div class="container footer-inner">
+            <div>
+                <p class="footer-brand">全作品战力评鉴所</p>
+                <p class="footer-note">跨作品角色战力量级评鉴 · 静态资料站</p>
+            </div>
+            <nav class="footer-nav">
+{footer_nav_html()}
+            </nav>
         </div>
     </footer>
 
@@ -156,9 +186,12 @@ def build_index(categories, realms, characters, pages):
 '''
 
     if pages:
+        # 区块标题：与 data/pages.yaml 中页面性质保持一致
+        # （当前收录《战力评级规则》与《材质与破坏能量数据库》）
         body += '''        <section class="panel">
             <div class="panel-header">
-                <h2>规则与世界观</h2>
+                <h2>规则与数据库</h2>
+                <span class="panel-note">评级方法论与换算参考</span>
             </div>
             <div class="page-list">
 '''
@@ -258,6 +291,9 @@ def category_name_for(char):
 
 
 _CAT_MAP = {}
+_CAT_ORDER = {}
+# 独立页面列表（供全局导航使用，改名后导航自动同步）
+_PAGES = []
 
 
 def build_categories(categories, characters):
@@ -794,7 +830,7 @@ def copy_static():
 
 
 def main():
-    global BASE, _CAT_MAP, _CAT_ORDER
+    global BASE, _CAT_MAP, _CAT_ORDER, _PAGES
     if '--base' in sys.argv:
         idx = sys.argv.index('--base')
         if idx + 1 < len(sys.argv):
@@ -807,6 +843,8 @@ def main():
     # 分类映射（slug -> name / sort_order），供卡片与搜索使用
     _CAT_MAP = {c['slug']: c['name'] for c in categories}
     _CAT_ORDER = {c['slug']: c.get('sort_order', 0) for c in categories}
+    # 供全局导航渲染（按 sort_order 排序）
+    _PAGES = sorted(pages, key=lambda x: x.get('sort_order', 0))
 
     print('=' * 55)
     print('生成静态站点（文件式，无后端）...')
