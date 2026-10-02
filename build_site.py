@@ -29,6 +29,7 @@ import sys
 import shutil
 import json
 import re
+from urllib.parse import quote
 import yaml
 import markdown
 from markdown.extensions.toc import slugify_unicode
@@ -618,11 +619,13 @@ _BG_URLS = {}   # slug -> [主源 URL, 备源 URL, ...]
 def load_backgrounds(raw):
     """解析 categories.yaml 的 backgrounds 块。
 
-    图源全部走外链，不下载进仓库。占位符 {slug}/{w}/{h} 在渲染时替换，
-    同一档位永远拿到同一张图（图源支持 seed，seed 取档位 slug）。
+    图源全部走外链，不下载进仓库。占位符 {slug}/{w}/{h}/{cat} 在渲染时替换。
+    seed 取档位 slug，所以同一档位永远拿到同一张图；
+    cat 取题材，由 cat_by_slug → cat_by_parent → default_cat 三级查表得到，
+    让底图内容跟档位的量级语义对上（爆砖→石头、爆恒星→太空…）。
     """
     global _BG_ENABLED, _BG_OPACITY, _BG_URLS
-    _BG_ENABLED, _BG_OPACITY, _BG_URLS = False, 0.15, {}
+    _BG_ENABLED, _BG_OPACITY, _BG_URLS = False, 0.10, {}
     if not isinstance(raw, dict):
         raw = {}
     cfg = raw.get('backgrounds') or {}
@@ -641,7 +644,11 @@ def load_backgrounds(raw):
         if not 0 < op <= 1:
             raise ValueError
     except (TypeError, ValueError):
-        op = 0.15
+        op = 0.10
+
+    by_slug = cfg.get('cat_by_slug') or {}
+    by_parent = cfg.get('cat_by_parent') or {}
+    default_cat = cfg.get('default_cat')
 
     _BG_ENABLED = True
     _BG_OPACITY = op
@@ -649,8 +656,15 @@ def load_backgrounds(raw):
         slug = cat.get('slug')
         if not slug:
             continue
+        topic = (by_slug.get(slug)
+                 or by_parent.get(cat.get('parent'))
+                 or default_cat)
+        if not topic:
+            continue
+        # 题材是中文，URL 里要 percent-encode
         _BG_URLS[slug] = [
-            s.format(slug=slug, w=w, h=h) for s in sources
+            s.format(slug=slug, w=w, h=h, cat=quote(str(topic), safe=''))
+            for s in sources
         ]
 
 

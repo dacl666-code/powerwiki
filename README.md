@@ -179,21 +179,51 @@ Windows 上直接双击 `deploy.bat` 即可（内部调用的就是上面这套�
 ### 档位卡片背景图
 
 首页「战力等级」每个档位卡片都带一张底图，**全部走外链，仓库里不放任何图片文件**。
+底图内容**跟档位的量级语义挂钩**——不是随机图：昆虫档配动物、爆砖档配石头、
+爆楼档配城市、爆恒星档配太空、论天最上配赛博朋克，由弱到强形成一条视觉递进。
+
 配置集中在 `data/categories.yaml` 顶部的 `backgrounds` 块：
 
 ```yaml
 backgrounds:
   enabled: true
-  opacity: 0.15      # 底图不透明度，改这里即可
+  opacity: 0.10      # 底图不透明度，改这里即可
   width: 400
   height: 300
   sources:
-    - "https://cdn.devimg.cn/photo/{w}/{h}?seed={slug}"   # 主源，国内 CDN
-    - "https://picsum.photos/seed/{slug}/{w}/{h}"         # 备源
+    - "https://cdn.devimg.cn/photo/{w}/{h}?cat={cat}&seed={slug}"  # 主源，国内 CDN
+    - "https://picsum.photos/seed/{slug}/{w}/{h}"                  # 备源
+
+  default_cat: 纹理                 # 兜底题材
+  cat_by_slug:                      # 按档位精确指定（优先）
+    beyond-sky-top: 赛博朋克        # 论天最上
+    unknown: 纹理                   # 兜底档
+  cat_by_parent:                    # 按所属量级指定（其次）
+    昆虫:   动物
+    凡人:   人物
+    爆砖:   石头
+    爆楼:   城市
+    爆国:   风景
+    爆大陆: 森林
+    爆地表: 海洋
+    爆恒星: 太空
+    宇宙级: 太空
+    # ...
 ```
 
-占位符 `{slug}` `{w}` `{h}` 在构建时替换。两个源都支持 seed，seed 取档位 slug，
-所以**同一档位永远是同一张图**，刷新不会变。
+占位符 `{slug}` `{w}` `{h}` `{cat}` 在构建时替换：
+
+- **seed 取档位 slug** —— 同一档位永远是同一张图，刷新不会变，92 档互不重图；
+- **cat 取题材** —— 查表顺序 `cat_by_slug` → `cat_by_parent` → `default_cat`。
+
+**题材必须是 `cdn.devimg.cn` 已开放的 82 项中文题材之一**，写错会返回
+`404 Category not found`。完整清单写在 `data/categories.yaml` 的
+`backgrounds` 注释里；想验证某个题材是否可用，直接请求一次看是否 404：
+
+```bash
+curl -i "https://cdn.devimg.cn/photo/400/300?cat=%E5%A4%AA%E7%A9%BA&seed=test"
+# 200 + 图片二进制 → 题材有效；404 + {"message":"Category not found: ..."} → 题材无效
+```
 
 容错逻辑（`static/js/main.js` 的 `tierBackgrounds`）：
 
@@ -202,8 +232,11 @@ backgrounds:
 3. 两个源都挂掉就摘掉 `has-bg`，卡片退回纯色底，**不会留破图**。
 
 选型理由：`cdn.devimg.cn`（图即）是国内部署的占位图 CDN（腾讯云 + COS + CDN），
-大陆访问快，免注册免 API Key，picsum 兼容写法；`picsum.photos` 作境外备源。
-换图源只改 `sources` 两行，不需要动代码；关掉把 `enabled` 设为 `false`。
+大陆访问快，免注册免 API Key，且是少数支持**中文题材**（82 项）的照片接口；
+`picsum.photos` 作境外备源。
+
+换不透明度改 `opacity`；换图源只改 `sources`；换题材映射改
+`cat_by_slug` / `cat_by_parent`；关掉把 `enabled` 设为 `false`。都不需要动代码。
 
 ### 加一个档位
 
@@ -231,7 +264,8 @@ powerwiki/
 ├── build_site.py          静态站点生成器（唯一构建入口）
 ├── deploy.bat             Windows 一键部署
 ├── data/
-│   ├── categories.yaml    战力量级体系表：分段 + 93 个档位  ← 站点核心数据
+│   ├── categories.yaml    战力量级体系表：分段 + 92 个档位  ← 站点核心数据
+│   │                      （91 档正式量级 + 1 个兜底档「未知/暂存」）
 │   ├── pages.yaml         独立页面清单
 │   ├── pages/
 │   │   ├── rules.md       《战力量级体系》原文
@@ -241,6 +275,8 @@ powerwiki/
 ├── static/
 │   ├── css/style.css      样式
 │   └── js/main.js         目录滚动高亮、阅读进度、返回按钮
+├── tests/
+│   └── ui.test.js         jsdom UI 回归测试（62 项断言）
 ├── dist/                  构建产物（.gitignore 忽略）
 ├── .site-manifest.json    产物清单，用于清理失效文件
 ├── index.html             以下为 --deploy-root 同步到根目录的产物
@@ -251,3 +287,14 @@ powerwiki/
 
 > 根目录的 HTML 是构建产物，不是源码。改内容请改 `data/` 与 `static/`，
 > 再跑一次构建，不要手改根目录的 HTML——下次构建会被覆盖。
+
+## 回归测试
+
+```bash
+npm i jsdom              # 只需一次
+node tests/ui.test.js
+```
+
+62 项断言，覆盖移动端阅读体验、体系表与首页战力等级的同步、兜底档语义、
+档位卡片背景图的题材映射与容错。改完样式或生成器跑一遍，
+能挡住「改了这里忘了那里」这类回归。

@@ -1,6 +1,10 @@
 # 构建产物（站点源码构建后输出，部署时由生成器写入根目录，不纳入版本管理）
 dist/
 
+# Node 依赖（tests/ 跑 jsdom 用）
+node_modules/
+package-lock.json
+
 # Python 缓存
 __pycache__/
 *.pyc

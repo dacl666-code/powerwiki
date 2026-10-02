@@ -35,18 +35,80 @@
 backgrounds:
   # 首页「战力等级」每个档位卡片的背景图（外链，不入库、不下载）
   enabled: true
-  opacity: 0.15          # 背景图不透明度，改这里即可
+  opacity: 0.10          # 背景图不透明度，改这里即可
   width: 400
   height: 300
-  # 按顺序探测，第一个能加载成功的就用它；全部失败则该卡片不显示背景（不会破图）
-  # 占位符：{slug} 档位标识  {w} 宽  {h} 高
+  # 占位符：{slug} 档位标识  {w} 宽  {h} 高  {cat} 题材（见下方映射）
   sources:
-    - "https://cdn.devimg.cn/photo/{w}/{h}?seed={slug}"   # 主源：国内 CDN（腾讯云+COS+CDN），大陆访问快
-    - "https://picsum.photos/seed/{slug}/{w}/{h}"         # 备源：境外，picsum 图库稳定
+    - "https://cdn.devimg.cn/photo/{w}/{h}?cat={cat}&seed={slug}"  # 主源：国内 CDN，按题材取图
+    - "https://picsum.photos/seed/{slug}/{w}/{h}"                  # 备源：境外，无题材但稳定
+
+  # ---- 题材映射：让底图跟档位的量级语义对上 ----
+  # 取值必须是 cdn.devimg.cn 已开放的 82 项中文题材之一，写错会返回 404。
+  # 有效题材（全量）：
+  #   商品：包包 电脑 电商主图 电子产品 耳机 服装 家电 键盘 礼物 美妆 母婴
+  #         手机 鼠标 数码产品 玩具 鞋子
+  #   餐饮：餐饮门店 咖啡 咖啡馆 美食 水果 甜品 饮料
+  #   内容：办公 办公桌 婚礼 健身 人物 书籍 新闻 学校 运动
+  #   出行：城市 飞机 风景 火车 酒店 露营 旅行 轮船 摩托 汽车 无人机
+  #         中国城市 自行车
+  #   垂直：宠物 电竞 动漫 动物 古建筑 家具 建筑 商务 室内 医院 游戏
+  #   装饰：3DRender 玻璃 抽象艺术 国风 海洋 极简 节日 金属 科技 木纹
+  #         赛博朋克 森林 石头 水彩 太空 天空 天气 纹理 像素风 烟花
+  #         植物 植物盆栽 纸张 AI插画 CG LowPoly
+  #
+  # 查找顺序：cat_by_slug（按档位精确指定）→ cat_by_parent（按所属量级）→ default_cat
+  default_cat: 纹理
+
+  cat_by_slug:
+    # 论外级单独指定，体现「超出体系」的递进
+    beyond-threshold: 抽象艺术        # 论外门槛
+    beyond-line3:     抽象艺术        # 三线
+    beyond-line2:     抽象艺术        # 二线
+    beyond-line1:     抽象艺术        # 一线
+    beyond-sky-low:   赛博朋克        # 论天下
+    beyond-sky-mid:   赛博朋克        # 论天中
+    beyond-sky-high:  赛博朋克        # 论天上
+    beyond-sky-top:   赛博朋克        # 论天最上
+    incomputable-number:    像素风    # 不可计算数
+    incomputable-expansion: 3DRender  # 不可计算扩张率
+    unknown:          纹理            # 兜底档，中性底纹
+
+  cat_by_parent:
+    # 由弱到强，题材跟着量级一路从生物走向太空再走向抽象
+    昆虫:           动物
+    凡人:           人物
+    爆砖:           石头
+    爆墙:           建筑
+    爆屋:           室内
+    爆楼:           城市
+    爆街:           中国城市
+    过渡区:         中国城市
+    爆城:           城市
+    爆国:           风景
+    爆大陆:         森林
+    爆地表:         海洋
+    爆行星:         太空
+    爆褐矮星:       烟花
+    爆恒星:         太空
+    "恒星 → 恒星系":   天空
+    恒星系级:       天空
+    "恒星系 → 星团":   天空
+    星团级:         太空
+    星系级:         天气
+    星系团级:       太空
+    宇宙结构级:     天空
+    宇宙级:         太空
+    论外级:         抽象艺术
+    兜底档:         纹理
+
   note: >-
     两个源都支持 seed，同一档位永远拿到同一张图，不会每次刷新都变。
-    若两个源都不可达，卡片退化为纯色底——15% 不透明度下几乎看不出差别，不会出现破图。
-    换图源只改本块的 sources；关掉把 enabled 设为 false。
+    题材取自 cdn.devimg.cn 已开放的 82 项中文题材，按档位量级映射，
+    使底图内容跟档位语义一致（昆虫→动物、爆楼→城市、爆恒星→太空…）。
+    若图源不可达，卡片退化为纯色底，不会出现破图。
+    换图源只改 sources；换题材映射改 cat_by_slug / cat_by_parent；
+    关掉把 enabled 设为 false。
 
 groups:
   - id: inherit
