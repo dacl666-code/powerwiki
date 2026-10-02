@@ -112,7 +112,8 @@
             else list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'zh'));
 
             resultsEl.innerHTML = list.map(c => {
-                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">' : '<div class="no-image">暂无图片</div>';
+                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">'
+                                    : '<div class="no-image">暂无图片</div>';
                 return '<a href="' + BASE + '/character/' + c.id + '.html" class="character-card">' +
                     '<div class="char-image">' + img + '</div>' +
                     '<div class="char-info"><h3>' + esc(c.name) + '</h3>' +
