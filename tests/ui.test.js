@@ -251,7 +251,7 @@ console.log('\n[8] 暗色模式');
         /html\[data-theme="dark"\][\s\S]{0,1200}--shadow-rgb:\s*0, 0, 0/.test(css));
     ok('暗色块声明了 color-scheme: dark', /html\[data-theme="dark"\][\s\S]*?color-scheme:\s*dark/.test(css));
     ok('CSS 含主题切换按钮样式', /\.theme-toggle\s*\{/.test(css));
-    ok('暗色下压暗了档位底图', /data-theme="dark"\][\s\S]{0,200}category-card::before/.test(css));
+    ok('暗色模式不另行压暗档位底图', !/html\[data-theme="dark"\]\s*\.category-card::before/.test(css));
 
     const idxHtml2 = read('index.html') || '';
     ok('每页有主题切换按钮 #theme-toggle', idxHtml2.includes('id="theme-toggle"'));
@@ -268,15 +268,15 @@ console.log('\n[8] 暗色模式');
     ok('init 里调用了 bindThemeToggle', /bindThemeToggle\(\);/.test(js));
 }
 
-/* ---------------- 9. 角色与档位联动 ---------------- */
-console.log('\n[9] 角色收录与档位并入');
+/* ---------------- 9. 角色收录与主题可读性 ---------------- */
+console.log('\n[9] 角色收录、图片与主题对比度');
 {
     const charsDir = path.join(ROOT, 'character');
     const wrong_names = [];
     const charFiles = fs.existsSync(charsDir)
         ? fs.readdirSync(charsDir).filter(f => f.endsWith('.html')) : [];
-    ok('生成了角色详情页', charFiles.length >= 2, '实际 ' + charFiles.length);
-    ok('叶凡角色页存在', charFiles.includes('ye-fan.html'));
+    ok('角色详情页数量符合当前数据', charFiles.length === 1, '实际 ' + charFiles.length);
+    ok('叶凡角色页已移除', !charFiles.includes('ye-fan.html'));
     ok('古尘沙角色页存在', charFiles.includes('gu-chensha.html'));
 
     // 角色必须并进所属档位：档位页要出现该角色，首页卡片计数要大于 0。
@@ -298,7 +298,7 @@ console.log('\n[9] 角色收录与档位并入');
             else if (catM) wrong_names.push(nameM ? nameM[1] : '(无名)');
         }
     }
-    ok('解析到角色—档位映射', Object.keys(expectCat).length >= 2,
+    ok('解析到保留角色—档位映射', Object.keys(expectCat).length === 1,
        JSON.stringify(expectCat));
 
     const wrong = [];
@@ -320,12 +320,15 @@ console.log('\n[9] 角色收录与档位并入');
             wrong.push(cat + ' 首页卡片计数仍为 0');
         }
     }
-    ok('两位主角已并入各自档位', wrong.length === 0, wrong.join(' | '));
+    ok('保留角色已并入所属档位', wrong.length === 0, wrong.join(' | '));
 
     const idxHtml3 = read('index.html') || '';
     ok('首页角色统计已更新（非 0）', !/<b>0<\/b><span>角色<\/span>/.test(idxHtml3));
     const charsPage = read('characters.html') || '';
-    ok('角色图鉴列出了角色', charsPage.includes('/character/ye-fan.html'));
+    ok('角色图鉴列出古尘沙', charsPage.includes('/character/gu-chensha.html'));
+    ok('角色图鉴不含已移除的叶凡', !charsPage.includes('ye-fan') && !charsPage.includes('叶凡'));
+    ok('首页/搜索/档位页已移除叶凡卡片',
+       !/ye-fan|叶凡/.test((read('index.html') || '') + (read('search.html') || '') + (read('category/incomputable-expansion.html') || '')));
     ok('角色图鉴不再显示「暂无角色」', !charsPage.includes('角色图鉴正在整理中'));
 
     // 角色数据挂在真实存在的档位上（构建期校验已拦，这里兜个底）
@@ -346,13 +349,52 @@ console.log('\n[9] 角色收录与档位并入');
     }
     ok('角色数据标注了最终形态口径', /最终形态|祭道之上|无不朽/.test(cy));
 
-    // 暗色模式：避免浅色斑马纹底与浅色文字撞色；未归档斜纹也必须跟主题走
+    // 明暗主题：避免硬编码白底/浅字、斜纹重叠与低对比文字
     const visualCss = cssNoComments();
     ok('表格斑马纹使用主题底色（暗色模式保持对比）',
        /\.markdown-content tbody tr:nth-child\(even\)\s*\{[^}]*background:\s*var\(--surface-2\)/.test(visualCss));
+    ok('量级表兜底行不再写死白底',
+       /#tier-unknown\s*\{[^}]*background:\s*var\(--surface-2\)/.test(visualCss));
+    ok('交互态不再写死浅色 hover 背景', !/#dbe8f8|#fbfcfe|#fafcfe/i.test(visualCss));
+    ok('搜索框输入/占位文字使用主题色',
+       /\.search-form input\s*\{[^}]*color:\s*var\(--text\)/.test(visualCss) &&
+       /\.search-form input::placeholder\s*\{[^}]*color:\s*var\(--text-3\)/.test(visualCss));
+    ok('档位图在暗色与悬停状态都保持 10% 透明度',
+       !/data-theme=\"dark\"]\s*\.category-card\.has-bg::before\s*\{[^}]*opacity/.test(visualCss) &&
+       !/\.category-card\.has-bg:hover::before\s*\{[^}]*opacity/.test(visualCss));
+    ok('暗色模式不整体降低内容图片透明度',
+       !/html\[data-theme=\"dark\"\]\s+img\s*\{[^}]*opacity/.test(visualCss));
     const unfiledCss = (visualCss.match(/\.tier-group#group-unfiled\s*\{[^}]*\}/) || [''])[0];
-    ok('未归档斜纹使用主题色、不再写死浅白色',
-       unfiledCss.includes('var(--surface-2)') && unfiledCss.includes('var(--surface-3)') && !/#f7f9fc/i.test(unfiledCss));
+    ok('未归档区移除斜纹并使用主题实底/虚线边框',
+       unfiledCss.includes('background: var(--surface-2)') &&
+       unfiledCss.includes('border-style: dashed') && !unfiledCss.includes('repeating-linear-gradient'));
+
+    // 三档文字颜色在明暗模式的常用表面上都达到至少 4.5:1 对比度
+    const rootBlock = (visualCss.match(/:root\s*\{([^}]*)\}/) || ['', ''])[1];
+    const darkBlock = (visualCss.match(/html\[data-theme=\"dark\"\]\s*\{([^}]*)\}/) || ['', ''])[1];
+    function cssHex(block, key) {
+        const m = block.match(new RegExp('--' + key + ':\\s*(#[0-9a-f]{6})', 'i'));
+        return m ? m[1] : null;
+    }
+    function luminance(hex) {
+        const rgb = [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255)
+            .map(c => c <= .04045 ? c / 12.92 : Math.pow((c + .055) / 1.055, 2.4));
+        return .2126 * rgb[0] + .7152 * rgb[1] + .0722 * rgb[2];
+    }
+    function contrast(a, b) {
+        const vals = [luminance(a), luminance(b)].sort((x, y) => y - x);
+        return (vals[0] + .05) / (vals[1] + .05);
+    }
+    function minTextContrast(block) {
+        const texts = ['text', 'text-2', 'text-3'].map(k => cssHex(block, k));
+        const bgs = ['bg', 'bg-grad-a', 'bg-grad-b', 'surface', 'surface-2', 'surface-3'].map(k => cssHex(block, k));
+        if (texts.some(v => !v) || bgs.some(v => !v)) return 0;
+        return Math.min(...texts.flatMap(t => bgs.map(b => contrast(t, b))));
+    }
+    const lightContrast = minTextContrast(rootBlock);
+    const darkContrast = minTextContrast(darkBlock);
+    ok('浅色主题核心文字对比度 ≥ 4.5:1', lightContrast >= 4.5, lightContrast.toFixed(2));
+    ok('暗色主题核心文字对比度 ≥ 4.5:1', darkContrast >= 4.5, darkContrast.toFixed(2));
 
     // 人物图片：约束 object-fit 防止变形，并使用外链图及可追溯来源
     ok('角色图鉴图片有 object-fit: cover',
@@ -361,7 +403,7 @@ console.log('\n[9] 角色收录与档位并入');
        /\.detail-image img\s*\{[^}]*object-fit:\s*contain/.test(visualCss));
     ok('详情页标题/别名/标签竖向排布',
        /\.detail-meta\s*\{[^}]*flex-direction:\s*column/.test(visualCss));
-    for (const [slug, label] of [['ye-fan', '叶凡'], ['gu-chensha', '古尘沙']]) {
+    for (const [slug, label] of [['gu-chensha', '古尘沙']]) {
         const page = read('character/' + slug + '.html') || '';
         ok(label + '详情页已显示外链人物图', /<img[^>]+src="https?:\/\//.test(page));
         ok(label + '详情页图片注明并链接图源', /class="img-note"[^>]*>[\s\S]*?href="https?:\/\//.test(page));

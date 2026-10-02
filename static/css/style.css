@@ -17,7 +17,8 @@
 
     --text:          #16202f;
     --text-2:        #525e72;
-    --text-3:        #8a96a8;
+    /* tertiary labels remain readable on the light surface palette */
+    --text-3:        #58677c;
 
     --primary:       #1f5fae;
     --primary-dark:  #16467f;
@@ -242,14 +243,14 @@ img { max-width: 100%; display: block; }
     padding: 12px 18px;
     font-size: 15px;
     font-family: inherit;
-    color: #1a2230;
+    color: var(--text);
     background: var(--glass);
     border: 1px solid transparent;
     border-radius: 999px;
     outline: none;
     transition: box-shadow .2s, transform .2s;
 }
-.search-form input::placeholder { color: #9aa6b6; }
+.search-form input::placeholder { color: var(--text-3); }
 .search-form input:focus {
     box-shadow: 0 0 0 4px rgba(255, 255, 255, .35);
     transform: translateY(-1px);
@@ -355,7 +356,7 @@ img { max-width: 100%; display: block; }
     transition: background .15s, transform .15s, box-shadow .15s, border-color .15s;
 }
 .page-tag:hover {
-    background: #dbe8f8;
+    background: var(--primary-soft);
     border-color: var(--primary);
     transform: translateY(-2px);
     box-shadow: var(--shadow);
@@ -424,15 +425,11 @@ img { max-width: 100%; display: block; }
     border-radius: var(--radius);
 }
 
-/* 未归档分段用低对比度斜纹提示「不属于体系」；两种颜色都走主题变量，暗色模式不再出现刺眼白条 */
+/* 未归档分段用实底 + 虚线边框标识；去掉斜纹，避免与兜底档卡片/背景图叠在一起 */
 .tier-group#group-unfiled {
-    background: repeating-linear-gradient(
-        -45deg,
-        var(--surface-2),
-        var(--surface-2) 12px,
-        var(--surface-3) 12px,
-        var(--surface-3) 24px
-    );
+    background: var(--surface-2);
+    border-style: dashed;
+    border-color: var(--border-strong);
 }
 
 .tier-group-head {
@@ -471,7 +468,7 @@ img { max-width: 100%; display: block; }
     transition: background .15s, border-color .15s;
 }
 .tier-group-link:hover {
-    background: #dbe8f8;
+    background: var(--primary-soft);
     border-color: var(--primary);
     text-decoration: none;
 }
@@ -560,7 +557,7 @@ img { max-width: 100%; display: block; }
 .tier-src.muted { color: var(--text-3); border-bottom: none; }
 
 /* 未归档两档在表格里弱化显示 */
-.tier-table tbody tr#tier-unknown { background: #fbfcfe; }
+.tier-table tbody tr#tier-unknown { background: var(--surface-2); }
 
 /* ---------------------------- 档位详情页 ---------------------------- */
 .tier-meta {
@@ -692,8 +689,6 @@ a.tier-nav-item:hover {
 .category-card.has-bg::before { opacity: var(--tier-bg-opacity, .1); }
 /* 底图压一档饱和度：再真实的照片也只做氛围底，不跟标题文字抢注意力 */
 .category-card.has-bg::before { filter: saturate(.8); }
-/* 悬停时底图略微加深，作为可点击的反馈（幅度很小，不影响阅读） */
-.category-card.has-bg:hover::before { opacity: calc(var(--tier-bg-opacity, .15) * 1.8); }
 @media (prefers-reduced-motion: reduce) {
     .category-card::before { transition: none; }
 }
@@ -892,7 +887,7 @@ a.tier-nav-item:hover {
     transition: background .15s, border-color .15s, transform .15s, color .15s;
 }
 .back-btn:hover {
-    background: #dbe8f8;
+    background: var(--primary-soft);
     border-color: var(--primary);
     color: var(--primary-dark);
     text-decoration: none;
@@ -1323,7 +1318,7 @@ html {
 .fab--back:hover { color: var(--on-primary); background: var(--primary-dark); border-color: var(--primary-dark); }
 /* 主按钮上显示阅读百分比，长文档里能看出看到哪了 */
 .fab--top { flex-direction: column; gap: 1px; padding: 0 10px; }
-.fab--top .fab-pct { font-size: 10px; font-weight: 600; opacity: .6; font-variant-numeric: tabular-nums; }
+.fab--top .fab-pct { font-size: 10px; font-weight: 600; opacity: 1; color: var(--text-2); font-variant-numeric: tabular-nums; }
 
 /* ---------------------------- 目录抽屉（移动端） ---------------------------- */
 .toc-backdrop {
@@ -1558,7 +1553,7 @@ html[data-theme="dark"] {
 
     --text:          #e6edf3;
     --text-2:        #a9b6c4;
-    --text-3:        #7d8b9c;
+    --text-3:        #8c9aaa;
 
     --primary:       #4f9cf9;
     --primary-dark:  #6fb0ff;
@@ -1592,23 +1587,11 @@ html[data-theme="dark"] {
     color-scheme: dark;
 }
 
-/* 暗色下底图要压暗降饱和，否则亮照片在深卡片上会发飘、抢文字 */
-html[data-theme="dark"] .category-card::before {
-    filter: saturate(.7) brightness(.72);
-}
-html[data-theme="dark"] .category-card.has-bg::before {
-    opacity: calc(var(--tier-bg-opacity, .1) * 1.25);
-}
-/* 暗色下代码块与表格斑马纹跟着变深 */
+/* 暗色下代码块沿用主题表面色；表格斑马纹直接用 surface token */
 html[data-theme="dark"] .markdown-content code {
     background: var(--surface-2);
     border-color: var(--border);
 }
-html[data-theme="dark"] img { opacity: .92; }
-html[data-theme="dark"] img:hover { opacity: 1; }
-/* 人物图不是弱化背景图，暗色模式也保持原色 */
-html[data-theme="dark"] .char-image img,
-html[data-theme="dark"] .detail-image img { opacity: 1; }
 
 /* ---------------------------- 主题切换按钮 ---------------------------- */
 .theme-toggle {
