@@ -1,0 +1,11 @@
+# 独立页面：规则 / 世界观
+# 正文优先读取 content_file 指向的 data/pages/*.md（便于自行维护与上传）；
+# 也可直接写内联 content（YAML 块标量 |）。二者都有时以 content_file 为准。
+- slug: rules
+  title: 战力评级规则
+  sort_order: 1
+  content_file: pages/rules.md
+- slug: cosmology
+  title: 宇宙学/世界观
+  sort_order: 2
+  content_file: pages/cosmology.md
