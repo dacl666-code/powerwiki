@@ -709,8 +709,7 @@ def build_tiers_page(categories, characters):
                     共 <b>{len(power_categories)}</b> 个量级档位，由弱到强排列。本表与
                     <a href="{rules_href}">《战力评级规则》</a> 的战力量级体系表一一对应：
                     档位名取自 1.3 量级表与第三、四部分的定级口径，能量区间与覆盖尺度照抄原文。
-                    改档位只需编辑 <code>data/categories.yaml</code>，首页战力等级、本表、
-                    各档详情页与搜索筛选器会同步更新。
+                    每档右侧「规则原文」可跳到《战力评级规则》的对应小节。
                 </p>
 '''
     for seg in iter_segments(power_categories):
@@ -767,19 +766,20 @@ def build_tiers_page(categories, characters):
     body += f'''
         <section class="panel">
             <div class="panel-header">
-                <h2>口径与维护</h2>
+                <h2>阅读口径</h2>
             </div>
             <div class="markdown-content">
                 <ul>
-                    <li><b>排序</b>：<code>sort_order</code> 由弱到强，间隔 10，便于后续插档；首页与本表共用同一顺序。</li>
-                    <li><b>分段</b>：<code>group</code> 对应体系分段，按档位在轴上首次出现的位置切分，因此过渡带 A / B 各自落在真实位置，不会被归拢打乱强弱顺序。</li>
-                    <li><b>兜底档</b>：末尾「未知/暂存」是体系之外的兜底档位，不属于任何体系分段，不参与强弱排序。
-                        两种情况都先放这里：<b>未知</b>——信息不足、连区间都圈不出来；
-                        <b>暂存</b>——区间已可圈定、只差坐实（若证明高估则下调至对应正式档）。
-                        二者处理动作一致：先放着，补齐材料后转出正式档，不要长期滞留。
-                    </li>
-                    <li><b>旧档归位</b>：旧框架的汪吧/维基式档位（弱单体 · 多元 · 高阶多元 · 无限盒子系列 · 指数塔系列 · 低维 · 微观等）已全部废弃，对照关系写在 <code>data/categories.yaml</code> 文件头注释里。挂在废弃档上的角色须改挂新档。</li>
-                    <li><b>改档流程</b>：编辑 <code>data/categories.yaml</code> → 重新构建 → 首页、本表、各档详情页、搜索筛选器同步更新。</li>
+                    <li><b>排序</b>：由弱到强，首页与本表共用同一顺序。</li>
+                    <li><b>分段</b>：对应《战力评级规则》的体系分段，按档位在能量轴上的真实位置切分。
+                        因此过渡带 A / B 各自单列，不与相邻量级归拢，避免打乱强弱顺序；
+                        同一分段被过渡带隔开时会标注（1/2）、（2/2）。</li>
+                    <li><b>能量与尺度</b>：能量区间为焦耳，覆盖尺度给出该档的典型参照物；
+                        论外级已不在能量轴上，改按规模与结构标注。</li>
+                    <li><b>兜底档</b>：末尾「未知/暂存」不属于任何体系分段，不参与强弱排序。
+                        <b>未知</b>——信息不足、连区间都圈不出来；
+                        <b>暂存</b>——区间已可圈定、只差坐实（若证明高估则下调至对应正式档）。</li>
+                    <li><b>规则原文</b>：每档末列可跳转到《战力评级规则》中定级该档的小节。</li>
                 </ul>
             </div>
         </section>
@@ -813,7 +813,7 @@ def build_characters_index(characters, power_categories=None):
                 </a>
 ''')
 
-    grid_inner = ''.join(cards) if cards else '            <div class="empty-state"><div class="empty-icon">◇</div><h3>暂无角色</h3><p>还没有收录任何角色，去 data/characters.yaml 添加吧。</p></div>\n'
+    grid_inner = ''.join(cards) if cards else '            <div class="empty-state"><div class="empty-icon">◇</div><h3>暂无角色</h3><p>角色图鉴正在整理中，尚未收录条目。</p></div>\n'
 
     body = f'''    <div class="container">
         <div class="breadcrumb">
@@ -926,7 +926,7 @@ def build_realm_index(realms, characters):
         </section>
 '''
     if not groups:
-        body += '''        <div class="empty-state"><div class="empty-icon">◇</div><h3>暂无境界体系</h3><p>还没有收录任何作品境界。可在 data/realms.yaml 为各作品建立境界阶梯（如修真 / 龙珠 / 一拳超人等），此处将自动按作品分组展示。</p></div>
+        body += '''        <div class="empty-state"><div class="empty-icon">◇</div><h3>暂无境界体系</h3><p>尚未收录任何作品的境界体系。境界阶梯按作品分组展示，便于跨作品对照与量级分析。</p></div>
 '''
     else:
         for i, (sname, rs) in enumerate(groups.items()):
@@ -1107,7 +1107,7 @@ def build_search(characters, categories, realms):
         })
     index_json = json.dumps(index_data, ensure_ascii=False)
     base = BASE
-    no_result_text = '暂无角色数据，去 data/characters.yaml 添加后重新生成即可' if not characters else '没有匹配的角色，试试放宽条件'
+    no_result_text = '暂无角色数据，稍后会陆续补充' if not characters else '没有匹配的角色，试试放宽条件'
 
     body = f'''    <div class="container">
         <div class="breadcrumb">
