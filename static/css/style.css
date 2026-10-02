@@ -600,38 +600,6 @@ a.tier-nav-item:hover {
 .tier-nav-name { font-size: 14px; font-weight: 600; color: var(--text); }
 .tier-nav-item.is-edge .tier-nav-name { color: var(--text-3); }
 
-/* ---------------------------- 窄屏适配 ---------------------------- */
-@media (max-width: 860px) {
-    .tier-table { font-size: 12.5px; }
-    .tier-table thead { display: none; }
-    .tier-table tbody tr {
-        display: block;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-strong);
-    }
-    .tier-table tbody td {
-        display: flex;
-        gap: 10px;
-        width: auto !important;
-        padding: 3px 0;
-        border-bottom: none;
-        text-align: left !important;
-    }
-    .tier-table tbody td::before {
-        content: attr(class);
-        flex-shrink: 0;
-        width: 62px;
-        font-size: 11.5px;
-        color: var(--text-3);
-    }
-    .tier-group { padding: 14px 12px 16px; }
-}
-
-@media (max-width: 560px) {
-    .tier-group-head { gap: 6px 8px; }
-    .tier-group-link { margin-left: auto; }
-}
-
 /* ---------------------------- 分类网格 ---------------------------- */
 .category-grid {
     display: grid;
@@ -1105,37 +1073,6 @@ a.tier-nav-item:hover {
 .footer-nav a:hover { color: var(--primary); }
 
 /* ---------------------------- 响应式 ---------------------------- */
-@media (max-width: 1080px) {
-    .doc-layout { grid-template-columns: 1fr; gap: 0; }
-    .doc-toc {
-        position: static;
-        max-height: none;
-        overflow: visible;
-        border-left: none;
-        border-top: 1px solid var(--border);
-        padding-left: 0;
-        padding-top: 18px;
-        margin-top: 10px;
-        order: -1;
-    }
-    .doc-toc.collapsed .doc-toc-body { display: none; }
-    .doc-toc:not(.collapsed) .doc-toc-body { display: block; }
-    .doc-toc-title {
-        cursor: pointer;
-        user-select: none;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        color: var(--text-2);
-    }
-    .doc-toc-title::after {
-        content: "▾";
-        font-size: 11px;
-        transition: transform .2s;
-    }
-    .doc-toc.collapsed .doc-toc-title::after { transform: rotate(-90deg); }
-}
-
 @media (max-width: 860px) {
     .container { padding: 0 18px; }
     .hero { padding: 42px 24px 36px; }
@@ -1157,4 +1094,312 @@ a.tier-nav-item:hover {
     .category-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
     .character-grid { grid-template-columns: repeat(auto-fill, minmax(152px, 1fr)); }
     .footer-inner { flex-direction: column; gap: 16px; }
+}
+
+
+/* ==========================================================================
+   移动端 / 阅读体验修复
+   1) 顶栏压缩 + 导航横向滚动（原：6 个链接换行成 3 行，吸顶吃掉小半屏）
+   2) 锚点跳转避开吸顶栏（scroll-padding-top 由 JS 写入 --header-h）
+   3) 阅读进度条 + 悬浮返回 / 顶部 / 目录
+   4) 移动端目录改为底部抽屉（原：目录在正文上方，下滑即消失）
+   5) 宽表格横向滚动容器
+   ========================================================================== */
+
+html {
+    scroll-behavior: smooth;
+    /* 由 main.js 按实际顶栏高度覆盖，这里给个保守兜底。
+       注意：不要给 html/body 加 overflow-x:hidden —— 那会让顶栏的 position:sticky 失效。
+       横向溢出改由 .table-wrap 这类局部滚动容器处理。 */
+    scroll-padding-top: 96px;
+}
+
+/* 锚点目标统一留出吸顶栏的空间，避免跳转后标题被压在顶栏下面 */
+[id] { scroll-margin-top: calc(var(--header-h, 96px) + 14px); }
+
+/* ---------------------------- 阅读进度条 ---------------------------- */
+.read-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    z-index: 200;
+    pointer-events: none;
+    background: transparent;
+}
+.read-progress > i {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+    border-radius: 0 3px 3px 0;
+    transition: width .08s linear;
+}
+
+/* ---------------------------- 悬浮操作区 ---------------------------- */
+.fab-stack {
+    position: fixed;
+    right: 14px;
+    bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+    z-index: 150;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.fab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    height: 48px;
+    padding: 0 14px;
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-2);
+    background: rgba(255, 255, 255, .95);
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    box-shadow: 0 4px 16px rgba(16, 24, 40, .16);
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    -webkit-tap-highlight-color: transparent;
+    transition: opacity .2s, transform .2s, color .15s, border-color .15s, background .15s;
+}
+.fab:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: #fff;
+    text-decoration: none;
+}
+.fab:active { transform: scale(.93); }
+.fab.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(12px) scale(.9);
+}
+/* 返回用主色，和「顶部 / 目录」区分开 */
+.fab--back {
+    color: #fff;
+    background: var(--primary);
+    border-color: var(--primary);
+}
+.fab--back:hover { color: #fff; background: var(--primary-dark); border-color: var(--primary-dark); }
+/* 主按钮上显示阅读百分比，长文档里能看出看到哪了 */
+.fab--top { flex-direction: column; gap: 1px; padding: 0 10px; }
+.fab--top .fab-pct { font-size: 10px; font-weight: 600; opacity: .6; font-variant-numeric: tabular-nums; }
+
+/* ---------------------------- 目录抽屉（移动端） ---------------------------- */
+.toc-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 190;
+    background: rgba(16, 24, 40, .45);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .24s, visibility .24s;
+}
+.toc-backdrop.is-open { opacity: 1; visibility: visible; }
+
+.toc-drawer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 195;
+    display: flex;
+    flex-direction: column;
+    max-height: 74vh;
+    background: var(--surface);
+    border-radius: 18px 18px 0 0;
+    box-shadow: 0 -10px 34px rgba(16, 24, 40, .2);
+    transform: translateY(101%);
+    visibility: hidden;
+    transition: transform .26s cubic-bezier(.32, .72, 0, 1), visibility .26s;
+}
+.toc-drawer.is-open { transform: translateY(0); visibility: visible; }
+
+.toc-drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 18px 12px;
+    border-bottom: 1px solid var(--border);
+}
+.toc-drawer-head::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 38px;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--border-strong);
+}
+.toc-drawer-title { font-size: 14.5px; font-weight: 800; color: var(--text); }
+.toc-drawer-close {
+    width: 30px;
+    height: 30px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: var(--text-2);
+    background: var(--surface-3);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.toc-drawer-close:active { background: var(--border-strong); }
+
+.toc-drawer-body {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 18px calc(20px + env(safe-area-inset-bottom, 0px));
+}
+
+/* 目录搬进抽屉后：取消吸附定位，标题由抽屉头部承担 */
+.toc-drawer .doc-toc {
+    position: static;
+    max-height: none;
+    overflow: visible;
+    padding: 0;
+    margin: 0;
+    border: none;
+}
+.toc-drawer .doc-toc-title { display: none; }
+.toc-drawer .doc-toc-body .toc { font-size: 15px; line-height: 1.6; }
+.toc-drawer .doc-toc-body .toc li { margin: 7px 0; }
+.toc-drawer .doc-toc-body .toc > ul > li > a {
+    font-weight: 700;
+    color: var(--text);
+}
+.toc-drawer .doc-toc-body .toc ul ul { padding-left: 14px; }
+/* 抽屉里每项加大点按区域 */
+.toc-drawer .doc-toc-body .toc a {
+    display: block;
+    padding: 4px 0;
+}
+
+/* ---------------------------- 宽表格横向滚动 ---------------------------- */
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    margin: 1.5em 0;
+    border-radius: var(--radius-sm);
+}
+.table-wrap > table { margin: 0; }
+/* 表格可横滑时给出提示，避免用户以为内容残缺 */
+.table-wrap.has-overflow { position: relative; padding-bottom: 22px; }
+.table-wrap.has-overflow::after {
+    content: "← 左右滑动查看完整表格 →";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 5px;
+    font-size: 11.5px;
+    text-align: center;
+    color: var(--text-3);
+}
+.markdown-content table { min-width: 100%; }
+
+/* ---------------------------- 顶栏：移动端压缩 ---------------------------- */
+@media (max-width: 1080px) {
+    .doc-layout { grid-template-columns: 1fr; }
+    /* JS 可用时目录会被搬进底部抽屉，内联位置隐藏避免重复；
+       JS 不可用时保留内联目录（渐进增强，不至于没有目录） */
+    .js .doc-layout > .doc-toc { display: none; }
+}
+
+@media (max-width: 860px) {
+    .header-inner {
+        flex-wrap: wrap;
+        gap: 0 12px;
+        min-height: 50px;
+        padding-top: 7px;
+    }
+    .logo { font-size: 16px; gap: 8px; }
+    .logo::before { width: 22px; height: 22px; border-radius: 7px; }
+
+    /* 导航改成单行横向滚动条，不再换行堆成三行 */
+    .main-nav {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        width: auto;
+        gap: 6px;
+        margin: 5px -18px 0;
+        padding: 5px 18px 7px;
+        border-top: 1px solid var(--border);
+    }
+    .main-nav::-webkit-scrollbar { display: none; }
+    .main-nav a { padding: 6px 11px; font-size: 13.5px; white-space: nowrap; }
+
+    /* 档位表：隐藏表头，用 data-label 渲染中文列名（原实现输出的是 class 名） */
+    .tier-table thead { display: none; }
+    .tier-table tbody,
+    .tier-table tbody tr,
+    .tier-table tbody td { display: block; width: auto; }
+    .tier-table tbody tr {
+        padding: 12px 0;
+        border-bottom: 1px solid var(--border-strong);
+    }
+    .tier-table tbody tr:last-child { border-bottom: none; }
+    .tier-table tbody td {
+        display: flex;
+        gap: 10px;
+        padding: 3px 0;
+        border-bottom: none;
+        text-align: left;
+        font-size: 13px;
+    }
+    .tier-table tbody td::before {
+        content: attr(data-label);
+        flex: 0 0 48px;
+        font-size: 11.5px;
+        color: var(--text-3);
+    }
+    .tier-table tbody td.col-pos { display: none; }
+    .tier-table tbody td.col-name { font-size: 14.5px; font-weight: 700; }
+    .tier-table tbody tr:hover { background: transparent; }
+
+    /* 档位卡片在窄屏排两列，别浪费横向空间 */
+    .tier-group .category-grid { grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
+    .tier-meta { padding: 12px 14px; }
+    .tier-meta-k { width: 58px; }
+
+    /* 表格容器贴边，滑动区域更大 */
+    .table-wrap {
+        margin-left: -18px;
+        margin-right: -18px;
+        padding-left: 18px;
+        padding-right: 18px;
+        border-radius: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    .fab-stack { right: 12px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); gap: 9px; }
+    .fab { min-width: 44px; height: 44px; padding: 0 12px; font-size: 12.5px; }
+    .main-nav a { padding: 6px 10px; font-size: 13px; }
+    .tier-group-head { gap: 6px 8px; }
+    .tier-group-link { margin-left: auto; }
+    .tier-nav-item { flex-basis: 100%; }
+}
+
+/* 尊重「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .toc-drawer, .fab, .read-progress > i { transition: none; }
 }

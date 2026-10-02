@@ -263,6 +263,7 @@ def render_page(title, body, desc=''):
     {meta}
     <title>{title} - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="{url('/static/css/style.css')}">
+    <script>document.documentElement.className += ' js';</script>
 </head>
 <body>
     <header class="site-header">
@@ -363,8 +364,9 @@ def tier_groups_html(power_categories, characters):
     """
     counts = char_counts(characters)
     tiers_href = url(f'/page/{TIERS_PAGE_SLUG}.html')
+    segments = iter_segments(power_categories)
     out = []
-    for seg in iter_segments(power_categories):
+    for seg in segments:
         note = group_note(seg['gid'])
         note_html = (f'\n                <p class="tier-group-note">{html_escape(note)}</p>'
                      if note else '')
@@ -687,6 +689,8 @@ def build_tiers_page(categories, characters):
     power_categories = ordered_power_categories(categories)
     counts = char_counts(characters)
     rules_href = url('/page/rules.html')
+    segments = iter_segments(power_categories)
+    toc_block = toc_block_html(build_tiers_toc(segments))
 
     body = f'''    <div class="container">
         <div class="breadcrumb">
@@ -743,15 +747,21 @@ def build_tiers_page(categories, characters):
                          if cat.get('note') else '')
             src_html = (f'<a href="{src_href}" class="tier-src">{html_escape(src_title)}</a>'
                         if src_href else '<span class="tier-src muted">—</span>')
-            body += (f'                    <tr id="tier-{cat.get("slug")}">\n'
-                     f'                        <td class="col-pos">{pos}</td>\n'
-                     f'                        <td class="col-name">{name_html}{note_cell}</td>\n'
-                     f'                        <td class="col-parent">{html_escape(cat.get("parent") or "—")}</td>\n'
-                     f'                        <td class="col-energy">{html_escape(tier_energy_label(cat))}</td>\n'
-                     f'                        <td class="col-scale">{html_escape(cat.get("scale") or "—")}</td>\n'
-                     f'                        <td class="col-count">{cnt}</td>\n'
-                     f'                        <td class="col-src">{src_html}</td>\n'
-                     f'                    </tr>\n')
+            # data-label：移动端隐藏表头后，靠它渲染中文列名
+            cells = [
+                ('col-pos', '位次', str(pos)),
+                ('col-name', '档位', name_html + note_cell),
+                ('col-parent', '量级', html_escape(cat.get('parent') or '—')),
+                ('col-energy', '能量', html_escape(tier_energy_label(cat))),
+                ('col-scale', '尺度', html_escape(cat.get('scale') or '—')),
+                ('col-count', '角色', str(cnt)),
+                ('col-src', '原文', src_html),
+            ]
+            body += (f'                    <tr id="tier-{cat.get("slug")}">\n')
+            for cls, label, value in cells:
+                body += (f'                        <td class="{cls}" data-label="{label}">'
+                         f'{value}</td>\n')
+            body += '                    </tr>\n'
         body += '                </tbody>\n            </table>\n        </section>\n'
 
     body += f'''
@@ -775,6 +785,7 @@ def build_tiers_page(categories, characters):
             </div>
         </section>
             </article>
+{toc_block}
         </div>
     </div>
 '''
@@ -1022,18 +1033,38 @@ def render_page_content(page):
     return _PAGE_CACHE[key]
 
 
+def toc_block_html(toc_inner):
+    """目录侧栏。移动端由 main.js 把整块搬进底部抽屉，桌面端保持右侧吸附。"""
+    if not (toc_inner or '').strip():
+        return ''
+    return f"""            <aside class="doc-toc" id="doc-toc">
+                <p class="doc-toc-title">目录</p>
+                <div class="doc-toc-body">
+{toc_inner}
+                </div>
+            </aside>"""
+
+
+def build_tiers_toc(segments):
+    """量级体系表页的目录：分段为一级，档位为二级。"""
+    out = ['<div class="toc">', '  <ul>']
+    for seg in segments:
+        out.append(f'    <li><a href="#group-{seg["key"]}">{html_escape(seg["label"])}</a>')
+        out.append('      <ul>')
+        for cat in seg['members']:
+            out.append(f'        <li><a href="#tier-{cat.get("slug")}">'
+                       f'{html_escape(cat.get("name"))}</a></li>')
+        out.append('      </ul>')
+        out.append('    </li>')
+    out.append('  </ul>')
+    out.append('</div>')
+    return '\n'.join(out)
+
+
 def build_pages(pages):
     for page in sorted(pages, key=lambda x: x.get('sort_order', 0)):
         content_html, toc_html = render_page_content(page)
-        if toc_html.strip():
-            toc_block = f'''            <aside class="doc-toc" id="doc-toc">
-                <p class="doc-toc-title">目录</p>
-                <div class="doc-toc-body">
-{toc_html}
-                </div>
-            </aside>'''
-        else:
-            toc_block = ''
+        toc_block = toc_block_html(toc_html)
         body = f'''    <div class="container">
         <div class="breadcrumb">
             <a class="back-btn" href="{url('/index.html')}" data-back>返回</a>
