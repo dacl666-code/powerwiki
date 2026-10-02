@@ -53,7 +53,7 @@
             <div id="active-filters" class="active-filters"></div>
             <p class="search-tip" id="search-tip"></p>
             <div id="search-results" class="character-grid"></div>
-            <p class="empty" id="no-result" style="display:none">没有匹配的角色，试试放宽条件</p>
+            <p class="empty" id="no-result" style="display:none">暂无角色数据，录入真实角色后即可搜索</p>
         </section>
     </div>
 
@@ -112,8 +112,7 @@
             else list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'zh'));
 
             resultsEl.innerHTML = list.map(c => {
-                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">'
-                                    : '<div class="no-image">暂无图片</div>';
+                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">' : '<div class="no-image">暂无图片</div>';
                 return '<a href="' + BASE + '/character/' + c.id + '.html" class="character-card">' +
                     '<div class="char-image">' + img + '</div>' +
                     '<div class="char-info"><h3>' + esc(c.name) + '</h3>' +
