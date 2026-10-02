@@ -597,7 +597,7 @@ img { max-width: 100%; display: block; }
    ========================================================================== */
 .doc-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 232px;
+    grid-template-columns: minmax(0, 1fr) 190px;
     gap: 40px;
     align-items: start;
 }
