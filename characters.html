@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>角色图鉴 - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
 </head>
 <body>
     <header class="site-header">
@@ -39,7 +39,7 @@
                 <input type="text" id="name-filter" placeholder="按名称或作品快速过滤..." class="filter-input">
             </div>
             <div class="character-grid" id="char-grid">
-            <div class="empty-state"><div class="empty-icon">◇</div><h3>暂无角色</h3><p>还没有收录任何角色，去 data/characters.yaml 添加吧。</p></div>
+            <p class="empty">暂无角色，敬请期待收录</p>
             </div>
             <p class="empty" id="no-result" style="display:none">没有匹配的角色</p>
         </section>
@@ -47,16 +47,16 @@
 
     <script>
         (function() {
-            var input = document.getElementById('name-filter');
-            var cards = document.querySelectorAll('#char-grid .character-card');
-            var noResult = document.getElementById('no-result');
+            const input = document.getElementById('name-filter');
+            const cards = document.querySelectorAll('#char-grid .character-card');
+            const noResult = document.getElementById('no-result');
             if (!input) return;
             input.addEventListener('input', function() {
-                var q = this.value.trim().toLowerCase();
-                var shown = 0;
+                const q = this.value.trim().toLowerCase();
+                let shown = 0;
                 cards.forEach(function(c) {
-                    var hay = (c.dataset.name + ' ' + c.dataset.series).toLowerCase();
-                    var ok = !q || hay.indexOf(q) !== -1;
+                    const hay = (c.dataset.name + ' ' + c.dataset.series).toLowerCase();
+                    const ok = !q || hay.indexOf(q) !== -1;
                     c.style.display = ok ? '' : 'none';
                     if (ok) shown++;
                 });

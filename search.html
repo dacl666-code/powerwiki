@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title>搜索 - 全作品战力评鉴所</title>
     <link rel="stylesheet" href="/powerwiki/static/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.4/dist/turbo.es2017-umd.min.js"></script>
 </head>
 <body>
     <header class="site-header">
@@ -57,43 +57,44 @@
             <div id="active-filters" class="active-filters"></div>
             <p class="search-tip" id="search-tip"></p>
             <div id="search-results" class="character-grid"></div>
-            <p class="empty" id="no-result" style="display:none">暂无角色数据，去 data/characters.yaml 添加后重新生成即可</p>
+            <p class="empty" id="no-result" style="display:none">暂无角色数据，录入真实角色后即可搜索</p>
         </section>
     </div>
 
     <script>
-        var indexData = [];
-        var BASE = "/powerwiki";
+        const indexData = [];
+        const BASE = "/powerwiki";
 
-        var el = function(id){ return document.getElementById(id); };
-        var qEl = el('search-input'), fSeries = el('f-series'), fCat = el('f-category'),
-            fRS = el('f-rseries'), fRealm = el('f-realm'), fSort = el('f-sort'),
-            resultsEl = el('search-results'), tipEl = el('search-tip'),
-            noRes = el('no-result'), activeBox = el('active-filters');
+        const el = id => document.getElementById(id);
+        const qEl = el('search-input'), fSeries = el('f-series'), fCat = el('f-category'),
+              fRS = el('f-rseries'), fRealm = el('f-realm'), fSort = el('f-sort'),
+              resultsEl = el('search-results'), tipEl = el('search-tip'),
+              noRes = el('no-result'), activeBox = el('active-filters');
 
-        var uniq = function(arr){ return Array.from(new Set(arr.filter(Boolean))).sort(function(a,b){return String(a).localeCompare(String(b),'zh');}); };
+        const uniq = arr => Array.from(new Set(arr.filter(Boolean)))
+            .sort((a, b) => String(a).localeCompare(String(b), 'zh'));
 
         function fillOptions(sel, values, keep) {
-            sel.innerHTML = '<option value="">全部</option>' + values.map(function(v){
-                return '<option value="'+v+'"'+(v===keep?' selected':'')+'>'+v+'</option>';
-            }).join('');
+            sel.innerHTML = '<option value="">全部</option>' + values.map(v =>
+                '<option value="' + v + '"' + (v === keep ? ' selected' : '') + '>' + v + '</option>').join('');
         }
 
+        // 选项联动：已选的作品/体系决定量级与境界的可选项
         function refreshOptions() {
-            var sub = indexData.filter(function(c){
-                return (!fSeries.value || c.series === fSeries.value) &&
-                       (!fRS.value || c.realmSeries === fRS.value);
-            });
-            fillOptions(fSeries, uniq(indexData.map(function(c){return c.series;})), fSeries.value);
-            fillOptions(fRS, uniq(indexData.map(function(c){return c.realmSeries;})), fRS.value);
-            fillOptions(fCat, uniq(sub.map(function(c){return c.category;})), fCat.value);
-            fillOptions(fRealm, uniq(sub.map(function(c){return c.realm;})), fRealm.value);
+            const sub = indexData.filter(c =>
+                (!fSeries.value || c.series === fSeries.value) &&
+                (!fRS.value || c.realmSeries === fRS.value));
+            fillOptions(fSeries, uniq(indexData.map(c => c.series)), fSeries.value);
+            fillOptions(fRS, uniq(indexData.map(c => c.realmSeries)), fRS.value);
+            fillOptions(fCat, uniq(sub.map(c => c.category)), fCat.value);
+            fillOptions(fRealm, uniq(sub.map(c => c.realm)), fRealm.value);
         }
 
         function match(c) {
-            var kw = qEl.value.trim().toLowerCase();
+            const kw = qEl.value.trim().toLowerCase();
             if (kw) {
-                var hay = [c.name, c.alias, c.series, c.category, c.realm, c.realmSeries, c.desc, c.power].join(' ').toLowerCase();
+                const hay = [c.name, c.alias, c.series, c.category, c.realm,
+                             c.realmSeries, c.desc, c.power].join(' ').toLowerCase();
                 if (hay.indexOf(kw) === -1) return false;
             }
             if (fSeries.value && c.series !== fSeries.value) return false;
@@ -103,24 +104,27 @@
             return true;
         }
 
-        function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+        function esc(s) {
+            return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
 
         function render() {
-            var list = indexData.filter(match);
-            var s = fSort.value;
-            if (s === 'cat') list.sort(function(a,b){return b.catOrder-a.catOrder;});
-            else if (s === 'realm') list.sort(function(a,b){return b.realmOrder-a.realmOrder;});
-            else list.sort(function(a,b){return String(a.name).localeCompare(String(b.name),'zh');});
+            let list = indexData.filter(match);
+            const s = fSort.value;
+            if (s === 'cat') list.sort((a, b) => b.catOrder - a.catOrder);
+            else if (s === 'realm') list.sort((a, b) => b.realmOrder - a.realmOrder);
+            else list.sort((a, b) => String(a.name).localeCompare(String(b.name), 'zh'));
 
-            resultsEl.innerHTML = list.map(function(c){
-                var img = c.image ? '<img src="'+esc(c.image)+'" alt="">' : '<div class="no-image">暂无图片</div>';
-                return '<a href="'+BASE+'/character/'+c.slug+'.html" class="character-card">'+
-                    '<div class="char-image">'+img+'</div>'+
-                    '<div class="char-info"><h3>'+esc(c.name)+'</h3>'+
-                    (c.series?'<p class="char-series">'+esc(c.series)+'</p>':'')+
-                    '<div class="char-tags">'+
-                    (c.category?'<span class="tag tag-power">'+esc(c.category)+'</span>':'')+
-                    (c.realm?'<span class="tag tag-realm">'+esc(c.realm)+'</span>':'')+
+            resultsEl.innerHTML = list.map(c => {
+                const img = c.image ? '<img src="' + esc(c.image) + '" alt="">'
+                                    : '<div class="no-image">暂无图片</div>';
+                return '<a href="' + BASE + '/character/' + c.id + '.html" class="character-card">' +
+                    '<div class="char-image">' + img + '</div>' +
+                    '<div class="char-info"><h3>' + esc(c.name) + '</h3>' +
+                    (c.series ? '<p class="char-series">' + esc(c.series) + '</p>' : '') +
+                    '<div class="char-tags">' +
+                    (c.category ? '<span class="tag tag-power">' + esc(c.category) + '</span>' : '') +
+                    (c.realm ? '<span class="tag tag-realm">' + esc(c.realm) + '</span>' : '') +
                     '</div></div></a>';
             }).join('');
 
@@ -131,9 +135,10 @@
         }
 
         function renderActive() {
-            var chips = [];
-            var add = function(label, value, key){
-                chips.push('<span class="chip">'+label+'：'+esc(value)+'<button type="button" data-clear="'+key+'">&times;</button></span>');
+            const chips = [];
+            const add = (label, value, key) => {
+                chips.push('<span class="chip">' + label + '：' + esc(value) +
+                    '<button type="button" data-clear="' + key + '">&times;</button></span>');
             };
             if (qEl.value.trim()) add('关键词', qEl.value.trim(), 'q');
             if (fSeries.value) add('作品', fSeries.value, 'series');
@@ -141,32 +146,33 @@
             if (fRS.value) add('体系', fRS.value, 'rseries');
             if (fRealm.value) add('境界', fRealm.value, 'realm');
             activeBox.innerHTML = chips.join('');
-            activeBox.querySelectorAll('button[data-clear]').forEach(function(btn){
-                btn.addEventListener('click', function(){
-                    var t = btn.dataset.clear;
-                    if (t==='q') qEl.value='';
-                    else if (t==='series') fSeries.value='';
-                    else if (t==='category') fCat.value='';
-                    else if (t==='rseries') fRS.value='';
-                    else if (t==='realm') fRealm.value='';
-                    refreshOptions(); render();
+            activeBox.querySelectorAll('button[data-clear]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const t = btn.dataset.clear;
+                    if (t === 'q') qEl.value = '';
+                    else if (t === 'series') fSeries.value = '';
+                    else if (t === 'category') fCat.value = '';
+                    else if (t === 'rseries') fRS.value = '';
+                    else if (t === 'realm') fRealm.value = '';
+                    refreshOptions();
+                    render();
                 });
             });
         }
 
         function syncURL() {
-            var p = new URLSearchParams();
+            const p = new URLSearchParams();
             if (qEl.value.trim()) p.set('q', qEl.value.trim());
             if (fSeries.value) p.set('series', fSeries.value);
             if (fCat.value) p.set('category', fCat.value);
             if (fRS.value) p.set('rseries', fRS.value);
             if (fRealm.value) p.set('realm', fRealm.value);
-            var qs = p.toString();
-            history.replaceState(null, '', qs ? ('?'+qs) : location.pathname);
+            const qs = p.toString();
+            history.replaceState(null, '', qs ? ('?' + qs) : location.pathname);
         }
 
         function readURL() {
-            var p = new URLSearchParams(location.search);
+            const p = new URLSearchParams(location.search);
             qEl.value = p.get('q') || '';
             fSeries.value = p.get('series') || '';
             fRS.value = p.get('rseries') || '';
@@ -174,13 +180,14 @@
             fRealm.value = p.get('realm') || '';
         }
 
-        el('search-form').addEventListener('submit', function(e){ e.preventDefault(); render(); });
+        el('search-form').addEventListener('submit', e => { e.preventDefault(); render(); });
         qEl.addEventListener('input', render);
-        [fSeries, fCat, fRS, fRealm, fSort].forEach(function(sel){
-            sel.addEventListener('change', function(){ refreshOptions(); render(); });
+        [fSeries, fCat, fRS, fRealm, fSort].forEach(sel => {
+            sel.addEventListener('change', () => { refreshOptions(); render(); });
         });
-        el('f-reset').addEventListener('click', function(){
-            qEl.value=''; fSeries.value=''; fCat.value=''; fRS.value=''; fRealm.value=''; fSort.value='name';
+        el('f-reset').addEventListener('click', () => {
+            qEl.value = ''; fSeries.value = ''; fCat.value = '';
+            fRS.value = ''; fRealm.value = ''; fSort.value = 'name';
             refreshOptions(); render();
         });
 
